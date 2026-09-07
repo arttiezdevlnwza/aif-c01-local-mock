@@ -1,0 +1,11 @@
+AIF-C01 Local Mock 10 Sets v8.5 — QA
+
+Set 8: domains {1: 13, 2: 16, 3: 18, 4: 9, 5: 9}, types {'single': 53, 'matching': 7, 'ordering': 2, 'multiple': 3}
+Set 9: domains {1: 13, 2: 16, 3: 18, 4: 9, 5: 9}, types {'single': 59, 'multiple': 3, 'ordering': 3}
+Set 10: domains {1: 13, 2: 16, 3: 18, 4: 9, 5: 9}, types {'single': 64, 'multiple': 1}
+
+Total sets: 10
+Total questions: 650
+New questions: 195
+Errors: 0
+PASS — data/schema/answer-key/domain/translation checks passed.

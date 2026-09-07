@@ -1,0 +1,39 @@
+AIF-C01 OPUS Practice — v8.2 Choice Wording Audit
+
+Goal
+- Prevent answer choices from revealing their own meaning in questions that are supposed to test whether the learner can distinguish a service, metric, technique, feature, or named concept.
+- Keep detailed reasoning in the post-answer explanation/Summary, not inside the pre-answer choices.
+
+Audit scope
+- 7 sets × 65 questions = 455 questions reviewed.
+- 73 identification-style questions normalized to concise label-only choices.
+- Updated questions by set:
+  Set 1: Q26
+  Set 2: Q6, Q8, Q11, Q12, Q58, Q60
+  Set 3: no changes required; identification choices were already sufficiently concise
+  Set 4: Q5, Q6, Q8, Q9, Q11, Q12, Q13, Q14, Q15, Q21, Q24, Q27, Q28, Q31, Q34, Q35, Q36, Q37, Q39, Q41, Q42, Q43, Q47, Q48, Q51, Q52, Q53, Q55, Q58, Q63, Q64, Q65
+  Set 5: Q3, Q6, Q7, Q8, Q9, Q11, Q12, Q15, Q17, Q20, Q26, Q27, Q30, Q32, Q33, Q34, Q35, Q37, Q40, Q42, Q43, Q45, Q46, Q47, Q48, Q51, Q52, Q53, Q54, Q59
+  Set 6: Q20, Q58
+  Set 7: Q3, Q60
+
+Examples
+- Before: Amazon Textract เพื่อสกัดข้อความ ตาราง และคู่ key-value จากเอกสารที่สแกน
+  After:  Amazon Textract
+- Before: Recall เพื่อจับ positive จริงให้ได้มากที่สุด
+  After:  Recall
+- Before: Continued pre-training ด้วยเอกสารโดเมนที่ไม่มี label ...
+  After:  Continued pre-training
+
+Intentional exceptions
+- Some questions explicitly ask which explanation, reason, action, design, or pairing is correct. Those choices must contain descriptive wording because the wording itself is what is being evaluated.
+- Examples include prompt-injection mitigations, pairing two services to two requirements, and questions asking what a concept means.
+
+Validation
+- 7 sets found
+- 455 questions total
+- 65 questions per set
+- 0 invalid answer keys
+- 0 duplicate choices
+- JavaScript syntax: PASS (quiz-data.js + app.js)
+- Answer keys were not changed in v8.2
+- Summary / Copy-for-review behavior from v8.1 is unchanged

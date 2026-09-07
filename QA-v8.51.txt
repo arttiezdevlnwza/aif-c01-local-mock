@@ -1,0 +1,44 @@
+AIF-C01 Local Mock v8.51 — QA
+===============================
+
+Scope
+- Baseline: v8.5 / 10 sets / 650 questions
+- Change only: Progress transfer tools (Copy Code / Export JSON / Import + Merge/Replace) and related UI/docs.
+
+Static / syntax checks
+- node --check app.js: PASS
+- HTML required progress-tool IDs: PASS
+- JS required progress functions: PASS
+- index.html references data/quiz-data.js, app.js, style.css: PASS
+- Duplicate HTML IDs: PASS
+
+Question data preservation
+- v8.5 quiz-data.js SHA256: 98f206d40d5594d6468e826cff1f51c600e1cc0a036e70b3b21e32d08204631a
+- v8.51 quiz-data.js SHA256: 98f206d40d5594d6468e826cff1f51c600e1cc0a036e70b3b21e32d08204631a
+- Identical question data: PASS
+
+Progress logic tests (Node harness)
+- Progress Code encode/decode round-trip: PASS
+- Prefix AIFPROGRESS1: validation: PASS
+- JSON payload validation: PASS
+- Sanitizes invalid answer keys: PASS
+- Replace import writes sanitized state: PASS
+- Merge keeps existing checked question and adds missing imported checked question: PASS
+- explain-more flags merge with OR behavior: PASS
+- Export payload can be parsed back from raw JSON: PASS
+- Synthetic full 650-question Progress Code size: ~50 KB (plain text, no DB/backend)
+
+Browser E2E
+- Automated Chromium navigation was attempted through localhost.
+- Environment blocked navigation with ERR_BLOCKED_BY_ADMINISTRATOR before page load.
+- Therefore visual/click-through browser E2E is NOT claimed for v8.51.
+
+Feature behavior
+- Copy Progress Code: emits AIFPROGRESS1:<base64url JSON> from current browser localStorage.
+- Export JSON: downloads a timestamped JSON backup.
+- Import Progress: accepts Progress Code, pasted JSON, or selected JSON file.
+- Merge: local answered/checked data wins on conflicts; missing/imported checked data is added; yellow review flags are OR-merged.
+- Replace: clears Local Mock Set 1-10 keys first, then imports; confirmation required.
+- Unknown set IDs are ignored.
+- Imported question/choice IDs are sanitized against current quiz data.
+- No database, login, account, API, or backend added.

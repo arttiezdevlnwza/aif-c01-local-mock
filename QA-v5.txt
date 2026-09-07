@@ -1,0 +1,45 @@
+AIF-C01 OPUS Practice 7 Sets — QA v5
+=====================================
+Scope: all 7 sets / 455 questions
+
+Checks run across every question
+- Question count and unique IDs
+- Valid answer keys for Single / Multiple
+- Ordering answer contains every ordering item exactly once
+- Matching answer maps every left item to a valid right item
+- No duplicate choice text within a question
+- Explanation present for every question
+- Select-TWO wording matches Multiple Response type
+- Raw Markdown bold markers removed from plain-text UI questions
+- Non-breaking spaces normalized
+- Definition/function questions scanned for placeholder answers that merely repeat the queried concept
+- Explanation option-letter formats audited against shuffled A/B/C/D/E display
+
+Fixes in v4
+1) Set 1 Q16 Embedding: replaced the weak/tautological answer with a real definition.
+2) Set 1 Q18 Top-P: replaced "Top-P sampling" with the actual cumulative-probability sampling behavior.
+3) Set 1 Q25 Multimodal: replaced "Multimodal model" with the actual multimodal definition.
+4) Explanation renderer now remaps:
+   - Set 1/2 distractor references such as "❌ A" and "· B, D"
+   - Set 2 correct-option references such as "✅ A" after answer shuffling
+   - Set 3 "ตอบ B" style explanations after answer shuffling
+   - Set 4 "A ✗ ... | B ✓ ..." style explanations after answer shuffling
+5) Renderer now requires standalone option letters, preventing false replacements in words such as Canvas and CloudTrail.
+6) Removed leftover **Markdown** markers from 8 Set 4 stems because the local UI renders plain text.
+
+Result
+- 455/455 questions passed structural/schema validation.
+- 0 invalid answer keys.
+- 0 duplicate choices within a question.
+- 0 missing explanations.
+- 0 leftover ** markers / NBSP artifacts after cleanup.
+
+Note
+This QA pass is exhaustive for structure, choice integrity, definition-placeholder patterns, and shuffled-letter explanation rendering. It is not a claim that every factual AWS statement was independently re-verified against live AWS documentation in this pass.
+
+v5 Summary enhancement
+- Summary button appears only after all questions in a set have been checked.
+- On the last question, Next changes to "Summary →" after completion.
+- Summary shows score/accuracy/wrong count and ONLY incorrect questions, sorted by question order.
+- Each wrong item shows user's answer, correct answer, explanation, and a button to jump back to that question.
+- Handles single, multiple-response, ordering, and matching answer display.

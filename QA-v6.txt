@@ -1,0 +1,7 @@
+AIF-C01 OPUS Practice 7 Sets v6
+- Added full Summary view for all Q1-Q65 after a set is fully checked.
+- Summary defaults to All Questions and supports filter: All / Incorrect Only.
+- Each question shows Correct/Incorrect status, Domain, question text, selected answer, correct answer, and explanation.
+- Added "Copy results for review" to copy a compact 65-question text report suitable for pasting into ChatGPT.
+- Preserved wrong-only in-quiz review and direct jump-back from Summary.
+- JavaScript syntax checked with node --check.

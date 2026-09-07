@@ -1,0 +1,21 @@
+AIF-C01 OPUS Practice 7 Sets — QA v7
+
+Changes
+1. Fixed Set 2 Q28 correct choice: now a complete explanation of Embedding -> vector -> similarity -> semantic search.
+2. Added per-question explain-more/uncertain flag stored in localStorage.
+3. Flag appears in navigator, Summary cards, Summary statistics/filter, and copied review text.
+
+Automated validation performed after build:
+- 7 sets / 455 questions.
+- Question IDs 1..65 unique in every set.
+- Single/multiple answer keys exist in choices.
+- Ordering keys and matching pairs validate.
+- No duplicate choice text inside a question.
+- DOM IDs referenced by app.js are present in index.html.
+- JavaScript syntax checked with Node.
+- ZIP integrity checked after packaging.
+
+Semantic spot/audit focus:
+- Definition/description questions were scanned for short/fragment-like correct answers.
+- The known malformed relationship choice (Set 2 Q28) was corrected.
+- Existing Set 1 definition fixes from v4 remain intact (Embedding, Top-P, Hallucination, Multimodal, Explainability).

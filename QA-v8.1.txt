@@ -1,0 +1,5 @@
+AIF-C01 Local Mock v8.1 QA
+- Change scope: Summary/review export only; question bank and answer keys unchanged from v8.
+- Summary includes all choices for Single/Multiple, all items for Ordering, and both sides for Matching.
+- Review-copy text includes all choices and preserves persisted shuffled display labels.
+- Selected/Correct markers added only after the full set has been checked and Summary is opened.

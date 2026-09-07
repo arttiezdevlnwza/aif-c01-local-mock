@@ -1,0 +1,24 @@
+AIF-C01 OPUS Practice v8.3 — Choice Fairness Audit
+
+Scope: all 7 sets / 455 questions.
+Goal: term/service/concept-identification questions should not reveal the answer by defining the choice itself.
+
+Direct definition-suffix fixes:
+- Set 4 Q3: metric options -> Accuracy / Precision / Mean Absolute Error / Recall
+- Set 4 Q25: ML task options -> names only
+- Set 4 Q46: Responsible AI dimension options -> Fairness / Elasticity / Transparency / Throughput / Cost optimization
+- Set 5 Q21: model-family options -> Decision tree / K-means / Linear regression / Diffusion model
+
+Additional giveaway-qualifier cleanup in label-only distractors:
+- Set 1 Q61
+- Set 2 Q32, Q44, Q49, Q50
+- Set 3 Q1, Q17, Q22, Q30, Q35, Q40, Q44, Q65
+- Set 6 Q6, Q57
+- Set 7 Q13
+
+Intentionally retained:
+- Definition questions (e.g. "Embedding คืออะไร?") must still contain definitions as answer choices.
+- Scenario/action/design questions retain descriptive choices because the action itself is what is being evaluated.
+- Compound labels/subfeatures such as "Guardrails — Contextual Grounding Check" are names, not explanatory hints.
+
+Answer keys: unchanged.

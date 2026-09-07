@@ -1,0 +1,16 @@
+AIF-C01 OPUS Practice v8.4 — Matching Fairness QA
+
+Issue fixed:
+Matching questions stored answer-pair IDs internally (e.g. A:1, B:2). The UI displayed those right-side IDs, which could reveal a sequential answer pattern even when option order was shuffled.
+
+Fix:
+- Hide internal right-side IDs in dropdown option text.
+- Keep dropdown option order randomized.
+- Hide right-side internal IDs in feedback, Summary, and Copy Review; show matched text instead.
+- Preserve left-side labels A/B/C/D for readability.
+
+QA:
+- 9 matching questions found across 7 sets.
+- JavaScript syntax: PASS.
+- Matching dropdown canonical-label leakage source check: PASS.
+- No question/answer keys changed.

@@ -1,0 +1,20 @@
+AIF-C01 OPUS Practice — QA v8 semantic audit
+
+This pass fixes semantic/wording issues that structural QA does not catch.
+
+Key fixes:
+- Set 1 Q14: correct choice now actually explains how a foundation model differs from task-specific ML.
+- Set 2 Q10: answer now addresses both hyperparameter category and tuning.
+- Set 2 Q29, Q30, Q41, Q45, Q46, Q53, Q55, Q56, Q60: expanded shorthand/fragment choices into complete answers.
+- Set 2 Q33: removed outdated/over-broad Provisioned Throughput wording; fine-tuning prerequisite focuses on supported training dataset format.
+- Set 2 Q34: updated to Bedrock Guardrails Prompt Attack filter (prompt injection/leakage) + defense-in-depth input separation/validation.
+- Set 3 Q12, Q13, Q24, Q36, Q38, Q39, Q45, Q54: expanded shorthand choices so they answer the question rather than merely naming a concept.
+- Set 7 Q3: fixed copy/paste bug 'Recall ของคลาสโรค' in a security-incident scenario.
+- Set 7 Q52: corrected wording from 'FM selection feature' to 'inference feature' for prompt caching.
+
+Validation after edits:
+- 7 sets x 65 questions = 455
+- answer keys resolve to existing choices
+- single/multiple schemas valid
+- no duplicate choices within a question
+- JS syntax checked separately
