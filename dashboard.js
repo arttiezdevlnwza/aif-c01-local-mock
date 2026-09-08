@@ -331,8 +331,7 @@
         byId('dashboardView').classList.add('hidden');
         window.openSet(setId);
         const index = targetSet.questions.findIndex(question => question.id === questionId);
-        if (index >= 0 && typeof window.currentIndex !== 'undefined') {
-          // currentIndex is a global lexical binding in app.js; assign through eval-free helper when available.
+        if (index >= 0) {
           try {
             currentIndex = index;
             if (typeof window.renderQuiz === 'function') window.renderQuiz();
