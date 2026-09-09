@@ -1,6 +1,46 @@
 window.REVIEW_INSIGHTS = {
-  version: '2026-09-10-set-8-10',
+  version: '2026-09-10-set-8-10-v2',
   source: 'manual-review',
+  history: [
+    { setId: 'local-set-8', label: 'Set 8', score: 56, total: 65, percent: 86, concept: 6, confidence: 15, language: 3 },
+    { setId: 'local-set-9', label: 'Set 9', score: 54, total: 65, percent: 83, concept: 11, confidence: 9, language: 0, note: 'Corrected Q32 answer-key bug: Prompt Management was correct.' },
+    { setId: 'local-set-10', label: 'Set 10', score: 60, total: 65, percent: 92, concept: 5, confidence: 18, language: 0 }
+  ],
+  languageTrend: [
+    { setId: 'local-set-8', label: 'Set 8', count: 3 },
+    { setId: 'local-set-9', label: 'Set 9', count: 0 },
+    { setId: 'local-set-10', label: 'Set 10', count: 0 }
+  ],
+  languageFocus: [
+    'retailer', 'churn / churned', 'progressively', 'corrupted',
+    'individual files', 'hundreds of megabytes', 'printed text',
+    'key-value fields', 'unsupported claims'
+  ],
+  topicStatus: [
+    { key: 'eu-ai-act', topic: 'EU AI Act risk tiers', status: 'repeated', priority: 'must', note: 'ยังมีทั้ง confidence gap และ concept miss ถึง Set 10 โดยเฉพาะ Limited risk / transparency obligation.' },
+    { key: 'fairness-metrics', topic: 'Fairness / group disparity metrics', status: 'unstable', priority: 'must', note: 'เคยตอบถูกแบบไม่มั่นใจ แล้วกลับมาผิดใน Set 10.' },
+    { key: 'agentcore-components', topic: 'AgentCore components', status: 'unstable', priority: 'must', note: 'Set 9 Runtime เคยถูก แต่ Set 10 สลับ Runtime กับ Observability.' },
+    { key: 'mcp-primitives', topic: 'MCP Resources vs Tools', status: 'unstable', priority: 'must', note: 'Set 9 รู้ core primitives แต่ Set 10 สลับ Resource กับ Tool.' },
+    { key: 'iam-permissions', topic: 'Identity Policy / Permissions Boundary / SCP', status: 'improving', priority: 'must', note: 'Grant vs ceiling ดีขึ้น แต่ยังมี confidence gap ในลำดับชั้น IAM.' },
+    { key: 'governance-frameworks', topic: 'CAF-AI / NIST AI RMF / ISO 27001 / EU AI Act', status: 'improving', priority: 'must', note: 'ผิดซ้ำ Set 8–9 และตอบถูกแต่ยังไม่มั่นใจใน Set 10.' },
+    { key: 'automated-reasoning-grounding', topic: 'Automated Reasoning vs Contextual Grounding', status: 'improving', priority: 'must', note: 'ผิดใน Set 8–9 ก่อนตอบถูกแต่ยัง Flag ใน Set 10.' },
+    { key: 'inference-controls', topic: 'Inference controls: Temperature / Max tokens', status: 'open', priority: 'must', note: 'Temperature direction เคยผิด และ Max output tokens ยังเป็น confidence gap.' },
+
+    { key: 'regression-metrics', topic: 'Regression metrics: RMSE / MAE / R-squared', status: 'confidence', priority: 'review', note: 'ตอบถูกหลายครั้งแต่ยัง Flag ต่อเนื่อง.' },
+    { key: 'interpretability-explainability', topic: 'Interpretability vs Explainability', status: 'improving', priority: 'review', note: 'Set 8 concept miss → Set 10 correct but still confidence gap.' },
+    { key: 'sagemaker-canvas', topic: 'SageMaker Canvas', status: 'open', priority: 'review', note: 'Concept miss ใน Set 8; ยังไม่มีหลักฐาน recovery ที่ตรงหัวข้อ.' },
+    { key: 'sagemaker-data-wrangler', topic: 'SageMaker Data Wrangler', status: 'open', priority: 'review', note: 'Concept miss ใน Set 9; ยังไม่มีข้อหลังมายืนยัน recovery.' },
+    { key: 'ml-lifecycle', topic: 'ML lifecycle order', status: 'open', priority: 'review', note: 'ลำดับ train/evaluate เคยสลับใน Set 9.' },
+    { key: 'classification-metrics', topic: 'Precision / Recall / F1 / Accuracy', status: 'improving', priority: 'review', note: 'Precision vs Accuracy เคยผิด Set 9 แต่ F1/imbalanced case ใน Set 10 ตอบถูก.' },
+
+    { key: 'flows-vs-agents', topic: 'Bedrock Flows vs Agents', status: 'recovered', priority: 'stable', note: 'Set 8 ผิด → Set 9 และ Set 10 ตอบถูกโดยไม่ Flag.' },
+    { key: 'shared-responsibility', topic: 'RDS vs EC2 Shared Responsibility', status: 'recovered', priority: 'stable', note: 'Set 9 ผิด EC2 guest OS → Set 10 ตอบคู่ RDS/EC2 ถูก.' },
+    { key: 'private-connectivity', topic: 'NAT Gateway vs PrivateLink', status: 'recovered', priority: 'stable', note: 'Set 9 ผิด → Set 10 เลือก PrivateLink requirement ถูก.' },
+    { key: 'rag-evaluation', topic: 'RAG retrieval relevance vs generation faithfulness', status: 'recovered', priority: 'stable', note: 'Set 8 language miss → Set 9 correct Flag → Set 10 correctโดยไม่ Flag.' },
+    { key: 'security-service-map', topic: 'KMS / TLS / Macie service map', status: 'recovered', priority: 'stable', note: 'Set 8 ผิด → Set 9/10 service mapping ถูก.' },
+    { key: 'tokenization-embeddings', topic: 'Tokenization vs Embeddings', status: 'recovered', priority: 'stable', note: 'Set 9 ผิด → Set 10 distinction ถูก.' },
+    { key: 'metadata-filtering', topic: 'Metadata Filtering / Reranking', status: 'confidence', priority: 'stable', note: 'ตอบถูกต่อเนื่องหลายข้อ แต่ยัง Flag บ่อย จึงยังเป็น confidence gap มากกว่า knowledge gap.' }
+  ],
   sets: {
     'local-set-8': {
       title: 'Local Mock Set 8',
