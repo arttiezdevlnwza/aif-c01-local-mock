@@ -163,6 +163,14 @@
     if (count) el.textContent += ` · 📘 ${count} ข้อ`;
   };
 
+  const originalCollectProgressPayload = collectProgressPayload;
+  collectProgressPayload = function () {
+    const payload = originalCollectProgressPayload();
+    payload.appVersion = '8.53';
+    payload.features = { ...(payload.features || {}), englishUnclear: true, reviewedDashboard: true };
+    return payload;
+  };
+
   window.isEnglishUnclear = (setId, questionId) => {
     const set = sets.find(item => item.id === setId);
     if (!set) return false;
