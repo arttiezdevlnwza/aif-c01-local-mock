@@ -1,6 +1,7 @@
 (() => {
   const STORAGE_PREFIX = 'aif-opus-practice:v2:';
   const sets = window.QUIZ_SETS || [];
+  const reviewInsights = window.REVIEW_INSIGHTS || { sets: {} };
   const byId = id => document.getElementById(id);
 
   const DOMAIN_NAMES = {
@@ -103,6 +104,39 @@
     return { label: 'Review', className: 'review' };
   }
 
+  function flattenReviewedInsights() {
+    const items = [];
+    Object.entries(reviewInsights.sets || {}).forEach(([setId, reviewSet]) => {
+      (reviewSet.items || []).forEach(item => {
+        items.push({
+          ...item,
+          setId,
+          setTitle: reviewSet.title || setId
+        });
+      });
+    });
+    return items;
+  }
+
+  function groupReviewedItems(items) {
+    const grouped = {};
+    items.forEach(item => {
+      const key = item.key || `${item.setId}:${item.questionId}`;
+      if (!grouped[key]) {
+        grouped[key] = {
+          key,
+          topic: item.topic || key,
+          type: item.type,
+          refs: [],
+          notes: []
+        };
+      }
+      grouped[key].refs.push(`${item.setTitle.replace('Local Mock ', '')} Q${item.questionId}`);
+      if (item.note) grouped[key].notes.push(item.note);
+    });
+    return Object.values(grouped).sort((a, b) => b.refs.length - a.refs.length || a.topic.localeCompare(b.topic));
+  }
+
   function collectDashboardData() {
     const setRows = [];
     const domains = Object.keys(DOMAIN_NAMES).reduce((acc, key) => {
@@ -168,10 +202,19 @@
       return { ...row, pct, rating: rating(pct, row.checked) };
     });
 
+    const reviewedItems = flattenReviewedInsights();
+    const reviewed = {
+      items: reviewedItems,
+      concept: reviewedItems.filter(item => item.type === 'concept'),
+      confidence: reviewedItems.filter(item => item.type === 'confidence'),
+      language: reviewedItems.filter(item => item.type === 'language')
+    };
+
     return {
       setRows,
       domainRows,
       reviewItems,
+      reviewed,
       effectiveChecked,
       effectiveCorrect,
       detailedChecked,
@@ -187,8 +230,6 @@
       ? Math.round(data.effectiveCorrect / data.effectiveChecked * 100)
       : 0;
     const remaining = Math.max(0, data.totalQuestions - data.effectiveChecked);
-    const wrongDetailed = data.reviewItems.filter(item => item.wrong).length;
-    const confidenceGaps = data.reviewItems.filter(item => item.flagged && !item.wrong).length;
 
     byId('dashboardOverview').innerHTML = `
       <div class="dashboard-stat-card">
@@ -201,15 +242,20 @@
         <strong>${data.completedSets}/${sets.length}</strong>
         <small>Local Mock Set 1–10</small>
       </div>
-      <div class="dashboard-stat-card">
-        <span>Needs review</span>
-        <strong>${wrongDetailed}</strong>
-        <small>ข้อผิดจากข้อมูลละเอียดใน browser</small>
+      <div class="dashboard-stat-card concept-stat">
+        <span>Concept / Recall gaps</span>
+        <strong>${data.reviewed.concept.length}</strong>
+        <small>จาก review Set 8–10</small>
       </div>
-      <div class="dashboard-stat-card">
+      <div class="dashboard-stat-card confidence-stat">
         <span>Confidence gaps</span>
-        <strong>${confidenceGaps}</strong>
-        <small>ตอบถูก/ยัง Flag 🟡</small>
+        <strong>${data.reviewed.confidence.length}</strong>
+        <small>ตอบถูกแต่ยังไม่มั่นใจ</small>
+      </div>
+      <div class="dashboard-stat-card language-stat">
+        <span>Language gaps</span>
+        <strong>${data.reviewed.language.length}</strong>
+        <small>อังกฤษทำให้ตีความโจทย์พลาด</small>
       </div>
       <div class="dashboard-stat-card">
         <span>Remaining</span>
@@ -269,6 +315,51 @@
         <h3>ควรทบทวนก่อน</h3>
         <ul>${domainList(weakest)}</ul>
       </div>`;
+  }
+
+  function reviewedGroupHtml(items, emptyText) {
+    const groups = groupReviewedItems(items);
+    if (!groups.length) return `<div class="dashboard-empty">${escapeHtml(emptyText)}</div>`;
+    return groups.map(group => `
+      <div class="reviewed-gap-item">
+        <div class="reviewed-gap-main">
+          <strong>${escapeHtml(group.topic)}</strong>
+          <span>${escapeHtml(group.refs.join(' · '))}</span>
+        </div>
+        ${group.refs.length > 1 ? `<span class="reviewed-count">${group.refs.length} ครั้ง</span>` : ''}
+        ${group.notes.length ? `<small>${escapeHtml(group.notes.join(' / '))}</small>` : ''}
+      </div>`).join('');
+  }
+
+  function renderReviewedInsights(data) {
+    const root = byId('dashboardReviewInsights');
+    if (!root) return;
+
+    root.innerHTML = `
+      <div class="reviewed-gap-grid">
+        <section class="reviewed-gap-column concept-column">
+          <div class="reviewed-gap-head">
+            <div><strong>🔴 Concept / Recall</strong><span>ผิดเพราะ concept ยังดึงออกมาใช้ไม่ได้</span></div>
+            <b>${data.reviewed.concept.length}</b>
+          </div>
+          <div class="reviewed-gap-list">${reviewedGroupHtml(data.reviewed.concept, 'ยังไม่มี concept gap ที่บันทึกไว้')}</div>
+        </section>
+        <section class="reviewed-gap-column confidence-column">
+          <div class="reviewed-gap-head">
+            <div><strong>🟡 Confidence</strong><span>ตอบถูก แต่ยังไม่มั่นใจ</span></div>
+            <b>${data.reviewed.confidence.length}</b>
+          </div>
+          <div class="reviewed-gap-list">${reviewedGroupHtml(data.reviewed.confidence, 'ยังไม่มี confidence gap ที่บันทึกไว้')}</div>
+        </section>
+        <section class="reviewed-gap-column language-column">
+          <div class="reviewed-gap-head">
+            <div><strong>📘 Language</strong><span>รู้ concept แต่ภาษาอังกฤษพาให้ตีความพลาด</span></div>
+            <b>${data.reviewed.language.length}</b>
+          </div>
+          <div class="reviewed-gap-list">${reviewedGroupHtml(data.reviewed.language, 'ยังไม่มี language gap ที่บันทึกไว้')}</div>
+        </section>
+      </div>
+      <p class="dashboard-note reviewed-note">ส่วนนี้มาจาก review หลังทำ Set 8–10 ไม่ได้อนุมานจากคะแนนอัตโนมัติ จึงยังคงอยู่แม้ browser ไม่มีรายละเอียด attempt เก่า</p>`;
   }
 
   function renderCoverage(data) {
@@ -350,6 +441,7 @@
     renderSetPerformance(data);
     renderDomains(data);
     renderStrengths(data);
+    renderReviewedInsights(data);
     renderCoverage(data);
     renderReviewQueue(data);
   }
