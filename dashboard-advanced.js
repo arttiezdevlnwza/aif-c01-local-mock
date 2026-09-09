@@ -16,8 +16,12 @@
       document.getElementById('dashboardCoverage')?.closest('.dashboard-panel');
     if (!anchor) return null;
 
+    const advancedPanels = [...document.querySelectorAll('.dashboard-panel[data-advanced="true"]')];
+    const insertAfter = advancedPanels.length ? advancedPanels[advancedPanels.length - 1] : anchor;
+
     const section = document.createElement('section');
     section.className = 'dashboard-panel';
+    section.dataset.advanced = 'true';
     section.innerHTML = `
       <div class="dashboard-panel-head">
         <div>
@@ -26,7 +30,7 @@
         </div>
       </div>
       <div id="${id}"></div>`;
-    anchor.insertAdjacentElement('afterend', section);
+    insertAfter.insertAdjacentElement('afterend', section);
     return section.querySelector(`#${id}`);
   }
 
