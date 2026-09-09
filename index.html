@@ -46,7 +46,7 @@
         <div>
           <div class="eyebrow">LOCAL STUDY DASHBOARD</div>
           <h2>ภาพรวมจาก Local Mock ที่ทำไปแล้ว</h2>
-          <p class="muted">คำนวณจาก progress ที่อยู่ใน browser เครื่องนี้ และคะแนนเดิมที่ฝังไว้ในชุดข้อสอบ</p>
+          <p class="muted">คำนวณจาก progress ที่อยู่ใน browser เครื่องนี้ และผล review ที่สรุปไว้หลังทำข้อสอบ</p>
         </div>
       </div>
 
@@ -75,6 +75,16 @@
       </div>
 
       <div id="dashboardStrengths" class="dashboard-insights"></div>
+
+      <section class="dashboard-panel">
+        <div class="dashboard-panel-head">
+          <div>
+            <h3>Reviewed Gaps — Set 8–10</h3>
+            <p class="muted">แยกจากผล review จริงว่าเป็น Concept / Confidence / Language ไม่ได้เดาจากคะแนนอย่างเดียว</p>
+          </div>
+        </div>
+        <div id="dashboardReviewInsights"></div>
+      </section>
 
       <section class="dashboard-panel">
         <div class="dashboard-panel-head">
@@ -213,6 +223,7 @@
 
   <script src="data/quiz-data.js"></script>
   <script src="data/set-09-10-prep.js"></script>
+  <script src="data/review-insights.js"></script>
   <script src="app.js"></script>
   <script src="dashboard.js"></script>
 </body>
