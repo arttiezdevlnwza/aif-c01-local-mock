@@ -1,6 +1,20 @@
 (() => {
   const TARGETS = new Set(['local-set-11', 'local-set-12', 'local-set-13']);
 
+  // Ordinary English that can block scenario comprehension without revealing
+  // the answer. This list is calibrated from actual learner feedback/review.
+  const KNOWN_VOCAB = [
+    { term: 'penalized', th: 'ถูกลงโทษ / ถูกให้น้ำหนักความผิดพลาดมากขึ้น' },
+    { term: 'heavily', th: 'อย่างมาก / หนักกว่า' },
+    { term: 'protected', th: 'ที่ได้รับการคุ้มครอง' },
+    { term: 'demographic', th: 'เกี่ยวกับกลุ่มประชากร' },
+    { term: 'guardrail', th: 'ข้อจำกัด / กฎกำกับเพื่อไม่ให้เกินขอบเขต' },
+    { term: 'legal counsel', th: 'ฝ่ายกฎหมาย / ที่ปรึกษากฎหมาย' },
+    { term: 'substantially', th: 'อย่างมาก / อย่างมีนัยสำคัญ' },
+    { term: 'preserving', th: 'โดยยังคงรักษาไว้' },
+    { term: 'downstream', th: 'ขั้นตอนหรืองานที่นำผลไปใช้ต่อ' }
+  ];
+
   const escapeRegExp = value => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
   function containsWholeTerm(text, term) {
@@ -28,6 +42,15 @@
         seen.add(key);
         return true;
       });
+
+      for (const item of KNOWN_VOCAB) {
+        const key = item.term.toLowerCase();
+        if (seen.has(key)) continue;
+        if (!containsWholeTerm(stem, item.term)) continue;
+        if (containsWholeTerm(choiceText, item.term)) continue;
+        question.vocab.push({ ...item });
+        seen.add(key);
+      }
 
       // Context-sensitive English: "sensitive to outliers" means "ไวต่อ",
       // not "sensitive/confidential data".
