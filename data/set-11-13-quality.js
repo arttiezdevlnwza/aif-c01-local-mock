@@ -52,8 +52,6 @@
         seen.add(key);
       }
 
-      // Context-sensitive English: "sensitive to outliers" means "ไวต่อ",
-      // not "sensitive/confidential data".
       if (/\bsensitive\s+to\b|\bless\s+sensitive\b/i.test(stem)) {
         question.vocab.forEach(item => {
           if (String(item.term).toLowerCase() === 'sensitive') item.th = 'ไวต่อ / ได้รับผลกระทบง่าย';
@@ -62,10 +60,10 @@
     }
   }
 
-  // These patches run before app.js so Set 13 feedback is ready when the quiz opens.
+  // Load explanation patches synchronously here; this file is parsed before app.js.
   if (document.readyState === 'loading') {
     [1, 2, 3, 4, 5].forEach(part => {
-      document.write(`<script src="data/set-13-explanations-${part}.js"><\\/script>`);
+      document.write('<script src="data/set-13-explanations-' + part + '.js"></' + 'script>');
     });
   }
 })();
