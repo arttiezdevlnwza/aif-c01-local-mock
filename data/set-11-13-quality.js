@@ -60,10 +60,18 @@
     }
   }
 
-  // Load explanation patches synchronously here; this file is parsed before app.js.
+  // Load data/explanation patches synchronously here; this file is parsed before app.js.
   if (document.readyState === 'loading') {
+    document.write('<script src="data/set-12-english-notes.js"></' + 'script>');
     [1, 2, 3, 4, 5].forEach(part => {
       document.write('<script src="data/set-13-explanations-' + part + '.js"></' + 'script>');
     });
+
+    // Set 12 review must run after dashboard-set-count-patch.js has applied Set 11 metadata.
+    document.addEventListener('DOMContentLoaded', () => {
+      const script = document.createElement('script');
+      script.src = 'data/set-12-review.js';
+      document.body.appendChild(script);
+    }, { once: true });
   }
 })();
