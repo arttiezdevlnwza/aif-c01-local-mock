@@ -61,4 +61,11 @@
       }
     }
   }
+
+  // These patches run before app.js so Set 13 feedback is ready when the quiz opens.
+  if (document.readyState === 'loading') {
+    [1, 2, 3, 4, 5].forEach(part => {
+      document.write(`<script src="data/set-13-explanations-${part}.js"><\\/script>`);
+    });
+  }
 })();
