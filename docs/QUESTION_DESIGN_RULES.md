@@ -45,6 +45,8 @@ Useful close families: Bedrock vs SageMaker AI; Canvas vs Data Wrangler vs Groun
 - Prefer ordinary English that can block comprehension, e.g. retailer, churn, progressively, corrupted, intermittent, sustained, jurisdiction, plausible, penalized.
 - Do not translate every word.
 - Use learner English Notes and 📘 flags as evidence for future Vocabulary additions.
+- After a completed-set review, resolve untranslated English Notes into the Thai summary glossary.
+- If an English Note term is itself an answer choice or would reveal the answer, keep its translation summary-only; do not backfill it into pre-answer Vocabulary.
 
 ## Explanations
 The explanation is learning content, not just an answer key.
