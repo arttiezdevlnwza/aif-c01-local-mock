@@ -67,11 +67,16 @@
       document.write('<script src="data/set-13-explanations-' + part + '.js"></' + 'script>');
     });
 
-    // Set 12 review must run after dashboard-set-count-patch.js has applied Set 11 metadata.
     document.addEventListener('DOMContentLoaded', () => {
-      const script = document.createElement('script');
-      script.src = 'data/set-12-review.js';
-      document.body.appendChild(script);
+      // Review flags depend on app.js/study-enhancements.js, so load after parser scripts finish.
+      const reviewFlagsScript = document.createElement('script');
+      reviewFlagsScript.src = 'review-flags.js';
+      document.body.appendChild(reviewFlagsScript);
+
+      // Set 12 review must run after dashboard-set-count-patch.js has applied Set 11 metadata.
+      const reviewScript = document.createElement('script');
+      reviewScript.src = 'data/set-12-review.js';
+      document.body.appendChild(reviewScript);
     }, { once: true });
   }
 })();
