@@ -1,6 +1,7 @@
 (() => {
   const REVIEW = window.REVIEW_INSIGHTS || {};
   const STORAGE_PREFIX = 'aif-opus-practice:v2:';
+  let reviewedGapOrigin = null;
 
   function escapeHtml(value) {
     return String(value || '').replace(/[&<>"']/g, char => ({
@@ -194,12 +195,148 @@
       </table>`;
   }
 
+  function reviewedGroups(type) {
+    const grouped = {};
+    Object.entries(REVIEW.sets || {}).forEach(([setId, reviewSet]) => {
+      (reviewSet.items || []).forEach(item => {
+        if (item.type !== type) return;
+        const key = item.key || `${setId}:${item.questionId}`;
+        if (!grouped[key]) {
+          grouped[key] = { key, topic: item.topic || key, refs: [] };
+        }
+        const label = `${String(reviewSet.title || setId).replace('Local Mock ', '')} Q${item.questionId}`;
+        const refKey = `${setId}:${item.questionId}`;
+        if (!grouped[key].refs.some(ref => ref.refKey === refKey)) {
+          grouped[key].refs.push({ refKey, label, setId, questionId: Number(item.questionId) });
+        }
+      });
+    });
+    return Object.values(grouped).sort((a, b) => b.refs.length - a.refs.length || a.topic.localeCompare(b.topic));
+  }
+
+  function injectReviewedGapStyles() {
+    if (document.getElementById('reviewedGapLinkStyles')) return;
+    const style = document.createElement('style');
+    style.id = 'reviewedGapLinkStyles';
+    style.textContent = `
+      .reviewed-gap-ref-list{display:flex!important;flex-wrap:wrap;align-items:center;gap:2px 4px}
+      .reviewed-gap-ref{appearance:none;border:0;background:transparent;padding:0;color:var(--accent,#2563eb);font:inherit;line-height:inherit;cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+      .reviewed-gap-ref:hover{color:var(--accent,#2563eb);text-decoration-style:solid}
+      .reviewed-gap-ref:focus-visible{outline:2px solid var(--accent,#2563eb);outline-offset:2px;border-radius:3px}
+      .reviewed-gap-separator{color:var(--muted,#6b7280)}
+      .reviewed-gap-ref.return-highlight{border-radius:4px;box-shadow:0 0 0 3px rgba(37,99,235,.22);background:rgba(37,99,235,.1)}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function ensureReviewedGapBackButton() {
+    const actions = document.querySelector('#quizView .quiz-toolbar .toolbar-actions');
+    if (!actions) return;
+    let button = document.getElementById('reviewedGapBackBtn');
+    if (!button) {
+      button = document.createElement('button');
+      button.id = 'reviewedGapBackBtn';
+      button.type = 'button';
+      button.className = 'ghost hidden';
+      button.textContent = '← กลับ Reviewed Gaps';
+      button.addEventListener('click', restoreReviewedGap);
+      actions.prepend(button);
+    }
+    const sameSet = reviewedGapOrigin && activeSet && reviewedGapOrigin.setId === activeSet.id;
+    button.classList.toggle('hidden', !sameSet);
+  }
+
+  function openReviewedGapQuestion(button) {
+    const setId = button.dataset.setId;
+    const questionId = Number(button.dataset.questionId);
+    const targetSet = (window.QUIZ_SETS || []).find(set => set.id === setId);
+    if (!targetSet || typeof window.openSet !== 'function') return;
+
+    const list = button.closest('.reviewed-gap-list');
+    reviewedGapOrigin = {
+      scrollY: window.scrollY,
+      listScrollTop: list ? list.scrollTop : 0,
+      type: button.dataset.gapType,
+      setId,
+      questionId,
+      refId: button.dataset.reviewRefId
+    };
+
+    document.getElementById('dashboardView')?.classList.add('hidden');
+    window.openSet(setId);
+    const index = targetSet.questions.findIndex(question => Number(question.id) === questionId);
+    if (index >= 0) {
+      currentIndex = index;
+      if (typeof window.renderQuiz === 'function') window.renderQuiz();
+    }
+  }
+
+  function restoreReviewedGap() {
+    if (!reviewedGapOrigin) return;
+    try { saveState(); } catch {}
+
+    document.getElementById('homeView')?.classList.add('hidden');
+    document.getElementById('quizView')?.classList.add('hidden');
+    document.getElementById('summaryView')?.classList.add('hidden');
+    document.getElementById('dashboardView')?.classList.remove('hidden');
+    if (typeof window.renderStudyDashboard === 'function') window.renderStudyDashboard();
+
+    const origin = reviewedGapOrigin;
+    reviewedGapOrigin = null;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const list = document.querySelector(`.${origin.type}-column .reviewed-gap-list`);
+        if (list) list.scrollTop = origin.listScrollTop;
+        window.scrollTo({ top: origin.scrollY, behavior: 'auto' });
+        const selector = `[data-review-ref-id="${CSS.escape(origin.refId || '')}"]`;
+        const item = document.querySelector(selector);
+        if (item) {
+          item.classList.add('return-highlight');
+          setTimeout(() => item.classList.remove('return-highlight'), 1800);
+        }
+        ensureReviewedGapBackButton();
+      });
+    });
+  }
+
+  function enhanceReviewedGapLinks() {
+    injectReviewedGapStyles();
+    const configs = [
+      { type: 'concept', selector: '.concept-column' },
+      { type: 'confidence', selector: '.confidence-column' },
+      { type: 'language', selector: '.language-column' }
+    ];
+
+    configs.forEach(({ type, selector }) => {
+      const groups = reviewedGroups(type);
+      const items = [...document.querySelectorAll(`${selector} .reviewed-gap-item`)];
+      items.forEach((item, groupIndex) => {
+        const group = groups[groupIndex];
+        const line = item.querySelector('.reviewed-gap-main > span');
+        if (!group || !line) return;
+        line.classList.add('reviewed-gap-ref-list');
+        line.innerHTML = group.refs.map((ref, refIndex) => {
+          const refId = `${type}|${group.key}|${ref.setId}|${ref.questionId}|${refIndex}`;
+          const separator = refIndex ? '<span class="reviewed-gap-separator">·</span>' : '';
+          return `${separator}<button class="reviewed-gap-ref" type="button" data-gap-type="${escapeHtml(type)}" data-set-id="${escapeHtml(ref.setId)}" data-question-id="${ref.questionId}" data-review-ref-id="${escapeHtml(refId)}" title="เปิด ${escapeHtml(ref.label)}">${escapeHtml(ref.label)}</button>`;
+        }).join('');
+      });
+    });
+
+    document.querySelectorAll('.reviewed-gap-ref').forEach(button => {
+      if (button.dataset.bound === '1') return;
+      button.dataset.bound = '1';
+      button.addEventListener('click', () => openReviewedGapQuestion(button));
+    });
+  }
+
   function renderAdvancedDashboard() {
     renderTrend();
     renderTopicHealth();
     renderPriorities();
     renderLanguage();
     renderHistory();
+    enhanceReviewedGapLinks();
   }
 
   const dashboardBtn = document.getElementById('dashboardBtn');
@@ -213,5 +350,17 @@
     };
   }
 
+  const previousRenderQuiz = renderQuiz;
+  renderQuiz = function () {
+    previousRenderQuiz();
+    ensureReviewedGapBackButton();
+  };
+
+  document.addEventListener('click', event => {
+    if (event.target.closest?.('#homeBtn')) reviewedGapOrigin = null;
+  }, true);
+
+  injectReviewedGapStyles();
+  ensureReviewedGapBackButton();
   window.renderAdvancedStudyDashboard = renderAdvancedDashboard;
 })();
