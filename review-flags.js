@@ -49,15 +49,18 @@
     const style = document.createElement('style');
     style.id = 'reviewFlagV2Styles';
     style.textContent = `
-      .review-flag-row.review-flag-grid-v2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch}
-      .review-flag-row.review-flag-grid-v2 .review-flag{margin:0;min-width:0;height:100%}
+      .review-flag-row.review-flag-grid-v2{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;align-items:stretch}
+      .review-flag-row.review-flag-grid-v2 .review-flag{margin:0;min-width:0;height:100%;padding:9px 10px}
+      .review-flag-row.review-flag-grid-v2 .review-flag strong{font-size:.92rem;line-height:1.2}
+      .review-flag-row.review-flag-grid-v2 .review-flag small{font-size:.76rem;line-height:1.25}
       .review-flag.clue-gap-flag.active{background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.42)}
       .review-flag.concept-gap-flag.active{background:rgba(220,38,38,.07);border-color:rgba(220,38,38,.4)}
       .qnav.clue-gap{box-shadow:inset 0 -3px 0 rgba(124,58,237,.72)}
       .qnav.concept-gap{box-shadow:inset 0 3px 0 rgba(220,38,38,.72)}
       .status-clue{background:rgba(124,58,237,.12)}
       .status-concept-gap{background:rgba(220,38,38,.12)}
-      @media(max-width:760px){.review-flag-row.review-flag-grid-v2{grid-template-columns:1fr}}
+      @media(max-width:1050px){.review-flag-row.review-flag-grid-v2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+      @media(max-width:560px){.review-flag-row.review-flag-grid-v2{gap:6px}.review-flag-row.review-flag-grid-v2 .review-flag{padding:8px}}
     `;
     document.head.appendChild(style);
   }
