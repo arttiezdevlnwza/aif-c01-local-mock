@@ -17,19 +17,19 @@
     5:'Security, Compliance, and Governance for AI Solutions'
   };
   const meta=[
-    {id:'local-set-14',title:'Local Mock Set 14',subtitle:'Coverage Reset · Broad Coverage + Spaced Repetition'},
-    {id:'local-set-15',title:'Local Mock Set 15',subtitle:'Service Decision Boundaries · Close AWS/AI Choices'},
-    {id:'local-set-16',title:'Local Mock Set 16',subtitle:'Lifecycle & Ordering · Sequences + Role Boundaries'},
-    {id:'local-set-17',title:'Local Mock Set 17',subtitle:'Applied Mixed Scenarios · Multi-Constraint Practice'},
-    {id:'local-set-18',title:'Local Mock Set 18',subtitle:'Final Coverage Sweep · Exam-Style Spaced Recall'}
+    {id:'local-set-14',title:'Local Mock Set 14',subtitle:'Broad Mixed Coverage · Spaced Repetition'},
+    {id:'local-set-15',title:'Local Mock Set 15',subtitle:'Broad Mixed Coverage · Spaced Repetition'},
+    {id:'local-set-16',title:'Local Mock Set 16',subtitle:'Broad Mixed Coverage · Spaced Repetition'},
+    {id:'local-set-17',title:'Local Mock Set 17',subtitle:'Broad Mixed Coverage · Spaced Repetition'},
+    {id:'local-set-18',title:'Local Mock Set 18',subtitle:'Broad Mixed Coverage · Spaced Repetition'}
   ];
 
-  function singleChoices(f,correctOriginal,setIndex,questionIndex){
+  function singleChoices(f,correctOriginal,setIndex,familyIndex){
     const all=f.choices.map((_,i)=>i);
     let selected=all;
     if(all.length>4){
       const others=all.filter(i=>i!==correctOriginal);
-      const start=(setIndex+questionIndex)%others.length;
+      const start=(setIndex+familyIndex)%others.length;
       const picked=[];
       for(let step=0;picked.length<3;step++){
         const idx=others[(start+step)%others.length];
@@ -48,13 +48,25 @@
     return (f.vocab||[]).filter(item=>q.includes(String(item.term||'').toLowerCase())&&!choiceText.includes(String(item.term||'').toLowerCase()));
   }
 
-  function buildQuestion(f,setIndex,questionIndex){
-    const order=f.orderVariant&&f.orderVariant.setIndex===setIndex?f.orderVariant:null;
+  function seededShuffle(items,seed){
+    const out=[...items];
+    let state=seed>>>0;
+    for(let i=out.length-1;i>0;i--){
+      state=(Math.imul(state,1664525)+1013904223)>>>0;
+      const j=state%(i+1);
+      [out[i],out[j]]=[out[j],out[i]];
+    }
+    return out;
+  }
+
+  function buildQuestion(f,setIndex,familyIndex){
+    // Ordering questions are distributed across all five sets instead of being concentrated in one themed set.
+    const orderSetIndex=familyIndex%meta.length;
+    const order=f.orderVariant&&orderSetIndex===setIndex?f.orderVariant:null;
     if(order){
       const choices={};
       order.choices.forEach((text,i)=>{ choices[letters[i]]=text; });
       return {
-        id:questionIndex+1,
         domain:f.domain,
         domainName:domainNames[f.domain],
         question:order.question,
@@ -67,12 +79,13 @@
       };
     }
 
-    const variant=f.variants[setIndex];
+    // Rotate the five scenario styles per topic so every set contains a mixture instead of one set-wide theme.
+    const variantIndex=(setIndex+familyIndex)%f.variants.length;
+    const variant=f.variants[variantIndex];
     const correctOriginal=variant[2];
-    const mapped=singleChoices(f,correctOriginal,setIndex,questionIndex);
+    const mapped=singleChoices(f,correctOriginal,setIndex,familyIndex);
     const correctText=f.choices[correctOriginal];
     return {
-      id:questionIndex+1,
       domain:f.domain,
       domainName:domainNames[f.domain],
       question:variant[0],
@@ -96,7 +109,17 @@
 
   meta.forEach((m,setIndex)=>{
     if(sets.some(existing=>existing.id===m.id)) return;
-    const questions=bank.map((family,index)=>buildQuestion(family,setIndex,index));
+
+    // Deterministic shuffle keeps progress IDs stable while mixing domains/topics inside every set.
+    const families=seededShuffle(
+      bank.map((family,familyIndex)=>({family,familyIndex})),
+      1418+(setIndex*101)
+    );
+    const questions=families.map(({family,familyIndex},outputIndex)=>({
+      ...buildQuestion(family,setIndex,familyIndex),
+      id:outputIndex+1
+    }));
+
     sets.push({...m,questionCount:65,questions});
   });
 })();
