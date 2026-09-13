@@ -1,5 +1,12 @@
 (()=>{
-  const bank=window.LOCAL_MOCK_14_18_BANK||[];
+  const sourceBank=window.LOCAL_MOCK_14_18_BANK||[];
+  // Keep one customization family as a reserve so D2 stays at the intended 16 questions per set.
+  const bank=sourceBank.filter(f=>!(
+    f.domain===2&&
+    f.choices?.[0]==='RAG'&&
+    f.choices?.[1]==='Supervised fine-tuning'&&
+    f.choices?.[3]==='Prompt caching'
+  ));
   const sets=window.QUIZ_SETS=window.QUIZ_SETS||[];
   const letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   const domainNames={
