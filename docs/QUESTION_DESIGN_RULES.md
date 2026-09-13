@@ -7,6 +7,15 @@ Default rules for every new Local Mock set and quality patch.
 - Keep practitioner/foundational depth. Increase difficulty through close distinctions, realistic constraints, and service boundaries — not SAA/SAP-level detail.
 - For 65 questions, preserve the intended mix when practical: D1 13, D2 16, D3 18, D4 9, D5 9.
 
+## Coverage and spaced repetition
+- New sets should optimize for **broad coverage + spaced repetition**, not only the learner's latest weak points.
+- Retest weak concepts, but do not let them dominate enough to crowd out topics that can be forgotten between reviews.
+- Track a concept as covered when it appears as the **correct answer**, a **plausible distractor**, or a **direct comparison**. These roles are not equivalent: important concepts should periodically appear as the correct answer too.
+- Rotate under-covered areas back into later sets, including agent memory, multi-agent patterns, tool orchestration, AgentCore capabilities, governance reports/standards, data governance, and security boundaries.
+- Do not create a new question by only swapping company names, numbers, or nouns in an old stem. Repetition should test a different decision boundary, lifecycle position, failure symptom, or adjacent concept.
+- Exact duplicate stems are never allowed. Near-duplicate reskins should be rewritten unless the repetition intentionally tests a different angle.
+- Preserve older stable topics in the mix so a concept that was once strong is still recalled weeks later.
+
 ## Stem / scenario
 - Give enough information for one best answer.
 - Difficulty must come from distinguishing concepts, not missing information or trick wording.
@@ -25,7 +34,7 @@ Default rules for every new Local Mock set and quality patch.
 - Avoid `all of the above` / `none of the above` unless necessary.
 - UI randomization does not replace good distractor design.
 
-Useful close families: Bedrock vs SageMaker AI; Canvas vs Data Wrangler vs Ground Truth vs A2I; Agents vs Flows; AgentCore Runtime/Gateway/Identity/Observability; Prompt Management/Optimization/Caching/Routing; RAG/SFT/CPT/Few-shot; Metadata filtering vs Reranking; Retrieval relevance vs Generation faithfulness; Identity Policy vs Boundary vs SCP; KMS/Macie/CloudTrail/Config/Artifact/Audit Manager; NIST/CAF-AI/ISO 27001/EU AI Act; Fairness/Robustness/Transparency/Sustainability.
+Useful close families: Bedrock vs SageMaker AI; Canvas vs Data Wrangler vs Ground Truth vs A2I; Agents vs Flows; AgentCore Runtime/Gateway/Identity/Observability/Memory/Policy/Evaluations; MCP Resources vs Tools vs Prompts; single-agent multi-tool vs multi-agent; Prompt Management/Optimization/Caching/Routing; RAG/SFT/CPT/Few-shot; Metadata filtering vs Reranking; Retrieval relevance vs Generation faithfulness; Identity Policy vs Boundary vs SCP; KMS/Macie/CloudTrail/Config/Artifact/Audit Manager; NIST/CAF-AI/ISO 27001/ISO 42001/EU AI Act; SOC 1/2/3; Fairness/Robustness/Transparency/Sustainability.
 
 ## Multiple / Matching / Ordering
 - Multiple-response: explain why every correct choice belongs and why every wrong choice does not.
@@ -33,10 +42,14 @@ Useful close families: Bedrock vs SageMaker AI; Canvas vs Data Wrangler vs Groun
 - Ordering: use real dependency/lifecycle order, not arbitrary memorization. Do not force optional steps into a mandatory sequence unless the stem includes them.
 - Common ordering patterns:
   - Objective -> Prepare/Train -> Evaluate -> Deploy -> Monitor
+  - Train -> Validation -> Test
   - RAG ingest: Source -> Chunk -> Embed -> Store/Index
   - RAG runtime: Query -> Retrieve -> Filter/Rerank -> Context -> Generate
   - Ground Truth labeling before training; A2I review after inference
   - Responsible AI: Intended use -> Representative data -> Evaluate -> Document -> Controls/Human oversight -> Monitor
+  - Agent tool loop: Goal/state -> Reason/plan -> Select tool -> Execute -> Observe -> Continue/finish
+  - Prompt lifecycle: Draft/template -> Test -> Optimize -> Version/approve -> Use/monitor
+  - NIST AI RMF recall: Govern -> Map -> Measure -> Manage (with Govern cross-cutting in practice)
 
 ## Vocabulary helper
 - Vocabulary is shown before answering and is only for understanding the English stem.
@@ -75,6 +88,8 @@ Never:
 - Vocabulary occurs in the stem and not in choices; no answer leakage.
 - No answer-length or correct-option specificity bias.
 - No duplicated exact stems.
+- No near-duplicate reskin that changes only names/numbers/nouns.
+- Coverage is broad enough that weak-point retests do not crowd out older or under-covered topics.
 - No out-of-scope depth.
 - Every explanation covers the correct answer and all distractors/mappings/steps as applicable.
 - Ordering questions have an unambiguous start point and no hidden optional step.
