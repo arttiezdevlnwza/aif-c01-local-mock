@@ -9,6 +9,7 @@
   ));
   const sets=window.QUIZ_SETS=window.QUIZ_SETS||[];
   const letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  const thaiExplanations=window.LOCAL_MOCK_14_18_EXPLANATIONS_TH||{};
   const domainNames={
     1:'Fundamentals of AI and ML',
     2:'Fundamentals of Generative AI',
@@ -23,6 +24,9 @@
     {id:'local-set-17',title:'Local Mock Set 17',subtitle:'Broad Mixed Coverage · Spaced Repetition'},
     {id:'local-set-18',title:'Local Mock Set 18',subtitle:'Broad Mixed Coverage · Spaced Repetition'}
   ];
+
+  const familyKey=f=>`${f.domain}:${f.choices?.[0]||''}`;
+  const thaiFamilyExplanation=f=>thaiExplanations[familyKey(f)];
 
   function singleChoices(f,correctOriginal,setIndex,familyIndex){
     const all=f.choices.map((_,i)=>i);
@@ -59,14 +63,13 @@
     return out;
   }
 
-  function thaiSingleExplanation(questionTh,correctText){
-    const q=String(questionTh||'').replace(/[?？]\s*$/,'');
-    return `✅ ถูกต้อง — ${correctText}. โจทย์ถามว่า ${q} ดังนั้นคำตอบที่ตรงกับเงื่อนไขที่สุดคือ ${correctText}.`;
+  function thaiSingleExplanation(f,correctText){
+    return `✅ ถูกต้อง — ${correctText}. ${thaiFamilyExplanation(f)}`;
   }
 
-  function thaiOrderingExplanation(order){
+  function thaiOrderingExplanation(f,order){
     const ordered=order.answer.map(i=>order.choices[i]).join(' → ');
-    return `✅ ถูกต้อง — ${ordered}. ลำดับนี้ตรงกับขั้นตอนที่โจทย์ต้องการเรียง.`;
+    return `✅ ถูกต้อง — ${ordered}. ${thaiFamilyExplanation(f)}`;
   }
 
   function buildQuestion(f,setIndex,familyIndex){
@@ -83,7 +86,7 @@
         questionTh:order.questionTh,
         choices,
         answer:order.answer.map(i=>letters[i]),
-        explanation:setIndex<4?thaiOrderingExplanation(order):order.explanation,
+        explanation:thaiOrderingExplanation(f,order),
         type:'ordering',
         vocab:[]
       };
@@ -102,9 +105,7 @@
       questionTh:variant[1],
       choices:mapped.choices,
       answer:mapped.answer,
-      explanation:setIndex<4
-        ?thaiSingleExplanation(variant[1],correctText)
-        :`✅ Correct — ${correctText}. ${f.explanation}`,
+      explanation:thaiSingleExplanation(f,correctText),
       type:'single',
       vocab:safeVocab(f,variant[0],mapped.choices)
     };
@@ -116,6 +117,12 @@
   const validBank=bank.length===65&&Object.keys(expected).every(k=>actual[k]===expected[k]);
   if(!validBank){
     console.error('Local Mock Set 14-18 bank has invalid domain counts', {total:bank.length,actual,expected});
+    return;
+  }
+
+  const missingThai=bank.filter(item=>!thaiFamilyExplanation(item));
+  if(missingThai.length){
+    console.error('Local Mock Set 14-18 is missing Thai explanations', missingThai.map(familyKey));
     return;
   }
 
