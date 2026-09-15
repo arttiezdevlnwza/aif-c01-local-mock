@@ -10,6 +10,17 @@
   const sets=window.QUIZ_SETS=window.QUIZ_SETS||[];
   const letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   const thaiExplanations=window.LOCAL_MOCK_14_18_EXPLANATIONS_TH||{};
+  const extraVocab={
+    cognitive:'เกี่ยวกับการคิด / กระบวนการคิด',
+    coherent:'เป็นเนื้อหาเดียวกัน / สอดคล้องต่อเนื่องกัน',
+    delegates:'มอบหมายงานให้',
+    ingestion:'กระบวนการนำข้อมูลเข้า',
+    malicious:'เป็นอันตราย / ประสงค์ร้าย',
+    obligation:'ข้อผูกพัน / หน้าที่ที่ต้องปฏิบัติ',
+    perturbations:'การเปลี่ยนแปลง input เล็กน้อย',
+    plausible:'สมเหตุสมผล / เป็นไปได้ในสถานการณ์จริง',
+    'representative data':'ข้อมูลที่เป็นตัวแทนของกลุ่มเป้าหมายได้ดี'
+  };
   const domainNames={
     1:'Fundamentals of AI and ML',
     2:'Fundamentals of Generative AI',
@@ -47,9 +58,20 @@
   }
 
   function safeVocab(f,question,choices){
-    const choiceText=Object.values(choices).join(' ').toLowerCase();
-    const q=question.toLowerCase();
-    return (f.vocab||[]).filter(item=>q.includes(String(item.term||'').toLowerCase())&&!choiceText.includes(String(item.term||'').toLowerCase()));
+    const choiceText=Object.values(choices||{}).join(' ').toLowerCase();
+    const q=String(question||'').toLowerCase();
+    const searchable=`${q} ${choiceText}`;
+    const items=[...(f.vocab||[])];
+    Object.entries(extraVocab).forEach(([term,th])=>{
+      if(searchable.includes(term)) items.push({term,th});
+    });
+    const seen=new Set();
+    return items.filter(item=>{
+      const key=String(item.term||'').trim().toLowerCase();
+      if(!key||seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
   }
 
   function seededShuffle(items,seed){
@@ -88,7 +110,7 @@
         answer:order.answer.map(i=>letters[i]),
         explanation:thaiOrderingExplanation(f,order),
         type:'ordering',
-        vocab:[]
+        vocab:safeVocab(f,order.question,choices)
       };
     }
 
