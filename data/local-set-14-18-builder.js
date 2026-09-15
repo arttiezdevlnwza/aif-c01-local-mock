@@ -59,6 +59,16 @@
     return out;
   }
 
+  function thaiSingleExplanation(questionTh,correctText){
+    const q=String(questionTh||'').replace(/[?？]\s*$/,'');
+    return `✅ ถูกต้อง — ${correctText}. โจทย์ถามว่า ${q} ดังนั้นคำตอบที่ตรงกับเงื่อนไขที่สุดคือ ${correctText}.`;
+  }
+
+  function thaiOrderingExplanation(order){
+    const ordered=order.answer.map(i=>order.choices[i]).join(' → ');
+    return `✅ ถูกต้อง — ${ordered}. ลำดับนี้ตรงกับขั้นตอนที่โจทย์ต้องการเรียง.`;
+  }
+
   function buildQuestion(f,setIndex,familyIndex){
     // Ordering questions are distributed across all five sets instead of being concentrated in one themed set.
     const orderSetIndex=familyIndex%meta.length;
@@ -73,7 +83,7 @@
         questionTh:order.questionTh,
         choices,
         answer:order.answer.map(i=>letters[i]),
-        explanation:order.explanation,
+        explanation:setIndex<4?thaiOrderingExplanation(order):order.explanation,
         type:'ordering',
         vocab:[]
       };
@@ -92,7 +102,9 @@
       questionTh:variant[1],
       choices:mapped.choices,
       answer:mapped.answer,
-      explanation:`✅ Correct — ${correctText}. ${f.explanation}`,
+      explanation:setIndex<4
+        ?thaiSingleExplanation(variant[1],correctText)
+        :`✅ Correct — ${correctText}. ${f.explanation}`,
       type:'single',
       vocab:safeVocab(f,variant[0],mapped.choices)
     };
