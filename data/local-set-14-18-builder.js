@@ -20,7 +20,11 @@
     obligation:'ข้อผูกพัน / หน้าที่ที่ต้องปฏิบัติ',
     perturbations:'การเปลี่ยนแปลง input เล็กน้อย',
     plausible:'สมเหตุสมผล / เป็นไปได้ในสถานการณ์จริง',
-    'representative data':'ข้อมูลที่เป็นตัวแทนของกลุ่มเป้าหมายได้ดี'
+    'representative data':'ข้อมูลที่เป็นตัวแทนของกลุ่มเป้าหมายได้ดี',
+    adequate:'เพียงพอ / เหมาะสมตามความต้องการ',
+    consequential:'มีผลกระทบสำคัญ',
+    disparity:'ความแตกต่าง / ความเหลื่อมล้ำระหว่างกลุ่ม',
+    rural:'ชนบท / พื้นที่ชนบท'
   };
   const domainNames={
     1:'Fundamentals of AI and ML',
@@ -62,7 +66,10 @@
     const choiceText=Object.values(choices||{}).join(' ').toLowerCase();
     const q=String(question||'').toLowerCase();
     const searchable=`${q} ${choiceText}`;
-    const items=[...(f.vocab||[])];
+    const items=(f.vocab||[]).filter(item=>{
+      const term=String(item.term||'').trim().toLowerCase();
+      return term&&searchable.includes(term);
+    });
     Object.entries(extraVocab).forEach(([term,th])=>{
       if(searchable.includes(term)) items.push({term,th});
     });
