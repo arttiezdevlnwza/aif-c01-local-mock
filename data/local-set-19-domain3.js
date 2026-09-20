@@ -39,14 +39,7 @@
     explanation:'ตอบ A — Aurora PostgreSQL-compatible สามารถใช้ pgvector สำหรับ relational + vector use case. B เป็น NoSQL key-value/document, C เป็น cache, D เป็น archival object storage.'
   });
 
-  add({
-    task:'3.1', type:'single',
-    question:'A company has a general-purpose foundation model and needs to answer questions from frequently changing internal manuals. Another proposal is to fine-tune the model on the manuals every month. The architecture team wants the lower-effort approach that keeps knowledge current and avoids changing model weights whenever documents are updated. Which approach provides the BEST tradeoff?',
-    questionTh:'บริษัทมี general FM ต้องตอบจาก internal manuals ที่เปลี่ยนบ่อย มีข้อเสนอ fine-tune ทุกเดือน แต่ทีมอยากลด effort และไม่เปลี่ยน weights ทุกครั้ง วิธีใดเหมาะกว่า?',
-    choices:{A:'Retrieval Augmented Generation (RAG)',B:'Full pre-training from scratch',C:'Supervised fine-tuning each time the manuals change',D:'Model distillation'},
-    answer:['A'],
-    explanation:'ตอบ A — RAG อัปเดต external knowledge โดยเปลี่ยน index/context ไม่ต้องเปลี่ยน weights จึงเหมาะข้อมูลเปลี่ยนบ่อย. B/C ใช้ training effort สูงกว่า, D เน้นสร้าง student model เล็กลง ไม่ใช่อัปเดต knowledge สด.'
-  });
+
 
   add({
     task:'3.1', type:'single',
@@ -103,14 +96,7 @@
     explanation:'ตอบ A — malicious instruction ที่เข้ามาผ่าน retrieved/external content คือ indirect prompt injection. B เป็น customization, C คือ input distribution เปลี่ยนหลัง deploy, D ไม่ใช่ security pattern นี้.'
   });
 
-  add({
-    task:'3.2', type:'single',
-    question:'A company has a reusable prompt that works well in development, but production teams keep changing wording manually and cannot determine which version produced a specific output. The company wants a controlled process to test variants, preserve published versions, and reuse approved prompts across applications. Which strategy BEST addresses the problem?',
-    questionTh:'บริษัทมี reusable prompt ที่ใช้ได้ดีแต่ production teams แก้ wording เองจนตามไม่ได้ว่า output มาจาก version ใด ต้องการ test variants, preserve version และ reuse approved prompts ควรใช้ strategy ใด?',
-    choices:{A:'Use Amazon Bedrock Prompt Management with versioned prompts',B:'Store prompts only in user browser history',C:'Fine-tune a new model for each wording change',D:'Increase the context window'},
-    answer:['A'],
-    explanation:'ตอบ A — Prompt Management ออกแบบมาสำหรับสร้าง/ทดสอบ/จัด version/reuse prompt. B traceability แย่, C หนักเกินปัญหา wording, D ไม่แก้ version management.'
-  });
+
 
   add({
     task:'3.3', type:'single',
@@ -167,14 +153,7 @@
     explanation:'ตอบ A — LLM-as-a-Judge ใช้ rubric ประเมิน output จำนวนมากได้ แต่ต้องระวัง judge/position bias. B เหมาะ n-gram translation-like comparison, C scale ไม่ตรง requirement, D ไม่ใช่ FM output evaluation ของ application.'
   });
 
-  add({
-    task:'3.4', type:'single',
-    question:'A translation team wants an automatic metric that compares generated translations with reference translations using n-gram overlap. A summarization team, by contrast, focuses on overlap between generated summaries and reference summaries. The teams want to use the conventional metrics associated with these tasks. Which pairing is correct?',
-    questionTh:'ทีม translation ต้องการ metric แบบ n-gram overlap กับ reference ส่วนทีม summarization ต้องการ overlap กับ reference summary ควรจับคู่ metric อย่างไร?',
-    choices:{A:'Translation: BLEU; Summarization: ROUGE',B:'Translation: ROUGE; Summarization: BLEU',C:'Translation: Accuracy; Summarization: R-squared',D:'Translation: F1; Summarization: RMSE'},
-    answer:['A'],
-    explanation:'ตอบ A — BLEU ใช้บ่อยกับ translation และ ROUGE ใช้บ่อยกับ summarization. B สลับกัน; C/D เป็น metrics คนละประเภท.'
-  });
+
 
   add({
     task:'3.4', type:'ordering',
@@ -194,21 +173,7 @@
     explanation:'ตอบ A, B — task completion และ user satisfaction สะท้อน outcome ของ application ต่อผู้ใช้โดยตรง. C/D/E เป็น implementation/model properties ไม่ได้บอกว่าธุรกิจ/ผู้ใช้บรรลุเป้าหมายหรือไม่.'
   });
 
-  add({
-    task:'3.4', type:'multiple',
-    question:'An evaluation team is deciding how to assess a customer-facing foundation model. Some criteria are subjective, such as tone and helpfulness, and the team wants nuanced judgments on a representative sample. For broader repeatable comparisons, it also wants standardized datasets that can be run consistently across candidate models. Which TWO evaluation approaches should the team combine? (Select TWO.)',
-    questionTh:'ทีม evaluation ต้องวัด criteria เชิง subjective เช่น tone/helpfulness ด้วย nuanced judgment บน sample และต้องการ standardized datasets สำหรับเทียบ candidate models ซ้ำได้ ควรใช้ 2 approach ใดร่วมกัน?',
-    choices:{A:'Human evaluation',B:'Benchmark datasets',C:'Only training loss',D:'Only infrastructure utilization',E:'Randomly increasing temperature'},
-    answer:['A','B'],
-    explanation:'ตอบ A, B — human evaluation เหมาะ nuance/subjective quality และ benchmark datasets เหมาะ repeatable standardized comparison. C/D ไม่ครอบคลุม output quality; E เป็น generation adjustment ไม่ใช่ evaluation method.'
-  });
 
-  add({
-    task:'3.4', type:'single',
-    question:'A research team compares two candidate foundation models. One produces answers that are semantically close to high-quality reference answers even when the wording differs substantially. The team wants a metric that captures contextual semantic similarity rather than relying mainly on exact token or n-gram overlap. Which metric is MOST appropriate?',
-    questionTh:'ทีมวิจัยเทียบ FM สองตัวและต้องการวัด semantic similarity กับ reference แม้ wording ต่างกันมาก ไม่อยากพึ่ง exact token/n-gram overlap เป็นหลัก ควรใช้ metric ใด?',
-    choices:{A:'BERTScore',B:'BLEU',C:'ROUGE-1 only',D:'Accuracy'},
-    answer:['A'],
-    explanation:'ตอบ A — BERTScore ใช้ contextual embeddings เพื่อวัด semantic similarity. BLEU/ROUGE เน้น overlap มากกว่า, Accuracy ไม่ใช่ metric หลักสำหรับ generated text semantics แบบนี้.'
-  });
+
+
 })();
