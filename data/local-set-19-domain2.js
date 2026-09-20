@@ -85,14 +85,7 @@
     explanation:'ตอบ A — model selection ต้องดู modality, language, latency, compliance, cost และ requirement อื่นร่วมกัน. B/C/D ใช้ปัจจัยเดียวหรือปัจจัยที่ไม่สะท้อน workload จึงไม่พอสำหรับการตัดสินใจ.'
   });
 
-  add({
-    task:'2.2', type:'single',
-    question:'A retailer deploys a GenAI shopping assistant to improve customer engagement. After launch, the technical team reports good response quality, but executives want evidence that the application creates business value. They do not want to judge success only by model-centric metrics. Which metric would be MOST useful to add?',
-    questionTh:'ร้านค้าปลีก deploy GenAI shopping assistant แล้ว technical quality ดี แต่ผู้บริหารต้องการหลักฐานว่าเกิด business value ไม่อยากดูเฉพาะ model metric ควรเพิ่ม metric ใด?',
-    choices:{A:'Conversion rate from assistant interactions',B:'Number of model parameters',C:'Embedding vector dimension',D:'Maximum context window size'},
-    answer:['A'],
-    explanation:'ตอบ A — conversion rate เชื่อมกับ business outcome โดยตรง. B/C/D เป็น technical properties ที่อาจมีผลต่อระบบแต่ไม่ได้พิสูจน์ business value.'
-  });
+
 
   add({
     task:'2.2', type:'single',
