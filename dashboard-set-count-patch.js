@@ -114,10 +114,25 @@
 
   function reviewRangeLabel() {
     const history = window.REVIEW_INSIGHTS?.history || [];
-    if (!history.length) return 'Reviewed Sets';
-    const first = String(history[0].label || '').replace(/^Set\s+/i, '');
-    const last = String(history[history.length - 1].label || '').replace(/^Set\s+/i, '');
-    return first && last ? `Set ${first}–${last}` : 'Reviewed Sets';
+    const numbers = [...new Set(history
+      .map(item => Number(String(item.label || '').replace(/^Set\s+/i, '')))
+      .filter(Number.isFinite))]
+      .sort((a, b) => a - b);
+    if (!numbers.length) return 'Reviewed Sets';
+
+    const ranges = [];
+    let start = numbers[0];
+    let end = numbers[0];
+    for (let i = 1; i < numbers.length; i++) {
+      if (numbers[i] === end + 1) {
+        end = numbers[i];
+        continue;
+      }
+      ranges.push(start === end ? String(start) : `${start}–${end}`);
+      start = end = numbers[i];
+    }
+    ranges.push(start === end ? String(start) : `${start}–${end}`);
+    return `Set ${ranges.join(', ')}`;
   }
 
   function syncDashboardLabels() {
