@@ -257,6 +257,10 @@
       .concept-guide{border-left:3px solid var(--accent,#2563eb);padding:9px 11px;background:rgba(37,99,235,.06);border-radius:0 10px 10px 0}
       .concept-guide strong{display:block;margin-bottom:3px}
       .memory-cue{margin-top:5px;font-weight:700}
+      .question-breakdown{display:flex;flex-direction:column;gap:7px;margin-bottom:2px}
+      .question-breakdown-block{border-radius:10px;padding:9px 11px;background:rgba(127,127,127,.07);line-height:1.6}
+      .question-breakdown-block strong{display:block;margin-bottom:3px}
+      .question-breakdown-ask{border-left:3px solid var(--accent,#2563eb)}
       .summary-explanation .explanation-readable{margin-top:4px}
       @media(max-width:760px){.review-flag-row{grid-template-columns:1fr}.explanation-compare{grid-template-columns:1fr}}
     `;
@@ -288,15 +292,56 @@
     return parts.length ? parts : [String(text || '').trim()].filter(Boolean);
   }
 
+  function questionAskTh(q) {
+    const th = String(q?.questionTh || '').trim();
+    if (!th) return '';
+
+    const cues = [
+      'ให้จับคู่', 'จงจับคู่', 'ให้เรียง', 'จงเรียง',
+      'ควรเลือก', 'ควรใช้', 'ควรทำ', 'ควรให้', 'ควร track', 'ควร prioritize',
+      'ข้อใด', 'ประเภทใด', 'บริการใด', 'service ใด', 'capability ใด', 'artifact ใด',
+      'แนวทางใด', 'แนวคิดใด', 'วิธีใด', 'metric ใด', 'factor ใด', 'technique ใด',
+      'approach ใด', 'solution ใด', 'pairing ใด', 'category ใด', 'risk ใด'
+    ];
+
+    let bestIndex = -1;
+    for (const cue of cues) {
+      const idx = th.toLowerCase().lastIndexOf(cue.toLowerCase());
+      if (idx > bestIndex) bestIndex = idx;
+    }
+    if (bestIndex >= 0) {
+      const extracted = th.slice(bestIndex).trim();
+      return extracted.charAt(0).toUpperCase() + extracted.slice(1);
+    }
+
+    if (q?.type === 'multiple') return `ให้เลือก ${(q.answer || []).length} คำตอบที่ตรงกับเงื่อนไขของสถานการณ์พร้อมกัน`;
+    if (q?.type === 'ordering') return 'ให้เรียงขั้นตอนหรือแนวคิดตามลำดับที่โจทย์กำหนด';
+    if (q?.type === 'matching') return 'ให้จับคู่แต่ละรายการกับแนวคิดหรือบริการที่ตรงที่สุด';
+    return 'ให้เลือกคำตอบที่ตรงกับเงื่อนไขหลักของสถานการณ์มากที่สุด';
+  }
+
+  function showQuestionBreakdown() {
+    return !!activeSet && (activeSet.id === 'local-set-19' || activeSet.id === 'local-set-20');
+  }
+
   function readableExplanationHtml(q, answer, explanationText) {
     const parts = splitExplanation(explanationText);
     const guide = findGuide(q);
     const ok = isCorrect(q, answer || []);
     const selected = selectedChoiceText(q, answer);
     const correct = correctChoiceText(q);
+    const questionTh = String(q?.questionTh || '').trim();
+    const askTh = questionAskTh(q);
+    const breakdown = showQuestionBreakdown() && questionTh
+      ? `<div class="question-breakdown">
+          <div class="question-breakdown-block"><strong>📝 โจทย์แปลว่าอะไร</strong><div>${safe(questionTh)}</div></div>
+          <div class="question-breakdown-block question-breakdown-ask"><strong>🎯 โจทย์ถามอะไรเรา</strong><div>${safe(askTh)}</div></div>
+        </div>`
+      : '';
 
     return `
       <div class="explanation-readable">
+        ${breakdown}
         <div class="explanation-readable-title">💡 ทำไมข้อนี้ถึงตอบแบบนี้</div>
         <div class="explanation-points">${parts.map(part => `<div class="explanation-point"><span>${safe(part)}</span></div>`).join('')}</div>
         ${!ok && selected && correct ? `<div class="explanation-compare"><div><small>สิ่งที่เลือก</small><strong>${safe(selected)}</strong></div><div><small>คำตอบที่ควรแยกให้ออก</small><strong>${safe(correct)}</strong></div></div>` : ''}
