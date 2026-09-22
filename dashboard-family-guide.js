@@ -112,5 +112,28 @@
   openAll.addEventListener('click', () => groupsRoot.querySelectorAll('details').forEach(item => { item.open = true; }));
   closeAll.addEventListener('click', () => groupsRoot.querySelectorAll('details').forEach(item => { item.open = false; }));
 
+  const infoLibraryBtn = document.getElementById('infoLibraryBtn');
+  const infoLibraryView = document.getElementById('infoLibraryView');
+  const infoLibraryHomeBtn = document.getElementById('infoLibraryHomeBtn');
+
+  function hideInfoLibrary() {
+    infoLibraryView?.classList.add('hidden');
+  }
+
+  function openInfoLibrary() {
+    ['homeView', 'dashboardView', 'quizView', 'summaryView'].forEach(id => document.getElementById(id)?.classList.add('hidden'));
+    infoLibraryView?.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  infoLibraryBtn?.addEventListener('click', openInfoLibrary);
+  infoLibraryHomeBtn?.addEventListener('click', () => {
+    hideInfoLibrary();
+    document.getElementById('homeView')?.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  document.getElementById('homeBtn')?.addEventListener('click', hideInfoLibrary);
+  document.getElementById('dashboardBtn')?.addEventListener('click', hideInfoLibrary);
+
   render();
 })();
