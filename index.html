@@ -18,6 +18,7 @@
       </div>
       <div class="topbar-actions">
         <button id="dashboardBtn" class="primary" type="button">Study Dashboard</button>
+        <button id="infoLibraryBtn" class="ghost" type="button">AIF-C01 Info Library</button>
         <button id="homeBtn" class="ghost" type="button">หน้ารวมชุด</button>
       </div>
     </header>
@@ -90,16 +91,6 @@
       <section class="dashboard-panel">
         <div class="dashboard-panel-head">
           <div>
-            <h3>AIF-C01 Info Library</h3>
-            <p class="muted">รวมภาพจำและของที่ชอบสับสนเป็นกลุ่ม ๆ เช่น Bedrock, AgentCore, SOC 1/2/3, IAM, Metrics, RAG และ Responsible AI</p>
-          </div>
-        </div>
-        <div id="dashboardFamilyGuide"></div>
-      </section>
-
-      <section class="dashboard-panel">
-        <div class="dashboard-panel-head">
-          <div>
             <h3>อะไรที่ยังขาดอยู่</h3>
             <p class="muted">ดู coverage ก่อนตีความจุดแข็ง/จุดอ่อน</p>
           </div>
@@ -115,6 +106,20 @@
           </div>
         </div>
         <div id="dashboardReviewQueue"></div>
+      </section>
+    </section>
+
+    <section id="infoLibraryView" class="info-library-shell hidden">
+      <div class="dashboard-toolbar info-library-header">
+        <div>
+          <div class="eyebrow">AIF-C01 QUICK REFERENCE</div>
+          <h2>AIF-C01 Info Library</h2>
+          <p class="muted">รวมภาพจำและของที่ชอบสับสนเป็นกลุ่ม ๆ เช่น Bedrock, AgentCore, SOC 1/2/3, IAM, Metrics, RAG และ Responsible AI</p>
+        </div>
+        <button id="infoLibraryHomeBtn" class="ghost" type="button">← กลับหน้ารวมชุด</button>
+      </div>
+      <section class="dashboard-panel info-library-panel">
+        <div id="dashboardFamilyGuide"></div>
       </section>
     </section>
 
