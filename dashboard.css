@@ -128,3 +128,9 @@
 @media(max-width:1200px){.family-guide-map,.family-quick-strip{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:900px){.family-guide-map,.family-quick-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.family-guide-body{grid-template-columns:1fr}.family-guide-item:nth-child(odd){border-right:0}}
 @media(max-width:640px){.family-guide-toolbar{align-items:stretch;flex-direction:column}.family-guide-count{align-self:flex-start}.family-guide-map,.family-quick-strip{grid-template-columns:1fr}.family-guide-group summary{flex-direction:column}.family-guide-group summary>b{align-self:flex-start}.family-guide-action{width:100%}}
+
+.info-library-shell{display:flex;flex-direction:column;gap:18px}
+.info-library-header{margin-bottom:0}
+.info-library-header h2{margin:4px 0 0}
+.info-library-panel{padding:18px}
+@media(max-width:640px){.info-library-header{align-items:stretch}.info-library-header>button{width:100%}}
