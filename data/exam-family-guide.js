@@ -124,3 +124,139 @@ window.EXAM_FAMILY_GUIDE = {
     }
   ]
 };
+
+window.EXAM_FAMILY_GUIDE.updated = '2026-09-23';
+window.EXAM_FAMILY_GUIDE.groups.push(
+  {
+    id: 'compliance-reports',
+    title: 'SOC / ISO / Frameworks — เอกสารกับมาตรฐานที่ชอบสับสน',
+    summary: 'แยกให้ออกว่าเป็น “รายงานตรวจสอบ”, “มาตรฐานระบบบริหาร”, “framework บริหารความเสี่ยง” หรือ “กฎหมาย”',
+    items: [
+      { name: 'SOC 1', use: 'รายงาน controls ของ service organization ที่เกี่ยวข้องกับ internal control over financial reporting (ICFR) ของลูกค้า', cue: 'Financial reporting controls = SOC 1', confuse: 'SOC 2 เน้น Trust Services Criteria ไม่ได้โฟกัส financial reporting' },
+      { name: 'SOC 2', use: 'รายงานแบบละเอียดเกี่ยวกับ controls ตาม Trust Services Criteria เช่น security, availability, confidentiality, privacy', cue: 'Detailed trust-services report = SOC 2', confuse: 'SOC 3 ใช้เกณฑ์คล้ายกันแต่เป็น general-use/public summary ที่รายละเอียดน้อยกว่า' },
+      { name: 'SOC 3', use: 'general-use report ตาม Trust Services Criteria สำหรับเผยแพร่กว้างกว่า', cue: 'Public/general summary = SOC 3', confuse: 'SOC 2 คือ detailed report สำหรับผู้ใช้ที่ต้องการรายละเอียด control มากกว่า' },
+      { name: 'ISO/IEC 27001', use: 'มาตรฐาน Information Security Management System (ISMS)', cue: 'Information Security Management = ISO 27001', confuse: 'ISO 42001 คือ AI Management System' },
+      { name: 'ISO/IEC 42001', use: 'มาตรฐาน AI Management System (AIMS) สำหรับ governance/management ของ AI ในองค์กร', cue: 'AI Management System = ISO 42001', confuse: 'ISO 27001 เน้น information security management' },
+      { name: 'NIST AI RMF', use: 'framework บริหาร AI risk ด้วย Govern, Map, Measure, Manage', cue: 'Govern · Map · Measure · Manage = NIST AI RMF', confuse: 'ไม่ใช่กฎหมายแบบ EU AI Act' },
+      { name: 'EU AI Act', use: 'กฎหมายแบบ risk-based แบ่ง prohibited/high/transparency/minimal obligations ตาม use case', cue: 'Risk tier + legal obligation = EU AI Act', confuse: 'NIST AI RMF เป็น voluntary risk-management framework' },
+      { name: 'AWS CAF-AI', use: 'guidance สำหรับ enterprise AI adoption/transformation ด้าน strategy, people, governance, platform, operating model', cue: 'Enterprise AI adoption = CAF-AI', confuse: 'ไม่ใช่ compliance report และไม่ใช่มาตรฐาน certification' }
+    ]
+  },
+  {
+    id: 'iam-family',
+    title: 'IAM / Permissions — Grant, Ceiling, Resource, Trust',
+    summary: 'เวลาโจทย์ถาม permission ให้ถามก่อนว่า “ใคร grant?”, “ใครเป็นเพดาน?”, “ผูกกับ identity หรือ resource?”',
+    items: [
+      { name: 'Identity-based Policy', use: 'ผูกกับ user/role/group และ grant permissions ให้ identity', cue: 'Identity นี้ทำอะไรได้ = Identity Policy', confuse: 'Permissions Boundary/SCP ไม่ grant สิทธิ์เอง' },
+      { name: 'Resource-based Policy', use: 'ผูกกับ resource และระบุว่า principal ใดเข้าถึง resource ได้', cue: 'Resource นี้ยอมให้ใคร = Resource Policy', confuse: 'Identity policy มองจากฝั่ง user/role' },
+      { name: 'Permissions Boundary', use: 'กำหนด maximum permissions ของ IAM identity', cue: 'Boundary = Ceiling ของ identity', confuse: 'ไม่ grant permission' },
+      { name: 'Service Control Policy (SCP)', use: 'permission guardrail ระดับ AWS Organizations/account', cue: 'SCP = Ceiling ระดับ Organization', confuse: 'ไม่ grant permission และไม่ใช่ policy ที่ผูกกับ resource' },
+      { name: 'IAM Role', use: 'identity ที่มี permission set และถูก assume เพื่อรับ temporary credentials', cue: 'Role = ชุดสิทธิ์ที่สวมได้', confuse: 'Role ไม่มี long-term credential แบบ user' },
+      { name: 'Trust Policy', use: 'กำหนดว่าใคร/อะไรสามารถ assume role ได้', cue: 'ใครสวม Role ได้ = Trust Policy', confuse: 'Permission policy บอกว่า role ทำอะไรได้หลัง assume แล้ว' },
+      { name: 'Explicit Deny', use: 'Deny ที่เขียนชัดเจนและมี precedence เหนือ Allow', cue: 'Explicit Deny ชนะ Allow', confuse: 'Implicit deny คือไม่มี Allow จึงไม่ได้สิทธิ์' }
+    ]
+  },
+  {
+    id: 'inference-modes',
+    title: 'Inference Modes — Real-Time / Serverless / Async / Batch',
+    summary: 'ดู 3 อย่าง: มีคนรอไหม, งานต่อ request ใหญ่/นานไหม, หรือเป็น dataset ก้อนใหญ่ offline',
+    items: [
+      { name: 'Real-Time Inference', use: 'interactive request ที่ต้องการ response latency ต่ำและ endpoint พร้อมรับงาน', cue: 'คนรอผลทันที = Real-Time', confuse: 'Async เหมาะ request ที่ใหญ่/นานและรับผลทีหลัง' },
+      { name: 'Serverless Inference', use: 'request สั้น ๆ ที่ traffic มาเป็นช่วงหรือคาดเดายาก และไม่อยาก provision instance', cue: 'traffic ไม่สม่ำเสมอ + request ไม่หนัก = Serverless', confuse: 'Async ก็ traffic กระตุกได้ แต่เด่นที่ payload ใหญ่/processing นาน' },
+      { name: 'Asynchronous Inference', use: 'single request/payload ใหญ่หรือใช้เวลานาน แล้วมารับผลภายหลัง', cue: 'งานเดี่ยวใหญ่/นาน + รับผลทีหลัง = Async', confuse: 'Batch Transform คือ dataset offline หลาย records' },
+      { name: 'Batch Transform', use: 'ประมวลผล dataset ขนาดใหญ่แบบ offline ไม่มี user รอ response ราย request', cue: 'กองข้อมูล offline = Batch', confuse: 'Async ยังเป็น request/job รายงานที่ต้องคืนผลแต่ละงาน' }
+    ]
+  },
+  {
+    id: 'ml-metrics',
+    title: 'Metrics — Classification / Regression จำยังไง',
+    summary: 'Classification ให้คิด TP/FP/FN; Regression ให้ดูว่าอยากอ่านง่ายหรืออยากลงโทษ error ใหญ่',
+    items: [
+      { name: 'Accuracy', use: 'สัดส่วนทายถูกทั้งหมด', cue: 'ถูกทั้งหมดกี่ % = Accuracy', confuse: 'อาจหลอกเมื่อ class imbalance มาก' },
+      { name: 'Precision', use: 'ในสิ่งที่ทายว่า positive ทั้งหมด มีของจริง positive กี่ส่วน', cue: 'ทายว่าใช่แล้ว ถูกจริงแค่ไหน = Precision', confuse: 'false positive เยอะ → Precision ต่ำ' },
+      { name: 'Recall', use: 'จาก positive จริงทั้งหมด โมเดลจับเจอได้กี่ส่วน', cue: 'ของจริงทั้งหมด จับได้กี่ส่วน = Recall', confuse: 'false negative เยอะ → Recall ต่ำ' },
+      { name: 'F1 Score', use: 'harmonic mean ของ Precision และ Recall', cue: 'อยาก balance Precision + Recall = F1', confuse: 'ไม่ใช่ตัวชี้วัด regression' },
+      { name: 'AUC-PR', use: 'ดู tradeoff Precision-Recall หลาย threshold และเหมาะกับ positive class ที่หายาก', cue: 'Rare positive + หลาย threshold = AUC-PR', confuse: 'Accuracy อาจดูสูงเกินจริงใน imbalanced data' },
+      { name: 'MAE', use: 'average absolute error ในหน่วยเดียวกับ target', cue: 'ผิดเฉลี่ยกี่หน่วย = MAE', confuse: 'RMSE ลงโทษ large error แรงกว่า' },
+      { name: 'RMSE', use: 'squared error ทำให้ large misses มีน้ำหนักสูงขึ้น แล้วแปลงกลับหน่วย target', cue: 'แพ้ error ใหญ่ = RMSE', confuse: 'MAE เป็น linear penalty' },
+      { name: 'R-squared (R²)', use: 'สัดส่วน variance ของ target ที่โมเดลอธิบายได้', cue: 'อธิบาย variance ได้แค่ไหน = R²', confuse: 'ไม่ใช่ average error ในหน่วย target' }
+    ]
+  },
+  {
+    id: 'data-governance',
+    title: 'Data Governance — Owner / Steward / Lineage / Residency / Retention',
+    summary: 'กลุ่มนี้ข้อสอบชอบเปลี่ยนคำกริยา: ใครรับผิดชอบ / มาจากไหน / อยู่ที่ไหน / เก็บนานแค่ไหน',
+    items: [
+      { name: 'Data Owner', use: 'รับผิดชอบภาพรวมของ data domain และ major decisions เรื่อง access/use', cue: 'เจ้าของภาพรวม = Data Owner', confuse: 'Steward ดู governance/quality รายวัน' },
+      { name: 'Data Steward', use: 'ดู quality, definitions, metadata และ governance operation รายวัน', cue: 'ผู้ดูแลรายวัน = Steward', confuse: 'Owner ถือ accountability ระดับสูงกว่า' },
+      { name: 'Data Lineage', use: 'trace source → transformations → downstream/model artifact', cue: 'มาจากไหน ผ่านอะไร = Lineage', confuse: 'Residency = อยู่ที่ไหน; Retention = เก็บนานเท่าไร' },
+      { name: 'Data Catalog', use: 'จัด metadata ให้ dataset ค้นหาและเข้าใจได้', cue: 'หา dataset ให้เจอ = Catalog', confuse: 'Lineage เน้นเส้นทางที่มา/การเปลี่ยนแปลง' },
+      { name: 'Data Residency', use: 'ข้อกำหนดว่าข้อมูลต้องเก็บ/ประมวลผลใน geographic location ใด', cue: 'ข้อมูลอยู่ที่ไหน = Residency', confuse: 'Retention = เวลา; Sovereignty = อยู่ภายใต้กฎหมายเขตใด' },
+      { name: 'Data Retention', use: 'กำหนดระยะเวลาที่เก็บข้อมูล ก่อน archive/delete', cue: 'เก็บกี่ปี = Retention', confuse: 'Residency ไม่ได้พูดเรื่องเวลา' },
+      { name: 'Data Sovereignty', use: 'ข้อกำกับตาม jurisdiction/law ที่มีอำนาจเหนือข้อมูล', cue: 'กฎหมายของเขตไหนครอบข้อมูล = Sovereignty', confuse: 'Residency คือ physical/logical location requirement' }
+    ]
+  },
+  {
+    id: 'responsible-ai',
+    title: 'Responsible AI — Fairness / Transparency / Explainability / Oversight',
+    summary: 'ถามว่าปัญหาอยู่ที่ “ความเป็นธรรม”, “การเปิดเผย”, “อธิบายเหตุผล”, “คนคุม”, หรือ “สิทธิ์ขอทบทวน”',
+    items: [
+      { name: 'Fairness', use: 'ลด unjustified disparity ระหว่างกลุ่มที่เทียบเคียงกัน', cue: 'ผลลัพธ์ต่างกันระหว่างกลุ่ม = Fairness', confuse: 'Explainability ถามว่าทำไม decision นี้เกิดขึ้น' },
+      { name: 'Transparency', use: 'เปิดเผยว่าใช้ AI, intended use, limitations และข้อมูลสำคัญต่อผู้ใช้', cue: 'บอกว่าเป็น AI / บอกข้อจำกัด = Transparency', confuse: 'Explainability คือเหตุผลของ prediction/decision' },
+      { name: 'Explainability', use: 'ให้เหตุผลที่เข้าใจได้สำหรับ prediction/decision', cue: 'ทำไมถึงตัดสินแบบนี้ = Explainability', confuse: 'Interpretability คือความเข้าใจได้จากโครงสร้าง model เอง' },
+      { name: 'Interpretability', use: 'ตัว model/logic เข้าใจได้โดยตรง เช่น simple linear model/tree/rules', cue: 'เข้าใจตัว model เอง = Interpretability', confuse: 'SHAP เป็น post-hoc explainability' },
+      { name: 'Privacy & Security', use: 'ปกป้อง personal/sensitive data และป้องกัน unauthorized access/exposure', cue: 'ข้อมูลลับ/PII = Privacy & Security', confuse: 'Fairness ไม่ใช่เรื่องการปกป้องข้อมูล' },
+      { name: 'Robustness', use: 'model ยัง reliable เมื่อ input มี noise/perturbation/shift ที่เหมาะสม', cue: 'input เปลี่ยนนิดหน่อยยังไว้ใจได้ = Robustness', confuse: 'Fairness ดู subgroup outcomes' },
+      { name: 'Environmental Sustainability', use: 'ลด compute/energy/resource impact โดยยังตอบ requirement ได้', cue: 'เล็กพอแล้ว อย่าใช้ใหญ่เกิน = Sustainability', confuse: 'ไม่ใช่ cost optimization อย่างเดียว' },
+      { name: 'Human Oversight', use: 'ให้คน review/approve/intervene ก่อน high-impact action', cue: 'คนตรวจ ก่อน final = Oversight', confuse: 'Recourse คือช่องทางหลัง/รอบ decision ให้ผู้ได้รับผลกระทบขอทบทวน' },
+      { name: 'Recourse', use: 'ช่องทางให้ผู้ได้รับผลกระทบ question/appeal/request review', cue: 'ขอทบทวน/อุทธรณ์ = Recourse', confuse: 'Transparency แค่แจ้งข้อมูล ไม่เท่ากับให้สิทธิ์ appeal' }
+    ]
+  },
+  {
+    id: 'aws-ai-services',
+    title: 'AWS AI Services — งานนี้ใช้บริการไหน',
+    summary: 'พวกนี้เป็น managed AI service สำเร็จรูป ให้จำจากชนิด input/output',
+    items: [
+      { name: 'Amazon Comprehend', use: 'NLP เช่น sentiment, entities, key phrases, language analysis', cue: 'Text เข้า → วิเคราะห์ภาษา = Comprehend', confuse: 'Transcribe = speech-to-text' },
+      { name: 'Amazon Transcribe', use: 'speech/audio → text', cue: 'เสียงเป็นข้อความ = Transcribe', confuse: 'Polly ทำกลับกัน' },
+      { name: 'Amazon Polly', use: 'text → lifelike speech', cue: 'ข้อความเป็นเสียง = Polly', confuse: 'Transcribe คือเสียงเป็นข้อความ' },
+      { name: 'Amazon Translate', use: 'machine translation ระหว่างภาษา', cue: 'แปลภาษา = Translate', confuse: 'Comprehend วิเคราะห์ความหมาย/อารมณ์ ไม่ได้เป็น translator หลัก' },
+      { name: 'Amazon Textract', use: 'extract text, forms, tables, key-value pairs จากเอกสาร/ภาพเอกสาร', cue: 'เอกสาร + table/form = Textract', confuse: 'Rekognition วิเคราะห์ภาพ/วิดีโอทั่วไป' },
+      { name: 'Amazon Rekognition', use: 'image/video analysis เช่น objects, scenes, faces, labels', cue: 'ภาพ/วิดีโอมีอะไร = Rekognition', confuse: 'Textract = document text/forms/tables' },
+      { name: 'Amazon Kendra', use: 'intelligent enterprise search/retrieval', cue: 'enterprise search = Kendra', confuse: 'Q/Quick ให้ assistant/workspace behavior มากกว่า search อย่างเดียว' },
+      { name: 'Amazon Personalize', use: 'managed personalized recommendations', cue: 'แนะนำของเฉพาะบุคคล = Personalize', confuse: 'Comprehend วิเคราะห์ text' },
+      { name: 'Amazon Lex', use: 'build conversational interfaces/chatbot ด้วย text/voice', cue: 'Conversational bot = Lex', confuse: 'Polly/Transcribe เป็น speech components ไม่ใช่ bot orchestration' }
+    ]
+  },
+  {
+    id: 'model-learning-types',
+    title: 'Model / Learning Types — งานแบบนี้คืออะไร',
+    summary: 'แยก classical ML, learning paradigm และ GenAI model family จากรูปแบบ input/output',
+    items: [
+      { name: 'Supervised Classification', use: 'มี labeled categories และต้องทำนาย class', cue: 'มี label + ทายหมวด = Classification', confuse: 'Regression ทายค่าต่อเนื่อง' },
+      { name: 'Regression', use: 'ทำนายค่าตัวเลขต่อเนื่อง เช่น price/time/demand', cue: 'ทายตัวเลขต่อเนื่อง = Regression', confuse: 'Classification ทาย category' },
+      { name: 'Clustering', use: 'ไม่มี label แล้วหา natural groups/patterns', cue: 'ไม่มี label + หากลุ่ม = Clustering', confuse: 'Classification ต้องมี labeled class' },
+      { name: 'Self-supervised Learning', use: 'สร้าง training signal จากข้อมูลดิบเอง เช่น masked-token prediction', cue: 'ข้อมูล unlabeled แต่สร้าง target เอง = Self-supervised', confuse: 'Supervised ใช้ label จากภายนอก' },
+      { name: 'Reinforcement Learning', use: 'agent เลือก action จาก state แล้วเรียนจาก reward/penalty', cue: 'State → Action → Reward = RL', confuse: 'ไม่ใช่ supervised labels ต่อ record' },
+      { name: 'Large Language Model', use: 'understand/generate natural language', cue: 'งานภาษาแบบ generative = LLM', confuse: 'Embedding model เน้น representation ไม่ได้สร้างข้อความยาวเป็นหลัก' },
+      { name: 'Embedding Model', use: 'สร้าง vector representation สำหรับ semantic similarity/retrieval', cue: 'Meaning → vector = Embedding Model', confuse: 'LLM สร้างภาษา; embedding model สร้าง vectors' },
+      { name: 'Multimodal Model', use: 'รับ/เข้าใจ/สร้างมากกว่าหนึ่ง modality เช่น text+image', cue: 'หลาย modality = Multimodal', confuse: 'Text-only LLM รับภาษาเป็นหลัก' },
+      { name: 'Diffusion Model', use: 'generative model ที่ค่อย ๆ denoise เพื่อสร้าง image/sample', cue: 'noise → image = Diffusion', confuse: 'Embedding model ไม่ได้สร้างภาพ' }
+    ]
+  },
+  {
+    id: 'evaluation-metrics',
+    title: 'FM / RAG Evaluation — metric ไหนวัดอะไร',
+    summary: 'อย่าสับสน reference similarity, semantic similarity, benchmark knowledge, RAG retrieval และ grounded generation',
+    items: [
+      { name: 'BLEU', use: 'reference-based n-gram overlap โดยนิยมกับ machine translation', cue: 'Translation overlap = BLEU', confuse: 'ROUGE พบได้บ่อยใน summarization' },
+      { name: 'ROUGE', use: 'reference-based overlap metric ที่นิยมกับ summarization', cue: 'Summary vs reference = ROUGE', confuse: 'BERTScore เน้น semantic similarity มากกว่า exact overlap' },
+      { name: 'BERTScore', use: 'semantic similarity ด้วย contextual embeddings ระหว่าง candidate กับ reference', cue: 'คำต่างแต่ความหมายใกล้ = BERTScore', confuse: 'BLEU/ROUGE พึ่ง overlap มากกว่า' },
+      { name: 'MMLU', use: 'benchmark multiple-choice วัด broad academic knowledge across subjects', cue: 'ความรู้กว้างหลายวิชา = MMLU', confuse: 'ไม่ใช่ business KPI ของ application' },
+      { name: 'LLM-as-a-Judge', use: 'ใช้ LLM evaluator ให้คะแนน output ตาม rubric ใน scale', cue: 'ประเมินหลายพัน answer ตาม rubric = LLM-as-a-Judge', confuse: 'ต้องระวัง judge/position bias และ validate evaluator' },
+      { name: 'Retrieval Relevance', use: 'retrieved documents/context ตรง query หรือไม่', cue: 'ดึง docs ถูกเรื่องไหม = Retrieval Relevance', confuse: 'Faithfulness ดู final answer ยึด docs หรือไม่' },
+      { name: 'Faithfulness / Groundedness', use: 'generated claims มี evidence ใน supplied context หรือไม่', cue: 'คำตอบแต่งเพิ่มไหม = Faithfulness', confuse: 'retrieval relevance อาจดีแต่ generation ยัง hallucinate ได้' },
+      { name: 'Business / Application Metrics', use: 'task completion, satisfaction, conversion, handling time, ROI ฯลฯ', cue: 'โมเดลดีแล้วธุรกิจดีไหม = Business metrics', confuse: 'offline benchmark สูงไม่ได้รับประกัน business outcome' }
+    ]
+  }
+);
