@@ -321,7 +321,7 @@
   }
 
   function showQuestionBreakdown() {
-    return !!activeSet && (activeSet.id === 'local-set-19' || activeSet.id === 'local-set-20');
+    return !!activeSet && /^local-set-(19|20|21|22)$/.test(activeSet.id);
   }
 
   function readableExplanationHtml(q, answer, explanationText) {
@@ -451,7 +451,7 @@
   const previousCollectProgressPayload = collectProgressPayload;
   collectProgressPayload = function () {
     const payload = previousCollectProgressPayload();
-    payload.appVersion = '8.54';
+    payload.appVersion = '8.55';
     payload.features = { ...(payload.features || {}), reviewQueueReturn: true, readableExplanations: true };
     return payload;
   };
