@@ -152,7 +152,7 @@
   });
   patch(49,{
     question:"Before training a hiring model, a data science team discovers that historical applicant data contains substantially fewer examples from some gender groups. The team wants an AWS capability that can measure pre-training bias and help analyze whether the dataset or model creates unequal outcomes, rather than a service for labeling or post-inference human review. Which service should it use?",
-    questionTh:"ก่อน train hiring model ทีม data science พบว่า historical applicant data มีบาง gender groups น้อยกว่ามาก ต้องการ AWS capability ที่วัด pre-training bias และช่วยวิเคราะห์ unequal outcomes ไม่ใช่ service สำหรับ labeling หรือ human review หลัง inference ควรใช้บริการใด?"
+    questionTh:"ก่อนฝึกโมเดลสำหรับคัดเลือกผู้สมัครงาน ทีมวิทยาศาสตร์ข้อมูลพบว่าข้อมูลผู้สมัครในอดีตมีตัวอย่างจากบางกลุ่มเพศน้อยกว่ากลุ่มอื่นอย่างมาก ทีมต้องการความสามารถของ AWS ที่สามารถวัดอคติก่อนการฝึก (pre-training bias) และช่วยวิเคราะห์ว่าชุดข้อมูลหรือโมเดลก่อให้เกิดผลลัพธ์ที่ไม่เท่าเทียมหรือไม่ โดยไม่ใช่บริการสำหรับติดป้ายกำกับข้อมูล (labeling) หรือให้มนุษย์ตรวจทานผลหลังการอนุมาน (post-inference human review) ควรใช้บริการใด?"
   });
   patch(50,{
     question:"A bank is an existing Amazon Augmented AI (Amazon A2I) customer. Its loan-review model sometimes returns low-confidence predictions, and policy requires those cases to be routed to an employee for a decision before the applicant is told the outcome. Which AWS capability BEST supports this existing human-review workflow?",
