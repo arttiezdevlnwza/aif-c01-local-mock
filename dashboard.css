@@ -134,3 +134,49 @@
 .info-library-header h2{margin:4px 0 0}
 .info-library-panel{padding:18px}
 @media(max-width:640px){.info-library-header{align-items:stretch}.info-library-header>button{width:100%}}
+
+/* Infographic Library */
+.info-library-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.info-library-tab{border:1px solid #d0d5dd;background:#fff;color:#344054;border-radius:10px;padding:9px 13px;font-weight:800;cursor:pointer}
+.info-library-tab.active{background:#17202a;color:#fff;border-color:#17202a}
+.infographic-library-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-end;flex-wrap:wrap;margin-bottom:14px}
+.infographic-library-head h3{margin:0 0 4px}
+.infographic-library-head p{margin:0}
+.infographic-library-head .family-guide-search{max-width:440px}
+.infographic-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.infographic-page-card{border:1px solid #dbe7f4;border-radius:16px;background:#fff;overflow:hidden;box-shadow:0 3px 12px rgba(16,24,40,.05)}
+.infographic-preview{appearance:none;border:0;background:linear-gradient(180deg,#fbfdff 0%,#eef7ff 100%);color:#17202a;width:100%;min-height:310px;padding:14px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:10px}
+.infographic-preview:hover{background:linear-gradient(180deg,#fff 0%,#e7f3ff 100%)}
+.infographic-paper-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.infographic-page-number{display:inline-flex;border-radius:999px;padding:5px 9px;background:#dff2ff;color:#175cd3;font-size:12px;font-weight:900}
+.infographic-page-icon{font-size:24px}
+.infographic-preview-title{font-size:18px;line-height:1.3;color:#0f285f}
+.infographic-mini-sections{display:grid;gap:7px}
+.infographic-mini-section{border:1px solid #d9e8f6;background:rgba(255,255,255,.9);border-radius:10px;padding:8px 9px;display:grid;gap:3px}
+.infographic-mini-section b{font-size:12px;color:#1d4f91}
+.infographic-mini-section span{font-size:11px;color:#667085;line-height:1.4}
+.infographic-open-label{margin-top:auto;font-size:12px;font-weight:900;color:#175cd3}
+.infographic-card-meta{padding:10px 12px;border-top:1px solid #edf1f5}
+.infographic-tag-row{display:flex;gap:6px;flex-wrap:wrap}
+.infographic-tag-row span{display:inline-block;border-radius:999px;padding:4px 7px;background:#eef8f6;border:1px solid #cdeee6;color:#16715f;font-size:11px;font-weight:800}
+.infographic-modal{position:fixed;inset:0;z-index:1100;background:rgba(16,24,40,.62);display:grid;place-items:start center;padding:24px;overflow:auto}
+.infographic-modal.hidden{display:none!important}
+.infographic-modal-card{width:min(1080px,100%);background:#fff;border-radius:18px;box-shadow:0 28px 70px rgba(16,24,40,.28);overflow:hidden}
+.infographic-modal-head{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 16px;border-bottom:1px solid #e4e7ec;background:#fff}
+.infographic-modal-head h2{margin:0;font-size:20px}
+.infographic-full-page{padding:18px;background:linear-gradient(180deg,#fafdff,#f2f8ff)}
+.infographic-full-head{border:1px solid #cae3f8;background:#fff;border-radius:16px;padding:16px;margin-bottom:14px}
+.infographic-full-head h2{margin:5px 0 10px;color:#0f285f}
+.infographic-full-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.infographic-full-section{border:1px solid #cfe2f3;background:#fff;border-radius:14px;overflow:hidden}
+.infographic-section-head{display:flex;gap:9px;align-items:center;background:#eaf6ff;padding:10px 12px;color:#123b75}
+.infographic-section-head>span{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#175cd3;color:#fff;font-size:12px;font-weight:900}
+.infographic-section-head strong{font-size:14px}
+.infographic-section-items{display:grid;gap:0;padding:5px 12px 10px}
+.infographic-section-items>div{display:flex;gap:8px;align-items:flex-start;padding:7px 0;border-bottom:1px solid #eef2f6}
+.infographic-section-items>div:last-child{border-bottom:0}
+.infographic-section-items p{margin:0;font-size:13px;line-height:1.45;color:#475467}
+.infographic-dot{width:7px;height:7px;border-radius:50%;background:#14b8a6;margin-top:6px;flex:0 0 auto}
+.infographic-goal{margin-top:14px;background:#0f4d8a;color:#fff;border-radius:12px;padding:11px 14px;text-align:center;font-weight:800}
+@media(max-width:980px){.infographic-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.infographic-gallery,.infographic-full-grid{grid-template-columns:1fr}.infographic-library-head{align-items:stretch}.infographic-library-head .family-guide-search{max-width:none}.infographic-modal{padding:10px}.infographic-full-page{padding:10px}}
