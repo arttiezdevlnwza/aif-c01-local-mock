@@ -114,14 +114,41 @@
         <div>
           <div class="eyebrow">AIF-C01 QUICK REFERENCE</div>
           <h2>AIF-C01 Info Library</h2>
-          <p class="muted">รวมภาพจำและของที่ชอบสับสนเป็นกลุ่ม ๆ เช่น Bedrock, AgentCore, SOC 1/2/3, IAM, Metrics, RAG และ Responsible AI</p>
+          <p class="muted">รวมภาพจำ ของที่ชอบสับสน และ Infographic Page 1–20 ไว้ที่เดียว</p>
         </div>
         <button id="infoLibraryHomeBtn" class="ghost" type="button">← กลับหน้ารวมชุด</button>
       </div>
-      <section class="dashboard-panel info-library-panel">
+
+      <div class="info-library-tabs" role="tablist" aria-label="Info Library sections">
+        <button id="infoTopicTabBtn" class="info-library-tab active" type="button">Topic Map</button>
+        <button id="infoInfographicTabBtn" class="info-library-tab" type="button">Infographics 1–20</button>
+      </div>
+
+      <section id="infoTopicPanel" class="dashboard-panel info-library-panel">
         <div id="dashboardFamilyGuide"></div>
       </section>
+
+      <section id="infoInfographicPanel" class="dashboard-panel info-library-panel hidden">
+        <div class="infographic-library-head">
+          <div>
+            <h3>AIF-C01 Infographics</h3>
+            <p class="muted">20 หน้าแบบภาพจำ ตั้งแต่ Platform Families, Memory/MCP, SOC/IAM ไปจนถึง RAG, Fine-tuning, Evaluation และ AWS Service Finder</p>
+          </div>
+          <input id="infographicSearch" class="family-guide-search" type="search" placeholder="ค้นหา Page / topic เช่น Memory, SOC 2, RAG, LoRA...">
+        </div>
+        <div id="infographicGallery" class="infographic-gallery"></div>
+      </section>
     </section>
+
+    <div id="infographicModal" class="infographic-modal hidden" role="dialog" aria-modal="true" aria-labelledby="infographicModalTitle">
+      <div class="infographic-modal-card">
+        <div class="infographic-modal-head">
+          <h2 id="infographicModalTitle">Infographic</h2>
+          <button id="infographicModalClose" class="ghost" type="button" aria-label="ปิด">✕</button>
+        </div>
+        <div id="infographicModalBody"></div>
+      </div>
+    </div>
 
     <section id="quizView" class="hidden">
       <div class="quiz-toolbar">
@@ -242,6 +269,7 @@
   <script src="data/quality-patches.js"></script>
   <script src="data/review-insights.js"></script>
   <script src="data/exam-family-guide.js"></script>
+  <script src="data/infographic-pages.js"></script>
 
   <script src="data/local-set-11-part-1.js"></script>
   <script src="data/local-set-11-part-2.js"></script>
@@ -288,6 +316,7 @@
   <script src="dashboard.js"></script>
   <script src="dashboard-advanced.js"></script>
   <script src="dashboard-family-guide.js"></script>
+  <script src="infographics.js"></script>
   <script src="dashboard-set-count-patch.js"></script>
   <script src="data/set-12-review.js"></script>
   <script src="data/set-12-english-notes.js"></script>
