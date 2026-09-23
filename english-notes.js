@@ -67,7 +67,8 @@
     adequate: 'เพียงพอ / เหมาะสมตามความต้องการ',
     consequential: 'มีผลกระทบสำคัญ',
     disparity: 'ความแตกต่าง / ความเหลื่อมล้ำระหว่างกลุ่ม',
-    rural: 'ชนบท / พื้นที่ชนบท'
+    rural: 'ชนบท / พื้นที่ชนบท',
+'chain records': 'ในประโยคนี้ chain = เครือ/เครือข่าย และ records = บันทึก (เป็นคำกริยา); “A supermarket chain records…” = “เครือซูเปอร์มาร์เก็ตบันทึก…”',
   };
 
   function normalizeTerm(value) {
