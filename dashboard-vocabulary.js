@@ -71,7 +71,8 @@
     'non-existent fact': 'ข้อเท็จจริงที่ไม่มีอยู่จริง / ข้อมูลที่ถูกแต่งขึ้น',
     prior: 'ก่อนหน้า / ที่เกิดขึ้นหรืออยู่มาก่อน',
     'progressively corrupting data': 'ค่อย ๆ ทำให้ข้อมูลเพี้ยนหรือปน noise มากขึ้นทีละขั้น',
-    'tenant metadata': 'metadata ที่บอกว่า record/document เป็นของ tenant หรือลูกค้ากลุ่มใด เพื่อใช้แยกขอบเขตข้อมูล'
+    'tenant metadata': 'metadata ที่บอกว่า record/document เป็นของ tenant หรือลูกค้ากลุ่มใด เพื่อใช้แยกขอบเขตข้อมูล',
+'chain records': 'ในประโยคนี้ chain = เครือ/เครือข่าย และ records = บันทึก (เป็นคำกริยา); “A supermarket chain records…” = “เครือซูเปอร์มาร์เก็ตบันทึก…”',
   };
 
   function normalize(value) {
