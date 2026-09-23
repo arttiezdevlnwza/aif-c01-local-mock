@@ -1,133 +1,177 @@
-AIF-C01 Local Mock — 10 Sets
-====================================
+# AIF-C01 Local Mock
 
-วิธีใช้
-1. เปิด GitHub Pages URL ของ repo นี้ใน browser
-2. เลือก Set 1-10 แล้วเริ่มทำได้เลย
-3. Progress จะเก็บใน localStorage ของ browser เครื่องนั้น
-4. ถ้าจะย้าย progress ไปอีกเครื่อง ใช้ Copy Progress Code / Import Progress หรือ Export/Import JSON
+Static web app สำหรับฝึก **AWS Certified AI Practitioner (AIF-C01)** แบบ local/browser-only พร้อมข้อสอบ 20 ชุด, Study Dashboard, Review Queue และ AIF-C01 Info Library
 
-Local fallback
-- Clone/download repo แล้วเปิด index.html ได้เช่นเดิม
+## Current status
 
-ฟีเจอร์
-- เป็น static web app; หลังตั้ง GitHub Pages ครั้งแรก ไม่ต้องติดตั้งอะไรบนเครื่องผู้ใช้
-- กดช้อยส์และตรวจคำตอบได้
-- รองรับ Single Choice, Select TWO/Multiple Response, Ordering และ Matching
-- อ่านเฉลยหลังตรวจคำตอบ
-- Previous / Next และกดเลขข้อเพื่อข้ามไปมา
-- ดูข้อที่ตอบผิด
-- เมื่อทำและตรวจครบทั้ง 65 ข้อ จะเปิดหน้า Summary ที่แสดงคะแนนรวมและเฉพาะข้อผิดเรียงลงมา
-- จำ progress แยกแต่ละชุดด้วย localStorage ของ browser
-- ช้อยส์ A/B/C/D/E ถูก shuffle ใหม่ต่อ Attempt และคงตำแหน่งเดิมระหว่างทำ Attempt นั้น
-- กด Reset จะล้างคำตอบ/คะแนนและสุ่มช้อยส์ใหม่
+- **20 Sets / 1,300 questions**
+- **65 questions per set**
+- Set 8–20 เน้น **English scenario + close distractors**
+- รองรับ **Single Choice / Multiple Response / Ordering / Matching**
+- ทุกข้อใน Local Mock คิดคะแนน: `correct / 65 × 100`
+- Progress เก็บใน **browser localStorage** ไม่มี account/database/backend
+- AIF-C01 Info Library ปัจจุบันมี **17 topic families / 133 quick-reference items**
 
-Anti-pattern pass (v2)
-- Set 1-4 คง anti-pattern pass เดิม; Set 5 ถูกสร้างโดยคุม answer distribution และความยาวช้อยส์ตั้งแต่ต้น
-- ตัดคำอธิบายส่วนเกินออกจากช้อยส์ถูก โดยไม่เปลี่ยนสาระว่าอะไรเป็นคำตอบที่ถูก
-- เฉลยที่เคยอ้างตัวอักษร A/B/C/D ถูกทำให้เป็นกลางกับการ shuffle
-- ใช้ localStorage key เวอร์ชันใหม่ เพื่อให้รอบวัดผลนี้เริ่มจาก state สะอาด
+## Blueprint สำหรับ Set 19–20
 
-โครงสร้าง
-index.html          หน้าเว็บ
-style.css           หน้าตาเว็บ
-app.js              logic การทำข้อสอบ + shuffle ช้อยส์
-data/set-01.js ... data/set-10.js   ข้อสอบ + เฉลยแยกตามชุด
+| Domain | Questions |
+|---|---:|
+| D1 — Fundamentals of AI and ML | 13 |
+| D2 — Fundamentals of Generative AI | 16 |
+| D3 — Applications of Foundation Models | 18 |
+| D4 — Responsible AI | 9 |
+| D5 — Security, Compliance, and Governance | 9 |
 
-ชุดข้อสอบ
-- Set 1: Standard / Easier
-- Set 2: Scenario Practice
-- Set 3: Hard 2026
-- Set 4: Exam-Style Hard 2026
-- Set 5: Closest-to-Real Exam Style (มี Single / Select TWO / Ordering / Matching)
-- Set 6: ExamTopics Curated Hard / High-Value 2026 — โจทย์ใหม่จาก concept ที่คัดแล้ว ไม่คัดลอกคำถาม ExamTopics ตรง ๆ
-- Set 7: Cold Scenario Hard / 2026 — พลิกสถานการณ์เพื่อวัดความเข้าใจจริง
+Set 19–20 ครอบคลุมทุก official Task Statement 1.1–5.2 และใช้ scenario / boundary / distractor แบบใกล้ข้อสอบมากขึ้น
 
-หมายเหตุ
-- เว็บนี้ทำไว้สำหรับฝึก local เท่านั้น
-- การ shuffle เปลี่ยนเฉพาะตำแหน่งที่แสดง ไม่เปลี่ยนคำตอบที่ถูกของโจทย์
+## Features
 
+### Quiz
 
-Set 6-7 design notes
-- 65 ข้อต่อชุด; ทุกข้อคิดคะแนนใน local practice
-- Domain quota ต่อชุด: D1=13, D2=16, D3=18, D4=9, D5=9
-- Type ต่อชุด: Single=50, Multiple=9, Ordering=3, Matching=3
-- Question stems/scenarios เป็น original practice items; ใช้ ExamTopics curation เป็น concept map ไม่ได้ copy ข้อสอบตรง ๆ
-- อิง AWS AIF-C01 exam guide/revisions ที่ตรวจล่าสุด 2026-09-04
+- Shuffle choices ต่อ attempt
+- Previous / Next และ question navigator
+- ตรวจคำตอบทันที
+- Explanation หลังตอบ
+- รองรับ Ordering และ Matching
+- Vocabulary helper สำหรับคำอังกฤษที่คัดว่าอาจเป็น friction point
+- Set 8–20 มี Thai translation ใน Summary
+- Per-question flag: **🟡 ขอให้อธิบายเพิ่มตอนรีวิว**
+- Summary แสดงทุกข้อ, ทุก choice, selected/correct state และ explanation
+- Filter Summary: ทุกข้อ / เฉพาะข้อผิด / ขออธิบายเพิ่ม
+- Copy-for-review output สำหรับนำผลไป review ต่อ
 
+### Explanation enhancement — Set 19–20
 
-UI fix v2: Explanation text now maps canonical option references to the currently shuffled display letter and option name, preventing missing/ambiguous distractor explanations.
+เฉลยของ Set 19–20 เพิ่มโครงอ่านโจทย์ก่อนเข้า concept:
 
-QA fix v4
-- Audited all 455 questions for schema/choice integrity and shuffled-answer explanation references.
-- Fixed Set 1 Q16 (Embedding), Q18 (Top-P), Q25 (Multimodal) placeholder/weak definitions.
-- Added remapping for Set 2 ✅ answer refs, Set 3 "ตอบ X", and Set 4 X ✓/✗ explanation styles.
-- Prevented false option-letter replacement inside words such as Canvas/CloudTrail.
-- Removed raw Markdown ** markers from plain-text question stems and normalized NBSP characters.
-- See QA-v4.txt for details.
+- **📝 โจทย์แปลว่าอะไร**
+- **🎯 โจทย์ถามอะไรเรา**
+- **💡 ทำไมข้อนี้ถึงตอบแบบนี้**
+- Concept เพิ่มเติม / memory cue เช่น `Version + approval ของ model = Registry`
 
-UI enhancement v5
-- เพิ่มหน้า Summary หลังตรวจครบ 65 ข้อ
-- Summary แสดง Correct / Accuracy / Wrong และแสดงเฉพาะข้อที่ผิด
-- แต่ละข้อผิดแสดงคำตอบที่เลือก, คำตอบที่ถูก, คำอธิบาย และปุ่มย้อนกลับไปดูข้อนั้น
+### Study Dashboard
 
+Dashboard ใช้ progress ใน browser ร่วมกับ review metadata ที่บันทึกไว้ เพื่อแสดง:
 
-v7 additions
-- Per-question checkbox: "ขอให้อธิบายเพิ่มตอนรีวิว" for answers that feel uncertain.
-- Yellow marker on the question navigator for flagged questions.
-- Summary adds a flagged count, yellow tag, and a dedicated "ขออธิบายเพิ่ม" filter.
-- Copy-for-review includes "🟡 EXPLAIN MORE" and a Review line for flagged questions.
-- Fixed Set 2 Q28 so the correct choice explains the relationship between embeddings and semantic search instead of only naming the mechanism.
+- คะแนนราย Set
+- Accuracy ตาม Domain
+- Reviewed Gaps
+- Concept / Confidence / Language gaps
+- Review Queue จากข้อผิดและข้อที่ Flag
+- Topic status เช่น repeated / unstable / improving / recovered
 
-v8.1 Summary enhancement
-- Summary now shows every answer choice for every question, not only Selected/Correct.
-- Single/Multiple choices preserve the same shuffled A/B/C/D labels used during the attempt.
-- Selected and correct choices are visibly tagged after completion.
-- Copy-for-review output now includes every choice, with [SELECTED] / [CORRECT] markers, so an external reviewer can explain why distractors are wrong.
-- Ordering and Matching questions also export their complete item/choice sets.
+มี review metadata สำหรับผลที่บันทึกไว้ของ Set 12, 13, 17, 18 และ 19
 
-v8.2 Choice wording audit
-- Audited all 455 questions for answer-choice leakage.
-- Identification-style questions now use concise choice labels only (service / metric / technique / feature names) instead of embedding definitions or use-case hints inside the choices.
-- Detailed meaning remains in the feedback, Summary, and Copy-for-review output after the answer is checked.
-- 73 questions were normalized across Sets 1–7; Set 3 required no wording changes.
-- Descriptive choices are intentionally retained only when the question itself asks the learner to evaluate an explanation, reason, action, design, or service-to-requirement pairing.
-- See QA-v8.2-choice-audit.txt for the audited question list and validation results.
+### AIF-C01 Info Library
 
-v8.3 choice fairness audit:
-- Removed definition/explanation suffixes from term-identification choices (e.g. Responsible AI dimensions, metrics, ML task type, image model family).
-- Removed artificial giveaway qualifiers such as "เท่านั้น/อย่างเดียว" from label-only distractors where the question is meant to test service/concept discrimination.
-- Answer keys and explanations are unchanged; detailed explanations remain available only after checking/Summary.
+เปิดจากปุ่ม **AIF-C01 Info Library** บนหน้าแรก เป็น standalone view แยกจาก Study Dashboard
 
-v8.4 Matching fairness fix
-- Matching dropdowns no longer display canonical right-side IDs (1/2/3/4 or A/B/C).
-- Right-side options remain shuffled, so answer mappings such as A→1, B→2 cannot be inferred from labels.
-- Feedback/Summary/Copy Review show the matched text rather than internal right-side IDs.
-- Existing progress is preserved; use "เริ่มชุดนี้ใหม่" if you want to clear previously saved selections.
+ปัจจุบันมี **17 กลุ่ม / 133 หัวข้อ**:
 
+1. Amazon Bedrock
+2. Amazon Bedrock AgentCore
+3. Amazon Quick
+4. Amazon Q / Developer tools
+5. SageMaker Family
+6. Security / Governance Services
+7. RAG Family
+8. Prompt / Customization
+9. SOC / ISO / Frameworks
+10. IAM / Permissions
+11. Inference Modes
+12. Classification / Regression Metrics
+13. Data Governance
+14. Responsible AI
+15. AWS AI Services
+16. Model / Learning Types
+17. FM / RAG Evaluation
 
-=== v8.5 / Local Mock 10 Sets ===
-- Added Set 8-10: 195 new English scenario questions (65 per set).
-- Blueprint-weighted per set: D1=13, D2=16, D3=18, D4=9, D5=9.
-- English questions and choices; Thai explanations.
-- Optional ? Vocabulary helper only for selected difficult/technical English terms. AWS service/feature names are not translated.
-- Summary shows Thai question translation for Sets 8-10.
-- Copy Review includes English question, Thai translation, vocabulary, choices, answers, and Thai explanation.
-- Overall Progress counts unique questions across all 10 sets and uses the user's historical Set 1-7 results as baseline until a completed retry replaces them.
-- Close-distractor design: wrong choices are intentionally kept in the same concept/service family where practical.
+แต่ละหัวข้อเน้น 3 อย่าง: ใช้ทำอะไร / **จำสั้น ๆ** / **อย่าสับสนกับอะไร**
 
+มี Search, Visual Topic Map, Quick Cards และปุ่มเปิด/ย่อทุกกลุ่ม
 
-=== v8.51 / Progress Transfer Tools ===
-- เพิ่ม Copy Progress Code: รวม Local Mock progress ใน localStorage เป็นข้อความ AIFPROGRESS1:... สำหรับ copy/paste ข้ามเครื่อง
-- เพิ่ม Export JSON: ดาวน์โหลด progress เป็นไฟล์ JSON สำรองได้
-- เพิ่ม Import Progress: รองรับทั้ง paste Progress Code / JSON และเลือกไฟล์ JSON
-- Merge Progress: เก็บข้อมูลที่เครื่องปัจจุบันมีอยู่ แล้วเติมคำตอบ/ผลตรวจที่ขาดจากข้อมูลนำเข้า; flag 🟡 รวมแบบ OR
-- Replace ทั้งหมด: ล้าง progress ของ Set 1-10 ใน browser ปัจจุบันก่อนนำข้อมูลเข้า (มี confirm)
-- Import ตรวจ format/version และ sanitize เฉพาะ Set/Question/Choice ที่มีอยู่จริงใน v8.51
-- ไม่มี database, account, login หรือ backend; progress ยังเป็น browser-local จนกว่าจะ export/copy ไปอีกเครื่อง
-- เหมาะสำหรับใช้ต่อเมื่อย้ายเว็บขึ้น GitHub Pages โดยไม่ต้องเปลี่ยนระบบบันทึกคะแนน
+## Progress transfer
 
+เพราะเว็บไม่มี backend จึงมีเครื่องมือย้าย progress ระหว่าง browser/device:
+
+- **Copy Progress Code**
+- **Export JSON**
+- **Import Progress**
+- **Merge Progress**
+- **Replace ทั้งหมด**
+
+Progress Code ใช้ prefix `AIFPROGRESS1:`
+
+## Project structure
+
+```text
+index.html
+style.css
+dashboard.css
+study-enhancements.css
+
+app.js
+study-enhancements.js
+english-notes.js
+
+dashboard.js
+dashboard-advanced.js
+dashboard-family-guide.js
+dashboard-vocabulary.js
+dashboard-set-count-patch.js
+
+data/
+  quiz-data.js                     # Sets 1–10 baseline
+  local-set-11-part-*.js
+  local-set-12-part-*.js
+  local-set-13-part-*.js
+  local-set-14-18-domain*.js
+  local-set-14-18-builder.js
+  local-set-19-domain*.js
+  local-set-19-builder.js
+  local-set-20-part-*.js
+  local-set-20-quality.js
+
+  exam-family-guide.js             # Info Library data
+  review-insights.js
+  set-12-review.js
+  set-13-review.js
+  set-17-review.js
+  set-18-review.js
+  set-19-review.js
+
+docs/
+  QUESTION_DESIGN_RULES.md
+```
+
+## Question design notes
+
+- Official AIF-C01 Exam Guide เป็น scope หลัก
+- AWS Learning Hub ใช้ช่วย coverage / terminology
+- Local Mock / third-party material ใช้เป็น scenario / distractor / gap booster ไม่ใช้กำหนด scope
+- หลีกเลี่ยง clue ที่เฉลยตัวเอง เช่น `The clue is "..."`
+- Distractors ควรอยู่ใน service/concept family เดียวกัน
+- Multiple Response ต้องมีคำตอบที่ defensible แบบ exact
+- Matching ใช้กับ concept ↔ scenario / service ↔ requirement / role ↔ responsibility
+- Ordering ใช้เฉพาะ lifecycle/flow ที่มีลำดับชัดเจน
+- Domain/task metadata ไม่แสดงบนหน้า quiz
+
+รายละเอียดเพิ่มเติม: `docs/QUESTION_DESIGN_RULES.md`
+
+## Local usage
+
+เปิด `index.html` โดยตรงได้ หรือ serve repository root ด้วย static web server
+
+Clone/download repo → เปิด index.html → เลือก Set → ทำข้อสอบ → Progress ถูกเก็บใน browser
 
 ## GitHub Pages
 
-This repository is a static web app. Serve the repository root with GitHub Pages. Progress is stored in the browser localStorage; use Copy Progress Code / Import Progress or JSON export/import to move progress between browsers/devices.
+Repository นี้เป็น static web app จึง deploy ผ่าน GitHub Pages ได้โดย serve จาก repository root
+
+ไม่มี server-side database หรือ login; หากย้ายเครื่อง/browser ให้ใช้ Progress Code หรือ JSON export/import
+
+## Notes
+
+- การ shuffle เปลี่ยนเฉพาะตำแหน่งที่แสดง ไม่เปลี่ยน answer key
+- ถ้ากด Reset ชุดนั้น คำตอบ/คะแนนของ attempt ปัจจุบันจะถูกล้างและ shuffle ใหม่
+- Review metadata และ Info Library เป็น study aids เพิ่มเติม ไม่ได้เปลี่ยน scoring ของ Local Mock
