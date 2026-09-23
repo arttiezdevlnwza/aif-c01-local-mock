@@ -1,18 +1,18 @@
 # AIF-C01 Local Mock
 
-Static web app สำหรับฝึก **AWS Certified AI Practitioner (AIF-C01)** แบบ local/browser-only พร้อมข้อสอบ 20 ชุด, Study Dashboard, Review Queue และ AIF-C01 Info Library
+Static web app สำหรับฝึก **AWS Certified AI Practitioner (AIF-C01)** แบบ local/browser-only พร้อมข้อสอบ 22 ชุด, Study Dashboard, Review Queue และ AIF-C01 Info Library
 
 ## Current status
 
-- **20 Sets / 1,300 questions**
+- **22 Sets / 1,430 questions**
 - **65 questions per set**
-- Set 8–20 เน้น **English scenario + close distractors**
+- Set 8–22 เน้น **English scenario + close distractors**
 - รองรับ **Single Choice / Multiple Response / Ordering / Matching**
 - ทุกข้อใน Local Mock คิดคะแนน: `correct / 65 × 100`
 - Progress เก็บใน **browser localStorage** ไม่มี account/database/backend
 - AIF-C01 Info Library ปัจจุบันมี **17 topic families / 133 quick-reference items**
 
-## Blueprint สำหรับ Set 19–20
+## Blueprint สำหรับ Set 19–22
 
 | Domain | Questions |
 |---|---:|
@@ -22,7 +22,9 @@ Static web app สำหรับฝึก **AWS Certified AI Practitioner (AIF-
 | D4 — Responsible AI | 9 |
 | D5 — Security, Compliance, and Governance | 9 |
 
-Set 19–20 ครอบคลุมทุก official Task Statement 1.1–5.2 และใช้ scenario / boundary / distractor แบบใกล้ข้อสอบมากขึ้น
+Set 19–22 ครอบคลุมทุก official Task Statement 1.1–5.2 และใช้ scenario / boundary / distractor แบบใกล้ข้อสอบมากขึ้น
+
+Set 21–22 เป็น **Targeted Weakness + Under-covered Topics** โดยเน้นหัวข้อที่ review พบว่าพลาดซ้ำ/ยังลังเล เช่น Data Governance, Traditional ML vs FM, Responsible AI, RAG order, RMSE vs MAE, SOC reports, AgentCore/Quick รวมทั้งหัวข้อที่เจอน้อยใน 20 ชุดแรก เช่น agent memory, MCP host/client/server, Converse API, AgentCore Browser/Code Interpreter/Evaluations, prompt optimization/caching/routing, fairness DPL/DPPL, model invocation logging และ Generative AI Security Scoping Matrix.
 
 ## Features
 
@@ -34,15 +36,15 @@ Set 19–20 ครอบคลุมทุก official Task Statement 1.1–5.2 
 - Explanation หลังตอบ
 - รองรับ Ordering และ Matching
 - Vocabulary helper สำหรับคำอังกฤษที่คัดว่าอาจเป็น friction point
-- Set 8–20 มี Thai translation ใน Summary
+- Set 8–22 มี Thai translation ใน Summary
 - Per-question flag: **🟡 ขอให้อธิบายเพิ่มตอนรีวิว**
 - Summary แสดงทุกข้อ, ทุก choice, selected/correct state และ explanation
 - Filter Summary: ทุกข้อ / เฉพาะข้อผิด / ขออธิบายเพิ่ม
 - Copy-for-review output สำหรับนำผลไป review ต่อ
 
-### Explanation enhancement — Set 19–20
+### Explanation enhancement — Set 19–22
 
-เฉลยของ Set 19–20 เพิ่มโครงอ่านโจทย์ก่อนเข้า concept:
+เฉลยของ Set 19–22 เพิ่มโครงอ่านโจทย์ก่อนเข้า concept:
 
 - **📝 โจทย์แปลว่าอะไร**
 - **🎯 โจทย์ถามอะไรเรา**
@@ -131,6 +133,8 @@ data/
   local-set-19-builder.js
   local-set-20-part-*.js
   local-set-20-quality.js
+  local-set-21-22-domain*.js
+  local-set-21-22-builder.js
 
   exam-family-guide.js             # Info Library data
   review-insights.js
