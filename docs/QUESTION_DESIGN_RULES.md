@@ -61,6 +61,19 @@ Useful close families: Bedrock vs SageMaker AI; Canvas vs Data Wrangler vs Groun
 - After a completed-set review, resolve untranslated English Notes into the Thai summary glossary.
 - If an English Note term is itself an answer choice or would reveal the answer, keep its translation summary-only; do not backfill it into pre-answer Vocabulary.
 
+## Explanation readability standard
+
+For every new question:
+
+- Explain the **correct answer first**, in its own line/block.
+- Explain **every incorrect choice separately**. Do not group distractors into a long sentence such as `A/B/C ไม่ใช่เพราะ...`.
+- Use short readable lines, not one long paragraph joined with slashes.
+- For Multiple Response, explain why **each selected answer is correct** and why **each unselected distractor is wrong**.
+- For Matching, explain **every mapping**.
+- For Ordering, show the **full correct sequence**, then explain why the order matters or which transition is commonly confused.
+- End with a concise **จำสั้น ๆ** memory cue when one is useful.
+- The explanation must teach the distinction, not merely restate the answer label.
+
 ## Thai translation quality
 
 - `questionTh` และส่วน **โจทย์แปลว่าอะไร** ต้องเป็นภาษาไทยที่อ่านลื่น ไม่ใช่การแปลคำต่อคำหรือสลับไทย/อังกฤษทั้งประโยค
