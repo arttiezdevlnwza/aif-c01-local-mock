@@ -24,22 +24,18 @@
     infographicBtn.classList.toggle('active', showInfographic);
   }
 
+  function assetPath(page) {
+    return 'assets/infographics/page-' + String(page).padStart(2, '0') + '.svg';
+  }
+
   function makeCard(page) {
-    const previewSections = page.sections.slice(0, 3);
-    let mini = '';
-    previewSections.forEach(section => {
-      mini += '<div class="infographic-mini-section"><b>' + esc(section.title) + '</b><span>' +
-        esc(section.items.slice(0, 2).join(' · ')) + (section.items.length > 2 ? ' …' : '') + '</span></div>';
-    });
     let tags = '';
     page.tags.forEach(tag => { tags += '<span>' + esc(tag) + '</span>'; });
     return '<article class="infographic-page-card" data-page="' + page.page + '">' +
-      '<button class="infographic-preview" type="button" data-open-infographic="' + page.page + '" aria-label="เปิด Page ' + page.page + ': ' + esc(page.title) + '">' +
-      '<div class="infographic-paper-head"><span class="infographic-page-number">Page ' + page.page + '</span><span class="infographic-page-icon" aria-hidden="true">' + ICONS[(page.page - 1) % ICONS.length] + '</span></div>' +
-      '<strong class="infographic-preview-title">' + esc(page.title) + '</strong>' +
-      '<div class="infographic-mini-sections">' + mini + '</div>' +
+      '<button class="infographic-preview infographic-image-preview" type="button" data-open-infographic="' + page.page + '" aria-label="เปิด Page ' + page.page + ': ' + esc(page.title) + '">' +
+      '<img class="infographic-thumb-image" src="' + assetPath(page.page) + '" alt="Page ' + page.page + ' — ' + esc(page.title) + '" loading="lazy">' +
       '<span class="infographic-open-label">เปิดอินโฟเต็ม →</span></button>' +
-      '<div class="infographic-card-meta"><div class="infographic-tag-row">' + tags + '</div></div></article>';
+      '<div class="infographic-card-meta"><strong>Page ' + page.page + ' — ' + esc(page.title) + '</strong><div class="infographic-tag-row">' + tags + '</div></div></article>';
   }
 
   function renderGallery(query) {
@@ -65,7 +61,9 @@
       section.items.forEach(item => { items += '<div><span class="infographic-dot"></span><p>' + esc(item) + '</p></div>'; });
       sections += '<section class="infographic-full-section"><div class="infographic-section-head"><span>' + (index + 1) + '</span><strong>' + esc(section.title) + '</strong></div><div class="infographic-section-items">' + items + '</div></section>';
     });
-    modalBody.innerHTML = '<div class="infographic-full-page"><div class="infographic-full-head"><div class="eyebrow">AIF-C01 INFO LIBRARY</div><h2>' + esc(page.title) + '</h2><div class="infographic-tag-row">' + tags + '</div></div><div class="infographic-full-grid">' + sections + '</div><div class="infographic-goal">Goal: อ่านเป็นภาพรวมก่อน แล้วค่อยใช้ Topic Map เพื่อเจาะ concept ที่ยังสับสน</div></div>';
+    modalBody.innerHTML =
+      '<div class="infographic-image-stage"><img class="infographic-full-image" src="' + assetPath(page.page) + '" alt="Page ' + page.page + ' — ' + esc(page.title) + '"></div>' +
+      '<details class="infographic-text-details"><summary>ดูเนื้อหาแบบข้อความ</summary><div class="infographic-full-page"><div class="infographic-full-head"><div class="infographic-tag-row">' + tags + '</div></div><div class="infographic-full-grid">' + sections + '</div></div></details>';
     modal.classList.remove('hidden');
     document.body.classList.add('modal-open');
   }
