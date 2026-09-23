@@ -61,6 +61,14 @@ Useful close families: Bedrock vs SageMaker AI; Canvas vs Data Wrangler vs Groun
 - After a completed-set review, resolve untranslated English Notes into the Thai summary glossary.
 - If an English Note term is itself an answer choice or would reveal the answer, keep its translation summary-only; do not backfill it into pre-answer Vocabulary.
 
+## Thai translation quality
+
+- `questionTh` และส่วน **โจทย์แปลว่าอะไร** ต้องเป็นภาษาไทยที่อ่านลื่น ไม่ใช่การแปลคำต่อคำหรือสลับไทย/อังกฤษทั้งประโยค
+- คงชื่อบริการ AWS, product names และ proper nouns เป็นอังกฤษ
+- คำอังกฤษทั่วไปใน scenario ควรแปลเป็นไทย เช่น `historical data` → `ข้อมูลในอดีต`, `unequal outcomes` → `ผลลัพธ์ที่ไม่เท่าเทียม`, `workflow` → `กระบวนการทำงาน`
+- คำเทคนิคที่สำคัญต่อข้อสอบให้ใช้ **ไทยก่อน + อังกฤษในวงเล็บ** เมื่อช่วยให้จำศัพท์ เช่น `อคติก่อนการฝึก (pre-training bias)` หรือ `การอนุมาน (inference)`
+- อย่าทิ้งคำอย่าง `train`, `deploy`, `labeling`, `human review`, `confidence` ไว้กลางประโยคไทยโดยไม่จำเป็น; แปลให้เป็นธรรมชาติ แต่ยังรักษา clue และ constraint เดิมครบ
+- การแปลต้องไม่ตัดรายละเอียดที่ใช้ตัดสินคำตอบ เช่น before training vs after inference, fixed vs dynamic, false positive vs false negative หรือ current vs historical data
 ## Explanations
 The explanation is learning content, not just an answer key.
 
@@ -93,4 +101,5 @@ Never:
 - No out-of-scope depth.
 - Every explanation covers the correct answer and all distractors/mappings/steps as applicable.
 - Ordering questions have an unambiguous start point and no hidden optional step.
+- Thai translations read naturally and do not leave ordinary English words untranslated unless they are service names, proper nouns, or intentionally retained exam terms.
 - Before the learner starts an untouched next set, audit that set against this file first.
