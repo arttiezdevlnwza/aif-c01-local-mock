@@ -158,6 +158,8 @@ Explain that question before moving to the next wrong answer:
 - **🟡 Explain More**: treat as a confidence gap even when the answer is correct, unless the learner's explanation shows another cause.
 - **📘 English unclear**: investigate wording/vocabulary comprehension separately from concept knowledge.
 - Wrong + flag must be classified from the learner's explanation; do not assume the flag alone caused the miss.
+- **Raw attempt flags are evidence, not the final diagnosis.** Preserve them when useful, but the post-review interview is the source of truth for the reviewed cause.
+- A question may have multiple reviewed causes when the learner's explanation supports them, e.g. **Confidence + Language** or **Concept + clue miss**.
 
 ### Review summary
 - After all wrong-answer interviews are complete, summarize repeated patterns, recovered concepts, and remaining gaps.
