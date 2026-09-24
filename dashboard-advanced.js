@@ -215,6 +215,11 @@
     return fallbackReviewDetails(reviewSet);
   }
 
+  function quizQuestionFor(setId, questionId) {
+    const set = (window.QUIZ_SETS || []).find(item => item.id === setId);
+    return set?.questions?.find(question => Number(question.id) === Number(questionId)) || null;
+  }
+
   function renderReviewSetDetail(setId) {
     const root = document.getElementById('dashboardReviewDetail');
     if (!root) return;
@@ -243,6 +248,9 @@
           const causes = (row.reviewedCauses || []).map(reviewCauseLabel);
           const rawFlags = row.rawFlags || [];
           const notes = row.notes || [];
+          const quizQuestion = quizQuestionFor(setId, row.questionId);
+          const questionText = row.question || quizQuestion?.question || '';
+          const questionTh = row.questionTh || quizQuestion?.questionTh || '';
           const resultClass = String(row.result || '').toLowerCase() === 'wrong' ? 'wrong' : 'correct';
           return `
             <details class="review-history-question">
@@ -256,6 +264,7 @@
                 </div>
               </summary>
               <div class="review-history-question-body">
+                ${questionText ? `<div class="review-detail-wide review-question-text"><b>โจทย์ถามอะไร</b><p>${escapeHtml(questionText)}</p>${questionTh ? `<small>${escapeHtml(questionTh)}</small>` : ''}</div>` : ''}
                 ${row.selected ? `<div><b>Selected</b><p>${escapeHtml(row.selected)}</p></div>` : ''}
                 ${row.correct ? `<div><b>Correct</b><p>${escapeHtml(row.correct)}</p></div>` : ''}
                 ${rawFlags.length ? `<div><b>Raw flags</b><p>${escapeHtml(rawFlags.join(' · '))}</p></div>` : ''}
