@@ -49,8 +49,8 @@
   function renderTrend() {
     const root = ensurePanel(
       'dashboardTrendAdvanced',
-      'Set 8–10 Trend',
-      'ใช้คะแนนหลัง review; Set 9 แก้ Q32 answer-key bug แล้ว'
+      'Reviewed Set Trend',
+      'ใช้ผลหลัง review ที่บันทึกไว้เป็น metadata; raw flags ไม่แทน diagnosis หลังคุย'
     );
     if (!root) return;
     const history = REVIEW.history || [];
@@ -70,7 +70,7 @@
         <div class="advanced-card">
           <h4>Concept / Recall</h4>
           <strong class="big">${history.reduce((sum, item) => sum + (item.concept || 0), 0)}</strong>
-          <p>จำนวน occurrence ที่ review แล้วว่าเป็น knowledge/recall gap ใน Set 8–10</p>
+          <p>จำนวน occurrence ที่ review แล้วว่าเป็น knowledge/recall gap</p>
         </div>
         <div class="advanced-card">
           <h4>English trend</h4>
@@ -160,7 +160,7 @@
         <div class="advanced-card">
           <h4>Manual review</h4>
           <strong class="big">${trend.reduce((sum, item) => sum + item.count, 0)}</strong>
-          <p>language-gap occurrences ที่ยืนยันจาก review Set 8–10</p>
+          <p>language-gap occurrences ที่ยืนยันจาก post-review evidence</p>
         </div>
         <div class="advanced-card">
           <h4>Live 📘 flags</h4>
@@ -183,7 +183,7 @@
     const history = REVIEW.history || [];
     root.innerHTML = `
       <table class="review-history-table">
-        <thead><tr><th>Source</th><th>Score</th><th>Concept</th><th>Confidence</th><th>Language</th></tr></thead>
+        <thead><tr><th>Source</th><th>Score</th><th>Concept</th><th>Confidence</th><th>Language</th><th>Clue</th></tr></thead>
         <tbody>${history.map(item => `
           <tr>
             <td>${escapeHtml(item.label)}</td>
@@ -191,6 +191,7 @@
             <td>${item.concept}</td>
             <td>${item.confidence}</td>
             <td>${item.language}</td>
+            <td>${item.clue || 0}</td>
           </tr>`).join('')}</tbody>
       </table>`;
   }
@@ -304,7 +305,8 @@
     const configs = [
       { type: 'concept', selector: '.concept-column' },
       { type: 'confidence', selector: '.confidence-column' },
-      { type: 'language', selector: '.language-column' }
+      { type: 'language', selector: '.language-column' },
+      { type: 'clue', selector: '.clue-column' }
     ];
 
     configs.forEach(({ type, selector }) => {
