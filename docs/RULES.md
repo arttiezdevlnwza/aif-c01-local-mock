@@ -40,6 +40,8 @@ Single rulebook for creating Local Mock questions and reviewing learner results.
 - If testing a service capability, use service names without embedding the answer clue into only one option when possible.
 - Avoid `all of the above` / `none of the above` unless necessary.
 - UI randomization does not replace good distractor design.
+- **Distractor challenge check:** ask whether a learner who does not really know the target concept could still reach the answer mainly because the other choices are from obviously unrelated domains/services. If yes, replace those choices with closer same-family or adjacent-family alternatives when a defensible distinction exists.
+- For single-choice questions, prefer at least one genuinely plausible adjacent alternative. For multiple-response questions, unselected choices should still look relevant enough that the learner must apply the deciding constraint rather than eliminate them by topic mismatch.
 
 Useful close families: Bedrock vs SageMaker AI; Canvas vs Data Wrangler vs Ground Truth vs A2I; Agents vs Flows; AgentCore Runtime/Gateway/Identity/Observability/Memory/Policy/Evaluations; MCP Resources vs Tools vs Prompts; single-agent multi-tool vs multi-agent; Prompt Management/Optimization/Caching/Routing; RAG/SFT/CPT/Few-shot; Metadata filtering vs Reranking; Retrieval relevance vs Generation faithfulness; Identity Policy vs Boundary vs SCP; KMS/Macie/CloudTrail/Config/Artifact/Audit Manager; NIST/CAF-AI/ISO 27001/ISO 42001/EU AI Act; SOC 1/2/3; Fairness/Robustness/Transparency/Sustainability.
 
