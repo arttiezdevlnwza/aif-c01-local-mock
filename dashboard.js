@@ -207,7 +207,8 @@
       items: reviewedItems,
       concept: reviewedItems.filter(item => item.type === 'concept'),
       confidence: reviewedItems.filter(item => item.type === 'confidence'),
-      language: reviewedItems.filter(item => item.type === 'language')
+      language: reviewedItems.filter(item => item.type === 'language'),
+      clue: reviewedItems.filter(item => item.type === 'clue')
     };
 
     return {
@@ -245,7 +246,7 @@
       <div class="dashboard-stat-card concept-stat">
         <span>Concept / Recall gaps</span>
         <strong>${data.reviewed.concept.length}</strong>
-        <small>จาก review Set 8–10</small>
+        <small>จากผล review ที่บันทึกไว้</small>
       </div>
       <div class="dashboard-stat-card confidence-stat">
         <span>Confidence gaps</span>
@@ -256,6 +257,11 @@
         <span>Language gaps</span>
         <strong>${data.reviewed.language.length}</strong>
         <small>อังกฤษทำให้ตีความโจทย์พลาด</small>
+      </div>
+      <div class="dashboard-stat-card clue-stat">
+        <span>Clue / Distractor gaps</span>
+        <strong>${data.reviewed.clue.length}</strong>
+        <small>รู้บางส่วน แต่จับคำถาม/ตัวลวงพลาด</small>
       </div>
       <div class="dashboard-stat-card">
         <span>Remaining</span>
@@ -353,13 +359,20 @@
         </section>
         <section class="reviewed-gap-column language-column">
           <div class="reviewed-gap-head">
-            <div><strong>📘 Language</strong><span>รู้ concept แต่ภาษาอังกฤษพาให้ตีความพลาด</span></div>
+            <div><strong>📘 Language</strong><span>ภาษาอังกฤษทำให้เข้าใจ scenario หรือ choice ไม่พอ</span></div>
             <b>${data.reviewed.language.length}</b>
           </div>
           <div class="reviewed-gap-list">${reviewedGroupHtml(data.reviewed.language, 'ยังไม่มี language gap ที่บันทึกไว้')}</div>
         </section>
+        <section class="reviewed-gap-column clue-column">
+          <div class="reviewed-gap-head">
+            <div><strong>🧩 Clue / Distractor</strong><span>พลาดจุดตัดสินของโจทย์หรือแยกตัวลวงไม่ขาด</span></div>
+            <b>${data.reviewed.clue.length}</b>
+          </div>
+          <div class="reviewed-gap-list">${reviewedGroupHtml(data.reviewed.clue, 'ยังไม่มี clue/distractor gap ที่บันทึกไว้')}</div>
+        </section>
       </div>
-      <p class="dashboard-note reviewed-note">ส่วนนี้มาจาก review หลังทำ Set 8–10 ไม่ได้อนุมานจากคะแนนอัตโนมัติ จึงยังคงอยู่แม้ browser ไม่มีรายละเอียด attempt เก่า</p>`;
+      <p class="dashboard-note reviewed-note">ส่วนนี้มาจาก post-review metadata หลังถามเหตุผลผู้เรียน ไม่ได้อนุมานจากคะแนนหรือ raw flag อัตโนมัติ จึงยังคงอยู่แม้ browser ไม่มีรายละเอียด attempt เก่า</p>`;
   }
 
   function renderCoverage(data) {
