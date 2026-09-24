@@ -3,7 +3,7 @@
 .dashboard-toolbar{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;flex-wrap:wrap}
 .dashboard-toolbar h2{margin:4px 0 0}
 .dashboard-toolbar p{margin:4px 0 0}
-.dashboard-overview{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.dashboard-overview{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
 .dashboard-stat-card{border:1px solid var(--border,#dfe3e8);border-radius:14px;padding:16px;background:var(--card,#fff);display:flex;flex-direction:column;gap:5px;min-width:0}
 .dashboard-stat-card span{font-size:.82rem;color:var(--muted,#6b7280)}
 .dashboard-stat-card strong{font-size:1.75rem;line-height:1.1}
@@ -11,6 +11,7 @@
 .dashboard-stat-card.concept-stat{background:rgba(220,38,38,.04)}
 .dashboard-stat-card.confidence-stat{background:rgba(245,158,11,.06)}
 .dashboard-stat-card.language-stat{background:rgba(37,99,235,.05)}
+.dashboard-stat-card.clue-stat{background:rgba(124,58,237,.05)}
 .dashboard-panel{border:1px solid var(--border,#dfe3e8);border-radius:16px;padding:18px;background:var(--card,#fff)}
 .dashboard-panel-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap}
 .dashboard-panel-head h3{margin:0 0 4px}
@@ -39,11 +40,12 @@
 .insight-card li span{color:var(--muted,#6b7280)}
 .strength-card{background:rgba(22,163,74,.04)}
 .weakness-card{background:rgba(220,38,38,.04)}
-.reviewed-gap-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.reviewed-gap-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .reviewed-gap-column{border:1px solid var(--border,#e5e7eb);border-radius:14px;overflow:hidden;min-width:0}
 .reviewed-gap-column.concept-column{background:rgba(220,38,38,.035)}
 .reviewed-gap-column.confidence-column{background:rgba(245,158,11,.045)}
 .reviewed-gap-column.language-column{background:rgba(37,99,235,.035)}
+.reviewed-gap-column.clue-column{background:rgba(124,58,237,.035)}
 .reviewed-gap-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:13px 14px;border-bottom:1px solid var(--border,#e5e7eb)}
 .reviewed-gap-head>div{display:flex;flex-direction:column;gap:3px;min-width:0}
 .reviewed-gap-head>div>span{font-size:.76rem;color:var(--muted,#6b7280);line-height:1.35}
