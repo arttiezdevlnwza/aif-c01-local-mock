@@ -145,7 +145,7 @@ data/
   set-19-review.js
 
 docs/
-  QUESTION_DESIGN_RULES.md
+  RULES.md
 ```
 
 ## Question design notes
@@ -160,7 +160,13 @@ docs/
 - Ordering ใช้เฉพาะ lifecycle/flow ที่มีลำดับชัดเจน
 - Domain/task metadata ไม่แสดงบนหน้า quiz
 
-รายละเอียดเพิ่มเติม: `docs/QUESTION_DESIGN_RULES.md`
+กฎ Review หลัก:
+
+- ข้อที่ตอบผิดจะถามเหตุผลผู้เรียน **ทีละข้อก่อนอธิบายเฉลย**
+- หลังผู้เรียนอธิบายเหตุผล จึงแยกสาเหตุเป็น **Concept / Confidence / Language / clue miss** ตามหลักฐานจริง
+- ข้อที่ตอบถูกแต่ติด 🟡 ยังถือเป็น confidence gap และไม่ถือว่า mastered อัตโนมัติ
+
+รายละเอียดเพิ่มเติมทั้งกฎการสร้างข้อสอบและกฎการรีวิวผลสอบ: `docs/RULES.md`
 
 ## Local usage
 
