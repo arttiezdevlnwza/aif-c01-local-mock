@@ -60,6 +60,7 @@ Dashboard ใช้ progress ใน browser ร่วมกับ review metadat
 - Reviewed Gaps
 - Concept / Confidence / Language / Clue-Distractor gaps
 - Review Queue จากข้อผิดและข้อที่ Flag
+- Review History แบบกด **ดู Review** ราย Set เพื่ออ่าน Selected/Correct, raw flags, เหตุผลตอนทำ, final diagnosis และ memory cue
 - Topic status เช่น repeated / unstable / improving / recovered
 
 มี review metadata สำหรับผลที่บันทึกไว้ของ Set 12, 13, 17, 18, 19, 20 และ 21
