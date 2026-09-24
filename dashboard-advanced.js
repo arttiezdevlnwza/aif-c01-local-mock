@@ -172,30 +172,144 @@
       <div class="live-language-note">📘 ปุ่มภาษาอังกฤษจะไม่กระทบคะแนน และจะถูกแนบไปกับ Copy for review เพื่อแยก Language gap ออกจาก Concept/Confidence โดยตรง</div>`;
   }
 
+  function fallbackReviewDetails(reviewSet) {
+    const grouped = {};
+    (reviewSet?.items || []).forEach(item => {
+      const id = Number(item.questionId);
+      if (!grouped[id]) {
+        grouped[id] = {
+          questionId: id,
+          result: /^Wrong\b/i.test(item.note || '') ? 'Wrong' : /^Correct\b/i.test(item.note || '') ? 'Correct' : 'Reviewed',
+          topic: item.topic || 'Reviewed question',
+          rawFlags: [],
+          reviewedCauses: [],
+          notes: []
+        };
+      }
+      const row = grouped[id];
+      (item.rawFlags || []).forEach(flag => {
+        if (!row.rawFlags.includes(flag)) row.rawFlags.push(flag);
+      });
+      const causes = item.reviewedCauses?.length ? item.reviewedCauses : [item.type];
+      causes.filter(Boolean).forEach(cause => {
+        if (!row.reviewedCauses.includes(cause)) row.reviewedCauses.push(cause);
+      });
+      if (item.note && !row.notes.includes(item.note)) row.notes.push(item.note);
+    });
+    return Object.values(grouped).sort((a, b) => a.questionId - b.questionId);
+  }
+
+  function reviewCauseLabel(cause) {
+    return ({
+      concept: 'Concept / Recall',
+      confidence: 'Confidence',
+      language: 'Language',
+      clue: 'Clue / Distractor'
+    })[cause] || cause;
+  }
+
+  function reviewDetailRows(reviewSet) {
+    if (Array.isArray(reviewSet?.details) && reviewSet.details.length) {
+      return [...reviewSet.details].sort((a, b) => Number(a.questionId) - Number(b.questionId));
+    }
+    return fallbackReviewDetails(reviewSet);
+  }
+
+  function renderReviewSetDetail(setId) {
+    const root = document.getElementById('dashboardReviewDetail');
+    if (!root) return;
+  
+    const reviewSet = REVIEW.sets?.[setId];
+    const history = (REVIEW.history || []).find(item => item.setId === setId);
+    if (!reviewSet) {
+      root.innerHTML = '<div class="dashboard-empty">ชุดนี้มีคะแนน review history แต่ยังไม่มีรายละเอียดรายข้อที่บันทึกไว้</div>';
+      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+  
+    const rows = reviewDetailRows(reviewSet);
+    const score = history ? `${history.score}/${history.total} (${history.percent}%)` : '';
+    root.innerHTML = `
+      <div class="review-set-detail-head">
+        <div>
+          <span class="review-set-detail-kicker">Review Detail</span>
+          <h4>${escapeHtml(reviewSet.title || history?.label || setId)}</h4>
+          <p>${score ? `Score ${score} · ` : ''}${escapeHtml(reviewSet.note || '')}</p>
+        </div>
+        <button class="ghost review-detail-close" type="button">ซ่อนรายละเอียด</button>
+      </div>
+      <div class="review-set-question-list">
+        ${rows.map(row => {
+          const causes = (row.reviewedCauses || []).map(reviewCauseLabel);
+          const rawFlags = row.rawFlags || [];
+          const notes = row.notes || [];
+          const resultClass = String(row.result || '').toLowerCase() === 'wrong' ? 'wrong' : 'correct';
+          return `
+            <details class="review-history-question">
+              <summary>
+                <div class="review-history-question-title">
+                  <span class="review-result ${resultClass}">${escapeHtml(row.result || 'Reviewed')}</span>
+                  <strong>Q${row.questionId} · ${escapeHtml(row.topic || '')}</strong>
+                </div>
+                <div class="review-cause-chips">
+                  ${causes.map(cause => `<span>${escapeHtml(cause)}</span>`).join('')}
+                </div>
+              </summary>
+              <div class="review-history-question-body">
+                ${row.selected ? `<div><b>Selected</b><p>${escapeHtml(row.selected)}</p></div>` : ''}
+                ${row.correct ? `<div><b>Correct</b><p>${escapeHtml(row.correct)}</p></div>` : ''}
+                ${rawFlags.length ? `<div><b>Raw flags</b><p>${escapeHtml(rawFlags.join(' · '))}</p></div>` : ''}
+                ${row.userReasoning ? `<div class="review-detail-wide"><b>ตอนทำคิดอะไร</b><p>${escapeHtml(row.userReasoning)}</p></div>` : ''}
+                ${row.diagnosis ? `<div class="review-detail-wide"><b>Final diagnosis</b><p>${escapeHtml(row.diagnosis)}</p></div>` : ''}
+                ${row.memoryCue ? `<div class="review-detail-wide"><b>จำสั้น ๆ</b><p>${escapeHtml(row.memoryCue)}</p></div>` : ''}
+                ${notes.length ? `<div class="review-detail-wide"><b>Review notes</b><p>${escapeHtml(notes.join(' / '))}</p></div>` : ''}
+              </div>
+            </details>`;
+        }).join('') || '<div class="dashboard-empty">ยังไม่มีรายละเอียดรายข้อ</div>'}
+      </div>`;
+  
+    root.querySelector('.review-detail-close')?.addEventListener('click', () => {
+      root.innerHTML = '<div class="dashboard-empty review-history-hint">เลือก “ดู Review” จากตารางด้านบนเพื่อเปิดรายละเอียดราย Set</div>';
+    });
+    root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   function renderHistory() {
     const root = ensurePanel(
       'dashboardReviewHistory',
       'Review History',
-      'เก็บผล review เป็น metadata เพื่อรองรับ Learning Hub / Skill Builder / ExamTopics / Stephane ในอนาคต'
+      'กด “ดู Review” เพื่อเปิดเหตุผลหลังรีวิวรายข้อของแต่ละ Set'
     );
     if (!root) return;
-
+  
     const history = REVIEW.history || [];
     root.innerHTML = `
-      <table class="review-history-table">
-        <thead><tr><th>Source</th><th>Score</th><th>Concept</th><th>Confidence</th><th>Language</th><th>Clue</th></tr></thead>
-        <tbody>${history.map(item => `
-          <tr>
-            <td>${escapeHtml(item.label)}</td>
-            <td>${item.score}/${item.total} (${item.percent}%)</td>
-            <td>${item.concept}</td>
-            <td>${item.confidence}</td>
-            <td>${item.language}</td>
-            <td>${item.clue || 0}</td>
-          </tr>`).join('')}</tbody>
-      </table>`;
+      <div class="review-history-table-wrap">
+        <table class="review-history-table">
+          <thead><tr><th>Source</th><th>Score</th><th>Concept</th><th>Confidence</th><th>Language</th><th>Clue</th><th></th></tr></thead>
+          <tbody>${history.map(item => {
+            const hasReview = !!REVIEW.sets?.[item.setId];
+            return `
+              <tr>
+                <td>${escapeHtml(item.label)}</td>
+                <td>${item.score}/${item.total} (${item.percent}%)</td>
+                <td>${item.concept}</td>
+                <td>${item.confidence}</td>
+                <td>${item.language}</td>
+                <td>${item.clue || 0}</td>
+                <td>${hasReview ? `<button class="review-history-open" type="button" data-review-set-id="${escapeHtml(item.setId)}">ดู Review</button>` : '<span class="muted">—</span>'}</td>
+              </tr>`;
+          }).join('')}</tbody>
+        </table>
+      </div>
+      <div id="dashboardReviewDetail">
+        <div class="dashboard-empty review-history-hint">เลือก “ดู Review” จากตารางด้านบนเพื่อเปิดรายละเอียดราย Set</div>
+      </div>`;
+  
+    root.querySelectorAll('.review-history-open').forEach(button => {
+      button.addEventListener('click', () => renderReviewSetDetail(button.dataset.reviewSetId));
+    });
   }
-
   function reviewedGroups(type) {
     const grouped = {};
     Object.entries(REVIEW.sets || {}).forEach(([setId, reviewSet]) => {
