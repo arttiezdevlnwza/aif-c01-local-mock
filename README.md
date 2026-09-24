@@ -26,6 +26,8 @@ Set 19–22 ครอบคลุมทุก official Task Statement 1.1–5.2 
 
 Set 21–22 เป็น **Targeted Weakness + Under-covered Topics** โดยเน้นหัวข้อที่ review พบว่าพลาดซ้ำ/ยังลังเล เช่น Data Governance, Traditional ML vs FM, Responsible AI, RAG order, RMSE vs MAE, SOC reports, AgentCore/Quick รวมทั้งหัวข้อที่เจอน้อยใน 20 ชุดแรก เช่น agent memory, MCP host/client/server, Converse API, AgentCore Browser/Code Interpreter/Evaluations, prompt optimization/caching/routing, fairness DPL/DPPL, model invocation logging และ Generative AI Security Scoping Matrix.
 
+Set 22 ผ่าน **distractor quality pass** เพิ่มเติมก่อนใช้งาน: ปรับ 29 ข้อที่ตัวลวงเดิมห่างเกินไปให้เป็น same-family/adjacent-family distractors มากขึ้น โดยใช้ override เฉพาะ Set 22 เพื่อไม่เปลี่ยน Set 21 ที่ทำและ review ไปแล้ว.
+
 ## Features
 
 ### Quiz
@@ -136,6 +138,7 @@ data/
   local-set-20-quality.js
   local-set-21-22-domain*.js
   local-set-21-22-builder.js
+  local-set-22-quality-overrides.js    # Set 22 close-distractor quality pass
 
   exam-family-guide.js             # Info Library data
   review-insights.js
