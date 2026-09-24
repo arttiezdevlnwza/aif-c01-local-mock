@@ -80,9 +80,37 @@
 .tag-wrong{background:rgba(220,38,38,.12)}
 .tag-flag{background:rgba(245,158,11,.16)}
 .dashboard-empty{padding:18px;text-align:center;color:var(--muted,#6b7280)}
+.review-history-table-wrap{overflow-x:auto}
+.review-history-table{width:100%;border-collapse:collapse}
+.review-history-table th,.review-history-table td{padding:9px 10px;border-bottom:1px solid var(--border,#e5e7eb);text-align:left;white-space:nowrap}
+.review-history-open{appearance:none;border:1px solid var(--border,#dfe3e8);border-radius:9px;background:var(--card,#fff);color:inherit;padding:6px 9px;font:inherit;font-size:.76rem;font-weight:700;cursor:pointer}
+.review-history-open:hover{background:rgba(127,127,127,.07)}
+#dashboardReviewDetail{margin-top:14px}
+.review-history-hint{border:1px dashed var(--border,#dfe3e8);border-radius:12px}
+.review-set-detail-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:14px;border:1px solid var(--border,#e5e7eb);border-radius:14px;margin-bottom:10px;background:rgba(37,99,235,.025)}
+.review-set-detail-head h4{margin:3px 0 5px;font-size:1.05rem}
+.review-set-detail-head p{margin:0;color:var(--muted,#6b7280);font-size:.82rem;line-height:1.45}
+.review-set-detail-kicker{font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b7280)}
+.review-detail-close{flex-shrink:0}
+.review-set-question-list{display:flex;flex-direction:column;gap:8px}
+.review-history-question{border:1px solid var(--border,#e5e7eb);border-radius:12px;background:var(--card,#fff);overflow:hidden}
+.review-history-question>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center;padding:11px 12px}
+.review-history-question>summary::-webkit-details-marker{display:none}
+.review-history-question[open]>summary{border-bottom:1px solid var(--border,#e5e7eb)}
+.review-history-question-title{display:flex;gap:8px;align-items:center;min-width:0}
+.review-history-question-title strong{font-size:.86rem;line-height:1.35}
+.review-result{font-size:.66rem;font-weight:800;border-radius:999px;padding:3px 7px;white-space:nowrap;background:rgba(22,163,74,.12)}
+.review-result.wrong{background:rgba(220,38,38,.12)}
+.review-cause-chips{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.review-cause-chips span{font-size:.66rem;font-weight:700;border-radius:999px;padding:3px 7px;background:rgba(127,127,127,.12);white-space:nowrap}
+.review-history-question-body{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:12px}
+.review-history-question-body>div{border:1px solid var(--border,#e5e7eb);border-radius:10px;padding:10px;min-width:0}
+.review-history-question-body b{display:block;font-size:.72rem;margin-bottom:4px;color:var(--muted,#6b7280)}
+.review-history-question-body p{margin:0;font-size:.82rem;line-height:1.5;overflow-wrap:anywhere}
+.review-history-question-body .review-detail-wide{grid-column:1/-1}
 @media(max-width:1180px){.dashboard-overview{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:980px){.dashboard-overview{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-two-col,.dashboard-insights,.reviewed-gap-grid{grid-template-columns:1fr}.coverage-grid{grid-template-columns:1fr 1fr}.reviewed-gap-list{max-height:none}}
-@media(max-width:640px){.dashboard-overview{grid-template-columns:1fr}.coverage-grid{grid-template-columns:1fr}.dashboard-set-head,.domain-performance-head{align-items:flex-start;flex-direction:column}.dashboard-set-head span{text-align:left}.review-domain summary{flex-direction:column}.review-item{grid-template-columns:1fr}.review-item-tags{grid-row:auto;flex-direction:row}}
+@media(max-width:640px){.dashboard-overview{grid-template-columns:1fr}.coverage-grid{grid-template-columns:1fr}.dashboard-set-head,.domain-performance-head{align-items:flex-start;flex-direction:column}.dashboard-set-head span{text-align:left}.review-domain summary{flex-direction:column}.review-item{grid-template-columns:1fr}.review-item-tags{grid-row:auto;flex-direction:row}.review-set-detail-head,.review-history-question>summary{flex-direction:column;align-items:stretch}.review-cause-chips{justify-content:flex-start}.review-history-question-body{grid-template-columns:1fr}.review-history-question-body .review-detail-wide{grid-column:auto}}
 
 
 /* AIF-C01 Info Library */
