@@ -58,11 +58,11 @@ Dashboard ใช้ progress ใน browser ร่วมกับ review metadat
 - คะแนนราย Set
 - Accuracy ตาม Domain
 - Reviewed Gaps
-- Concept / Confidence / Language gaps
+- Concept / Confidence / Language / Clue-Distractor gaps
 - Review Queue จากข้อผิดและข้อที่ Flag
 - Topic status เช่น repeated / unstable / improving / recovered
 
-มี review metadata สำหรับผลที่บันทึกไว้ของ Set 12, 13, 17, 18 และ 19
+มี review metadata สำหรับผลที่บันทึกไว้ของ Set 12, 13, 17, 18, 19, 20 และ 21
 
 ### AIF-C01 Info Library
 
@@ -164,6 +164,7 @@ docs/
 
 - ข้อที่ตอบผิดจะถามเหตุผลผู้เรียน **ทีละข้อก่อนอธิบายเฉลย**
 - หลังผู้เรียนอธิบายเหตุผล จึงแยกสาเหตุเป็น **Concept / Confidence / Language / clue miss** ตามหลักฐานจริง
+- raw flag เป็นข้อมูลประกอบ แต่ **post-review interview เป็น source of truth ของสาเหตุจริง**
 - ข้อที่ตอบถูกแต่ติด 🟡 ยังถือเป็น confidence gap และไม่ถือว่า mastered อัตโนมัติ
 
 รายละเอียดเพิ่มเติมทั้งกฎการสร้างข้อสอบและกฎการรีวิวผลสอบ: `docs/RULES.md`
