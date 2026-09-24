@@ -64,17 +64,19 @@
       const variant = item.v?.[setNumber];
       if (!variant) throw new Error(`Missing Set ${setNumber} variant for bank item ${index + 1}`);
       const [question, questionTh] = variant;
+      const effectiveChoices = setNumber === 22 && item.choices22 ? item.choices22 : item.choices;
+      const effectiveExplanation = setNumber === 22 && item.exp22 ? item.exp22 : item.exp;
       const q = {
         id:index + 1,
         domain:item.domain,
         domainName:domainNames[item.domain],
         question,
         questionTh,
-        choices:clone(item.choices),
+        choices:clone(effectiveChoices),
         answer:clone(item.answer),
-        explanation:(item.exp || []).join('\n'),
+        explanation:(effectiveExplanation || []).join('\n'),
         type:item.type,
-        vocab:buildVocab(question, item.choices),
+        vocab:buildVocab(question, effectiveChoices),
         task:item.task,
         _target:item.target
       };
