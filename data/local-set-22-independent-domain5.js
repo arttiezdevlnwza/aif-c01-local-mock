@@ -3,11 +3,11 @@
   const add = x => bank.push({ domain:5, ...x });
 
   add({task:'5.1',type:'single',target:'iam-boundary-vs-scp-angle',
-    question:'A security team wants to cap the maximum permissions of one IAM role even if administrators attach additional identity policies later. Which mechanism is designed for that identity-level ceiling?',
-    questionTh:'ทีม security ต้องการจำกัด maximum permissions ของ IAM role หนึ่ง แม้ภายหลัง administrator จะ attach identity policies เพิ่ม กลไกใดถูกออกแบบมาเป็น identity-level ceiling?',
-    choices:{A:'Permissions boundary',B:'Service control policy (SCP)',C:'Role trust policy',D:'Resource-based policy only'},
+    question:'An organization has many AWS accounts. Security wants a centrally managed maximum-permission guardrail that applies across selected organizational units even if account administrators attach permissive IAM policies. Which mechanism BEST fits?',
+    questionTh:'องค์กรมี AWS accounts หลายบัญชี ทีม security ต้องการ maximum-permission guardrail ที่บริหารจากส่วนกลางและใช้กับ organizational units ที่เลือก แม้ account administrators จะ attach IAM policies ที่กว้าง ควรใช้กลไกใด?',
+    choices:{A:'Service control policy (SCP)',B:'Permissions boundary on one role',C:'Role trust policy',D:'Session tag only'},
     answer:['A'],
-    exp:['✅ A — Permissions boundary กำหนด maximum permissions ของ IAM identity โดยไม่ได้ grant permissions เอง.','❌ B — SCP เป็น ceiling ระดับ organization/account ไม่ใช่ per-identity boundary.','❌ C — Trust policy กำหนดว่าใคร assume role ได้.','❌ D — Resource policy ควบคุม access ที่ resource ไม่ใช่ maximum permission ceiling ของ role.','🧠 จำสั้น ๆ — Identity grant = policy; identity ceiling = Boundary; org ceiling = SCP.']});
+    exp:['✅ A — SCP เป็น permission ceiling ระดับ organization/account/OU และใช้ควบคุมขอบเขตสูงสุดจากส่วนกลาง.','❌ B — Permissions boundary เป็น ceiling ระดับ IAM identity ไม่ได้ครอบคลุมหลาย accounts/OU แบบโจทย์.','❌ C — Trust policy กำหนดว่าใคร assume role ได้.','❌ D — Session tag ใช้เป็น context/attribute ไม่ใช่ org-level maximum permission guardrail.','🧠 จำสั้น ๆ — One identity ceiling = Boundary; Org/OU ceiling = SCP.']});
 
   add({task:'5.1',type:'single',target:'guardrails-denied-topics-vs-content',
     question:'A chatbot must refuse conversations about a company-defined prohibited business topic even when the text is not generally toxic or violent. Which Bedrock Guardrails control is the closest fit?',
