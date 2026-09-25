@@ -1211,6 +1211,92 @@
     ]
   });
 
+
+  // Final no-identical-choice-set cleanup after canonical (order-insensitive) comparison.
+  override(17, {
+    question:'A support agent stores several kinds of information. Match each example with the memory concept that BEST describes it.',
+    questionTh:'support agent เก็บข้อมูลหลายลักษณะ ให้จับคู่ตัวอย่างแต่ละแบบกับ memory concept ที่ตรงที่สุด.',
+    choices:{
+      A:'Details from one specific refund incident last month',
+      B:'The current chat context needed for the next reply',
+      C:'A stable fact such as the customer’s preferred language',
+      D:'A preference retained so it is still available in a future session'
+    },
+    matches:{
+      '1':'Episodic memory',
+      '2':'Short-term / working memory',
+      '3':'Semantic memory',
+      '4':'Long-term memory'
+    },
+    answer:['A:1','B:2','C:3','D:4'],
+    exp:[
+      '✅ เหตุการณ์ refund ครั้งหนึ่ง → Episodic memory เพราะเป็นประสบการณ์เฉพาะ.',
+      '✅ context ของแชทปัจจุบัน → Short-term/working memory.',
+      '✅ fact เช่น preferred language → Semantic memory.',
+      '✅ preference ที่ต้องอยู่ข้าม session → Long-term memory.',
+      '🧠 จำสั้น ๆ — เหตุการณ์ = Episodic; ตอนนี้ = Working; fact = Semantic; ข้าม session = Long-term.'
+    ]
+  });
+
+  override(56, {
+    question:'Match each user-protection scenario with the responsible-AI concept that BEST fits it.',
+    questionTh:'จับคู่ user-protection scenario แต่ละแบบกับ responsible-AI concept ที่ตรงที่สุด.',
+    choices:{
+      A:'A rejected applicant can request another review or appeal the outcome',
+      B:'A human reviewer can stop or approve a high-impact automated action',
+      C:'Users are told that AI is involved and are shown intended use and limitations',
+      D:'A user receives understandable reasons for why a particular decision was made'
+    },
+    matches:{
+      '1':'Recourse',
+      '2':'Human oversight',
+      '3':'Transparency',
+      '4':'Explainability'
+    },
+    answer:['A:1','B:2','C:3','D:4'],
+    exp:[
+      '✅ ขอ review/appeal หลังได้รับผลกระทบ → Recourse.',
+      '✅ คนสามารถหยุด/approve action สำคัญ → Human oversight.',
+      '✅ แจ้งว่าใช้ AI และบอก intended use/limitations → Transparency.',
+      '✅ อธิบายเหตุผลของ decision เฉพาะกรณี → Explainability.',
+      '🧠 จำสั้น ๆ — Appeal = Recourse; คนคุม = Oversight; บอกระบบ = Transparency; บอกเหตุผล = Explainability.'
+    ]
+  });
+
+  override(58, {
+    choices:{
+      A:'AWS Config — evaluate resource configuration state against rules',
+      B:'AWS Audit Manager — map frameworks and collect audit evidence',
+      C:'AWS Security Hub — aggregate security findings and posture signals',
+      D:'AWS Artifact — download AWS compliance reports and agreements'
+    },
+    answer:['B'],
+    exp:[
+      '✅ B — Audit Manager ช่วย map controls/frameworks และรวบรวม evidence เพื่อรองรับ audit readiness.',
+      '❌ A — Config เน้น resource configuration state และ rule-based compliance.',
+      '❌ C — Security Hub รวม security findings/posture จากหลายแหล่ง ไม่ได้เป็นตัวหลักสำหรับ framework-based audit evidence collection.',
+      '❌ D — Artifact ใช้ดาวน์โหลด AWS compliance reports/agreements ของ AWS.',
+      '🧠 จำสั้น ๆ — Config = resource state; Audit Manager = evidence; Security Hub = findings; Artifact = AWS reports.'
+    ]
+  });
+
+  override(65, {
+    choices:{
+      A:'Model extraction — use repeated queries to build a substitute that mimics the original model',
+      B:'Model inversion — reconstruct sensitive information about training examples',
+      C:'Data poisoning — manipulate training data to alter future model behavior',
+      D:'Prompt injection — insert instructions that redirect application/model behavior'
+    },
+    answer:['A'],
+    exp:[
+      '✅ A — การใช้ queries/outputs ไปสร้าง substitute model ที่เลียนแบบของเดิมคือ Model extraction.',
+      '❌ B — Model inversion เน้นย้อนหรือ reconstruct ข้อมูลเกี่ยวกับ training examples.',
+      '❌ C — Data poisoning แก้/ปน training data เพื่อเปลี่ยน behavior ในอนาคต.',
+      '❌ D — Prompt injection แทรก instructions เพื่อ redirect behavior ระหว่างใช้งาน.',
+      '🧠 จำสั้น ๆ — สร้างตัวเลียนแบบจาก queries = Extraction; ย้อนข้อมูล train = Inversion.'
+    ]
+  });
+
   window.LOCAL_SET_22_QUALITY_AUDIT = {
     focus:'Independent Retest B: no Set 21-identical choice sets, different decision angles, and closer distractors',
     revisedQuestions:Array.from({length:65}, (_, index) => index + 1)
