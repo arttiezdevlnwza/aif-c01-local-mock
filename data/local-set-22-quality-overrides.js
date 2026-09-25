@@ -507,6 +507,240 @@
     ]
   });
 
+
+  // Full Set 22 independence pass — remaining questions that still reused Set 21 choices.
+  override(2, {
+    question:'A team wants to tune several candidate models without contaminating the final unbiased estimate. Which practice BEST preserves the role of each data split?',
+    questionTh:'ทีมต้องการปรับ candidate models หลายตัวโดยไม่ทำให้ผลประเมินสุดท้ายลำเอียง แนวทางใดรักษาหน้าที่ของแต่ละ data split ได้ถูกต้องที่สุด?',
+    choices:{
+      A:'Tune hyperparameters on the training set and report the same score as final',
+      B:'Use validation for model selection and reserve test data for the final estimate',
+      C:'Check the test set after every tuning change and choose the best result',
+      D:'Merge validation and test data before tuning so more examples are available'
+    },
+    answer:['B'],
+    exp:[
+      '✅ B — Validation ใช้เปรียบเทียบ candidate/tune hyperparameters ส่วน Test ต้องเก็บไว้ใช้ประเมินครั้งสุดท้ายหลังตัดสินใจทั้งหมดแล้ว.',
+      '❌ A — Training set ใช้เรียนรู้ model parameters; ใช้คะแนนจากชุดเดียวกันเป็น final estimate จะประเมิน generalization ได้ไม่ดี.',
+      '❌ C — ถ้าดู Test ซ้ำระหว่าง tuning ก็เท่ากับนำ Test มาใช้ตัดสินใจ ทำให้ผล final ไม่ unbiased.',
+      '❌ D — การรวม Validation กับ Test ก่อน tuning ทำให้สูญเสียชุดข้อมูลอิสระสำหรับ final evaluation.',
+      '🧠 จำสั้น ๆ — Train = เรียน, Validation = เลือก/ปรับ, Test = สอบรอบสุดท้าย.'
+    ]
+  });
+
+  override(3, {
+    choices:{
+      A:'MAE because each absolute error contributes linearly',
+      B:'RMSE because squaring makes large errors influence the score more strongly',
+      C:'R-squared because it directly penalizes the largest individual misses',
+      D:'F1 score because it balances large and small regression errors'
+    },
+    answer:['B'],
+    exp:[
+      '✅ B — RMSE ยกกำลังสอง error ก่อนเฉลี่ย จึงทำให้ error ขนาดใหญ่มีผลต่อคะแนนมากเป็นพิเศษ.',
+      '❌ A — MAE รวม absolute error แบบเส้นตรง จึงไม่ลงโทษ outlier แรงเท่า RMSE.',
+      '❌ C — R-squared วัดสัดส่วนความแปรปรวนที่โมเดลอธิบายได้ ไม่ได้ถูกออกแบบมาเพื่อให้น้ำหนัก error ใหญ่เป็นพิเศษ.',
+      '❌ D — F1 เป็น classification metric ไม่ใช่ regression metric.',
+      '🧠 จำสั้น ๆ — พลาดใหญ่ต้องเจ็บกว่า = RMSE.'
+    ]
+  });
+
+  override(4, {
+    question:'A screening model outputs “negative,” but the confirmed ground truth is “positive.” Which description matches this confusion-matrix case?',
+    questionTh:'โมเดลคัดกรองทำนายว่า “negative” แต่ ground truth ยืนยันว่าเป็น “positive” คำอธิบายใดตรงกับกรณีนี้ใน confusion matrix?',
+    choices:{
+      A:'Predicted positive and actually positive',
+      B:'Predicted positive but actually negative',
+      C:'Predicted negative and actually negative',
+      D:'Predicted negative but actually positive'
+    },
+    answer:['D'],
+    exp:[
+      '✅ D — ทาย negative แต่ความจริง positive คือ False Negative.',
+      '❌ A — ทาย positive และจริง positive คือ True Positive.',
+      '❌ B — ทาย positive แต่จริง negative คือ False Positive.',
+      '❌ C — ทาย negative และจริง negative คือ True Negative.',
+      '🧠 จำสั้น ๆ — FN = ของจริง positive แต่โมเดลปล่อยหลุดเป็น negative.'
+    ]
+  });
+
+  override(5, {
+    question:'A reinforcement-learning system controls a delivery drone. Match each RL concept with its role in the interaction loop.',
+    questionTh:'ระบบ reinforcement learning ควบคุมโดรนส่งของ ให้จับคู่แนวคิด RL แต่ละตัวกับหน้าที่ใน interaction loop.',
+    choices:{
+      A:'Agent',
+      B:'Environment',
+      C:'Reward',
+      D:'Policy'
+    },
+    matches:{
+      '1':'The learner/decision-maker that chooses what to do',
+      '2':'The external world that changes and returns observations',
+      '3':'A feedback signal indicating how desirable an outcome was',
+      '4':'The strategy used to choose an action from the current situation'
+    },
+    answer:['A:1','B:2','C:3','D:4'],
+    exp:[
+      '✅ Agent → ตัวที่ตัดสินใจเลือก action.',
+      '✅ Environment → โลกภายนอกที่ agent โต้ตอบและรับ observation กลับมา.',
+      '✅ Reward → feedback ว่าผลลัพธ์ดีหรือแย่เพียงใด.',
+      '✅ Policy → กลยุทธ์ที่ใช้เลือก action จากสถานการณ์ปัจจุบัน.',
+      '🧠 จำสั้น ๆ — Agent ทำ; Environment ตอบกลับ; Reward ให้คะแนน; Policy คือวิธีเลือก.'
+    ]
+  });
+
+  override(9, {
+    choices:{
+      A:'Versioned model/data artifacts and repeatable deployment pipelines',
+      B:'Production monitoring for quality, drift, latency, and failures',
+      C:'Controlled retraining and promotion based on measured evidence',
+      D:'A one-time notebook that is manually rerun whenever someone remembers',
+      E:'Replacing evaluation gates with direct production deployment',
+      F:'Keeping training data and model versions untracked to move faster'
+    },
+    answer:['A','B','C'],
+    exp:[
+      '✅ A — MLOps ต้องการ versioning และ repeatable pipelines เพื่อให้ lifecycle ทำซ้ำและตรวจสอบย้อนหลังได้.',
+      '✅ B — Production monitoring เป็นแกนหลักสำหรับดู quality, drift, latency และ failures หลัง deploy.',
+      '✅ C — Retraining/redeployment ควรถูกควบคุมและอิงหลักฐาน ไม่ใช่ ad hoc.',
+      '❌ D — Manual notebook แบบไม่มี process ลด repeatability และ traceability.',
+      '❌ E — การข้าม evaluation gate ทำให้ production governance แย่ลง.',
+      '❌ F — ไม่ track data/model versions ทำให้ reproduce และ audit ไม่ได้.',
+      '🧠 จำสั้น ๆ — MLOps = version → pipeline → deploy → monitor → retrain อย่างควบคุม.'
+    ]
+  });
+
+  override(10, {
+    choices:{
+      A:'A continuously provisioned real-time endpoint with fixed baseline capacity',
+      B:'Serverless inference that scales capacity for intermittent short requests',
+      C:'Asynchronous inference for long-running requests with deferred results',
+      D:'Offline batch transform over a prepared dataset'
+    },
+    answer:['B'],
+    exp:[
+      '✅ B — Traffic ต่ำและไม่แน่นอน, request สั้น และไม่อยากดูแล instance fleet ตรงกับ Serverless Inference.',
+      '❌ A — Provisioned real-time endpoint เหมาะเมื่อมี traffic ต่อเนื่องหรือมี latency requirement ที่ต้องเปิด capacity รอ.',
+      '❌ C — Asynchronous inference เหมาะ request ที่ใหญ่/นานและรับผลภายหลัง.',
+      '❌ D — Batch transform เหมาะการประมวลผล dataset แบบ offline ไม่ใช่ request เป็นครั้ง ๆ.',
+      '🧠 จำสั้น ๆ — สั้น + นาน ๆ มาที + ไม่อยาก provision = Serverless.'
+    ]
+  });
+
+  override(11, {
+    choices:{
+      A:'The production input distribution has shifted — data drift',
+      B:'The relationship between the same inputs and target has changed — concept drift',
+      C:'Training examples accidentally reveal the target — label leakage',
+      D:'The model memorized training data and fails to generalize — overfitting'
+    },
+    answer:['A'],
+    exp:[
+      '✅ A — โจทย์บอกว่า distribution ของ input/features เปลี่ยน แต่ยังไม่มีหลักฐานว่า X→Y เปลี่ยน จึงเป็น Data drift.',
+      '❌ B — Concept drift ต้องมีการเปลี่ยนความสัมพันธ์ระหว่าง input กับ target.',
+      '❌ C — Label leakage คือมีข้อมูลที่เผย target อย่างไม่เหมาะสมใน training data.',
+      '❌ D — Overfitting คือ train ดีแต่ generalize ไม่ดี ไม่ได้หมายถึง production input distribution เปลี่ยน.',
+      '🧠 จำสั้น ๆ — X เปลี่ยน = Data drift; X เดิมแต่ความหมายต่อ Y เปลี่ยน = Concept drift.'
+    ]
+  });
+
+  override(12, {
+    choices:{
+      A:'Release the approved model into production',
+      B:'Validate, clean, and prepare the training data/features',
+      C:'Observe live quality/drift and feed evidence into the next iteration',
+      D:'Fit candidate models on the prepared training data',
+      E:'Compare candidates against defined evaluation criteria before release'
+    },
+    answer:['B','D','E','A','C'],
+    exp:[
+      '✅ ลำดับคือ Prepare data → Train candidates → Evaluate → Deploy → Monitor.',
+      '❌ Deploy ต้องเกิดหลัง Evaluate ไม่ใช่ก่อน.',
+      '❌ Monitoring เป็นกิจกรรมหลัง production เพื่อดู quality/drift และใช้เป็น feedback รอบถัดไป.',
+      '🧠 จำสั้น ๆ — Data → Train → Evaluate → Deploy → Monitor.'
+    ]
+  });
+
+  override(14, {
+    choices:{
+      A:'Confidently stated factual errors or fabricated details',
+      B:'Different outputs across repeated runs with the same input',
+      C:'Difficulty fully explaining why internal model behavior produced an answer',
+      D:'Ability to draft or transform new content from instructions',
+      E:'Ability to summarize and converse in natural language',
+      F:'Ability to adapt behavior from examples and prompt instructions'
+    },
+    answer:['A','B','C'],
+    exp:[
+      '✅ A — การสร้างข้อเท็จจริงผิดหรือข้อมูลที่แต่งขึ้นคือ hallucination ซึ่งเป็น limitation/risk.',
+      '✅ B — Output ที่แปรผันแม้ input เดิมสะท้อน nondeterministic behavior.',
+      '✅ C — การอธิบายกลไกภายในได้ไม่ครบเป็น limited interpretability.',
+      '❌ D — การสร้าง/แปลง content ใหม่เป็น core capability ของ GenAI.',
+      '❌ E — การ summarize/converse เป็น capability ไม่ใช่ limitation.',
+      '❌ F — การปรับ behavior ผ่าน examples/prompt เป็น capability.',
+      '🧠 จำสั้น ๆ — Error/variation/อธิบายยาก = limitation; Generate/converse/adapt = capability.'
+    ]
+  });
+
+  override(15, {
+    choices:{
+      A:'A diffusion model that iteratively denoises toward an image',
+      B:'A vision transformer used only to classify an existing image',
+      C:'A multimodal embedding model that maps image/text into vectors',
+      D:'A convolutional classifier trained to assign image labels'
+    },
+    answer:['A'],
+    exp:[
+      '✅ A — การเริ่มจาก noise แล้วค่อย ๆ denoise เพื่อสร้างภาพใหม่เป็นลักษณะของ diffusion model.',
+      '❌ B — Vision classifier วิเคราะห์ภาพที่มีอยู่แล้ว ไม่ได้สร้างภาพใหม่จาก noise.',
+      '❌ C — Embedding model สร้าง vector representation สำหรับ similarity/search ไม่ใช่ image generation.',
+      '❌ D — CNN classifier ใช้จำแนกภาพ ไม่ใช่สร้างภาพใหม่.',
+      '🧠 จำสั้น ๆ — Noise → ค่อย ๆ denoise → ภาพใหม่ = Diffusion.'
+    ]
+  });
+
+  override(16, {
+    choices:{
+      A:'Validate the candidate solution against quality, safety, and business criteria',
+      B:'Collect production feedback and use it to improve the next iteration',
+      C:'Choose the base model, data strategy, and overall solution approach',
+      D:'Release the approved solution for production use',
+      E:'Apply the needed customization or adaptation approach'
+    },
+    answer:['C','E','A','D','B'],
+    exp:[
+      '✅ ลำดับเชิงแนวคิดคือ Choose approach → Customize/Adapt → Evaluate → Deploy → Feedback/Iterate.',
+      '❌ Evaluate ต้องมาก่อน production release เพื่อไม่ promote solution ที่ยังไม่ผ่านเกณฑ์.',
+      '❌ Feedback เป็นข้อมูลหลังใช้งานจริงเพื่อนำไป iterate รอบถัดไป.',
+      '🧠 จำสั้น ๆ — Select → Adapt → Evaluate → Deploy → Improve.'
+    ]
+  });
+
+  override(17, {
+    question:'A customer-support agent uses several memory concepts. Match each memory type with the example that BEST fits it.',
+    questionTh:'customer-support agent ใช้ memory หลายแบบ ให้จับคู่ memory type กับตัวอย่างที่ตรงที่สุด.',
+    choices:{
+      A:'Episodic memory',
+      B:'Short-term / working memory',
+      C:'Semantic memory',
+      D:'Long-term memory'
+    },
+    matches:{
+      '1':'Remembering the details of a specific refund incident that happened last month',
+      '2':'Holding the current conversation state needed to answer the next message',
+      '3':'Remembering a general fact such as the customer’s preferred language',
+      '4':'Persisting useful information across sessions instead of losing it when one chat ends'
+    },
+    answer:['A:1','B:2','C:3','D:4'],
+    exp:[
+      '✅ Episodic → เหตุการณ์เฉพาะที่เคยเกิดขึ้น เช่น refund incident ครั้งหนึ่ง.',
+      '✅ Short-term/working → context ที่ต้องใช้ใน interaction ปัจจุบัน.',
+      '✅ Semantic → facts/concepts/preferences ที่เป็นความรู้ทั่วไปเกี่ยวกับผู้ใช้.',
+      '✅ Long-term → การเก็บข้อมูลข้าม session ในระยะยาว.',
+      '🧠 จำสั้น ๆ — ตอนนี้ = Working; fact = Semantic; เหตุการณ์ = Episodic; ข้าม session = Long-term.'
+    ]
+  });
+
   window.LOCAL_SET_22_QUALITY_AUDIT = {
     focus:'Close distractors and reduced elimination-by-unrelated-choice risk',
     revisedQuestions:[1,6,7,8,13,19,20,25,27,28,29,30,33,35,37,38,43,44,45,46,47,48,54,55,60,61,62,63,64]
