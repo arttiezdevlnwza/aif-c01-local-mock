@@ -23,11 +23,11 @@
       D:'A general-purpose foundation model with few-shot examples'
     },
     exp:[
-      '✅ A — Structured tabular inputs + narrow labeled classification + explainability + low inference cost at scale favor traditional supervised ML.',
-      '❌ B — A fine-tuned FM could classify, but it adds model complexity/cost without a requirement for broad generative behavior.',
-      '❌ C — RAG helps ground answers in retrieved knowledge; it does not replace a narrow supervised classifier for tabular renewal prediction.',
-      '❌ D — Few-shot prompting can steer an FM, but the task does not need open-ended generation and has stronger cost/explainability constraints.',
-      '🧠 จำสั้น ๆ — Narrow + structured + labeled + explainable + cheap at scale = Traditional ML.'
+      '✅ A — ข้อมูลเป็น structured/tabular, งานเป็น classification ที่มี label ชัดเจน, ต้องอธิบายเหตุผลได้ และต้องรันจำนวนมากด้วยต้นทุนต่ำ จึงเหมาะกับ traditional supervised ML.',
+      '❌ B — Fine-tuned FM สามารถทำ classification ได้ แต่เพิ่มความซับซ้อนและต้นทุน ทั้งที่โจทย์ไม่ได้ต้องการพฤติกรรม generative แบบกว้าง.',
+      '❌ C — RAG ใช้ดึงความรู้มา grounding คำตอบ แต่ไม่ได้แทน supervised classifier สำหรับการทำนายจากข้อมูลตารางแบบงานแคบนี้.',
+      '❌ D — Few-shot prompting ช่วยชี้นำ FM ได้ แต่โจทย์ไม่ต้องการ open-ended generation และให้ความสำคัญกับ cost/explainability มากกว่า.',
+      '🧠 จำสั้น ๆ — งานแคบ + structured + labeled + explainable + cheap at scale = Traditional ML.'
     ]
   });
 
@@ -39,10 +39,10 @@
       D:'Positional encoding'
     },
     exp:[
-      '✅ B — Attention computes how strongly parts of the context should influence one another when building representations.',
-      '❌ A — Tokenization already happened when the text was converted into token IDs.',
-      '❌ C — Embedding lookup maps token IDs to vectors, but it does not decide which context elements should influence each other more strongly.',
-      '❌ D — Positional encoding represents token order/position; it is not the mechanism that weights relationships across the context.',
+      '✅ B — Attention ใช้คำนวณว่าส่วนต่าง ๆ ของ context ควรมีอิทธิพลต่อกันมากแค่ไหนตอนสร้าง representation.',
+      '❌ A — Tokenization เกิดไปแล้วตอนข้อความถูกแบ่งและแปลงเป็น token IDs.',
+      '❌ C — Embedding lookup แปลง token IDs เป็น vectors แต่ไม่ได้ตัดสินว่าส่วนไหนของ context ควรมีน้ำหนักต่อกันมากกว่า.',
+      '❌ D — Positional encoding บอกลำดับ/ตำแหน่งของ token แต่ไม่ได้เป็นกลไกที่ชั่งความสัมพันธ์ระหว่าง token.',
       '🧠 จำสั้น ๆ — Tokenization = แบ่ง; Embedding = แปลงเป็น vector; Position = บอกลำดับ; Attention = ชั่งความสัมพันธ์.'
     ]
   });
@@ -55,10 +55,10 @@
       D:'A foundation model prompted with the legal formula'
     },
     exp:[
-      '✅ A — The exact statutory formula is already known, so deterministic rules provide reproducible and auditable results.',
-      '❌ B — Regression estimates an unknown numeric relationship from data; no estimation is needed when the legal formula already defines the answer.',
-      '❌ C — A decision tree would learn patterns from examples instead of directly executing the authoritative formula.',
-      '❌ D — An FM can restate or reason about the formula, but it adds nondeterminism where exact calculation is required.',
+      '✅ A — สูตรตามกฎหมายถูกกำหนดไว้อยู่แล้ว deterministic rules จึงให้ผลที่ทำซ้ำได้ตรงเดิมและ audit ได้ชัดเจน.',
+      '❌ B — Regression ใช้เรียนรู้ความสัมพันธ์เชิงตัวเลขที่ยังไม่รู้จากข้อมูล แต่โจทย์นี้มีสูตรคำตอบตายตัวอยู่แล้ว.',
+      '❌ C — Decision tree จะเรียน pattern จากตัวอย่างในอดีต แทนที่จะคำนวณตามสูตรกฎหมายโดยตรง.',
+      '❌ D — FM อาจอธิบายหรือทำตามสูตรได้ แต่เพิ่มความไม่แน่นอนในงานที่ต้องการผลคำนวณ exact ทุกครั้ง.',
       '🧠 จำสั้น ๆ — สูตรตายตัว + ต้องได้ผลเดิมทุกครั้ง = Rules ไม่ต้องใช้ ML.'
     ]
   });
@@ -72,11 +72,11 @@
       E:'Recommendation systems'
     },
     exp:[
-      '✅ A — Detecting visible defects in uploaded photos is a computer-vision task.',
-      '✅ B — Sentiment analysis and information extraction from written complaints are NLP tasks.',
-      '❌ C — Speech AI is relevant to audio/speech input, which the scenario does not require.',
-      '❌ D — Forecasting predicts future values from time-oriented data, not image defects or written-text meaning.',
-      '❌ E — Recommendation systems rank or suggest items/users/content rather than performing these two requested analyses.',
+      '✅ A — การตรวจหาความเสียหายที่มองเห็นจากรูปภาพเป็นงาน Computer Vision.',
+      '✅ B — การวิเคราะห์ sentiment และดึงข้อมูลสำคัญจากข้อความร้องเรียนเป็นงาน NLP.',
+      '❌ C — Speech AI เหมาะกับข้อมูลเสียง/คำพูด ซึ่ง scenario นี้ไม่ได้ต้องการ.',
+      '❌ D — Time-series forecasting ใช้ทำนายค่าจากข้อมูลตามเวลา ไม่ใช่ตรวจภาพหรือเข้าใจข้อความ.',
+      '❌ E — Recommendation systems ใช้จัดอันดับหรือแนะนำสิ่งที่เหมาะกับผู้ใช้ ไม่ใช่งานสองอย่างในโจทย์.',
       '🧠 จำสั้น ๆ — ภาพ = CV; ภาษา/ข้อความ = NLP.'
     ]
   });
@@ -90,11 +90,11 @@
       E:'Foundation-model benchmark scores only'
     },
     exp:[
-      '✅ A — Model-quality metrics show whether the classifier performs technically as intended.',
-      '✅ B — Business/application outcomes show whether that technical quality actually creates user or business value.',
-      '❌ C — Loss is useful during model development but does not by itself establish real-world customer benefit.',
-      '❌ D — Infrastructure metrics describe operational efficiency, not whether the application outcome is useful.',
-      '❌ E — Generic benchmark scores do not replace task-specific model quality plus business outcomes for this application.',
+      '✅ A — Model-quality metrics บอกว่า classifier ทำงานเชิงเทคนิคได้ดีแค่ไหน เช่น precision/recall.',
+      '✅ B — Business/application outcomes บอกว่าคุณภาพทางเทคนิคนั้นสร้างประโยชน์ต่อผู้ใช้หรือธุรกิจจริงหรือไม่.',
+      '❌ C — Training/validation loss มีประโยชน์ตอนพัฒนาโมเดล แต่ไม่ได้ยืนยันว่าลูกค้าได้รับประโยชน์จริง.',
+      '❌ D — Infrastructure metrics บอกประสิทธิภาพการใช้ระบบ แต่ไม่ได้บอกว่า application outcome มีคุณค่าหรือไม่.',
+      '❌ E — Benchmark score ทั่วไปของ FM ไม่สามารถแทน task-specific model quality และ business outcome ของ application นี้ได้.',
       '🧠 จำสั้น ๆ — Technical quality + Business outcome ต้องดูคู่กัน.'
     ]
   });
@@ -108,11 +108,11 @@
       E:'Retrieval-augmented generation (RAG)'
     },
     exp:[
-      '✅ A — A coordinator that delegates subtasks to specialized agents and merges results is an orchestrator-worker multi-agent pattern.',
-      '✅ B — MCP provides a standardized connection layer for exposing tools/context instead of bespoke integration per tool.',
-      '❌ C — A single-agent multi-tool pattern has one agent choosing tools; the scenario explicitly uses several specialized agents coordinated by another component.',
-      '❌ D — Point-to-point integration is the custom integration approach the team wants to avoid.',
-      '❌ E — RAG grounds generation with retrieved knowledge; it does not describe the multi-agent delegation or standard tool protocol.',
+      '✅ A — มี coordinator แจก subtasks ให้ specialized agents หลายตัวแล้วรวมผลกลับมา ตรงกับ orchestrator-worker multi-agent pattern.',
+      '✅ B — MCP เป็นมาตรฐานกลางสำหรับเชื่อม tools/context แทนการทำ integration แบบเฉพาะตัวต่อ tool.',
+      '❌ C — Single-agent multi-tool มี agent เดียวเลือกใช้หลาย tools แต่โจทย์ระบุชัดว่ามี specialized agents หลายตัวที่ถูก coordinator จัดงาน.',
+      '❌ D — Point-to-point integration คือวิธี custom integration ต่อ tool ที่ทีมต้องการหลีกเลี่ยง.',
+      '❌ E — RAG ใช้ grounding ด้วยข้อมูลที่ retrieve มา แต่ไม่ได้อธิบายการแบ่งงานหลาย agent หรือมาตรฐานเชื่อม tool.',
       '🧠 จำสั้น ๆ — แจกงานหลาย agent = Orchestrator-worker; มาตรฐานเชื่อม tools/context = MCP.'
     ]
   });
@@ -125,11 +125,11 @@
       D:'Fine-tuning'
     },
     exp:[
-      '✅ A — Context engineering manages what information enters the context window and how it is selected, summarized, structured, and refreshed before each call.',
-      '❌ B — Prompt engineering focuses mainly on instructions/examples in the prompt; the scenario also manages history and retrieved context as a whole.',
-      '❌ C — RAG is one way to retrieve external evidence, but the scenario additionally summarizes stale history and structures the entire context window.',
-      '❌ D — Fine-tuning changes model weights; it does not dynamically curate the per-request context window.',
-      '🧠 จำสั้น ๆ — Prompt = เขียนคำสั่ง; RAG = ดึงความรู้; Context engineering = จัดของทั้งหมดที่จะยัดเข้า context.'
+      '✅ A — Context engineering คือการจัดการว่าข้อมูลอะไรจะเข้า context window รวมถึงการเลือก สรุป จัดโครง และ refresh ข้อมูลก่อนแต่ละ call.',
+      '❌ B — Prompt engineering เน้นการเขียน instructions/examples ใน prompt เป็นหลัก แต่โจทย์นี้จัดการทั้ง history และ retrieved context ด้วย.',
+      '❌ C — RAG เป็นวิธีดึง external evidence เข้ามา แต่โจทย์ยังมีการสรุป history เก่าและจัด context ทั้งก้อนด้วย.',
+      '❌ D — Fine-tuning เปลี่ยน model weights ไม่ได้ dynamically curate context ที่ส่งเข้าแต่ละ request.',
+      '🧠 จำสั้น ๆ — Prompt = เขียนคำสั่ง; RAG = ดึงความรู้; Context engineering = จัดของทั้งหมดที่จะเข้า context.'
     ]
   });
 
@@ -141,10 +141,10 @@
       D:'Prompt Management'
     },
     exp:[
-      '✅ A — Converse provides a consistent message-based interface across supported Bedrock models, which is exactly the portability requirement.',
-      '❌ B — InvokeModel provides direct model invocation but can require model-specific request/response formats.',
-      '❌ C — InvokeModelWithResponseStream adds streaming to direct invocation; it does not provide the same unified conversational message schema.',
-      '❌ D — Prompt Management stores and versions reusable prompts; it is not the runtime API that standardizes multi-turn messages across models.',
+      '✅ A — Converse API ให้ message-based interface ที่สม่ำเสมอกับ Bedrock models ที่รองรับ จึงตรงกับ requirement ที่ต้องสลับโมเดลโดยไม่เปลี่ยนโครง request หลัก.',
+      '❌ B — InvokeModel ใช้ invoke โมเดลโดยตรง แต่ request/response format อาจแตกต่างตามแต่ละ model.',
+      '❌ C — InvokeModelWithResponseStream เพิ่ม streaming ให้ direct invocation แต่ไม่ได้ให้ unified conversational message schema แบบ Converse.',
+      '❌ D — Prompt Management ใช้เก็บและ version prompts ไม่ใช่ runtime API สำหรับทำ multi-turn messages แบบเดียวกันข้ามหลาย models.',
       '🧠 จำสั้น ๆ — หลาย Bedrock models + message interface เดียว = Converse.'
     ]
   });
@@ -157,10 +157,10 @@
       D:'Prompt-versioning versus prompt-caching tradeoffs'
     },
     exp:[
-      '✅ A — A routing option that can process requests in more Regions must be checked against where data is allowed to be processed.',
-      '❌ B — Quality/cost matters for model choice, but it is not the deciding issue when the hard requirement is geographic processing boundaries.',
-      '❌ C — Latency/context size is a model/runtime tradeoff, not the residency constraint described.',
-      '❌ D — Prompt lifecycle and caching do not determine which geographic Regions may process inference traffic.',
+      '✅ A — ถ้า routing สามารถส่ง request ไปประมวลผลหลาย Regions ต้องตรวจว่า data ได้รับอนุญาตให้ถูกประมวลผลใน Regions เหล่านั้นหรือไม่.',
+      '❌ B — Quality/cost เป็น tradeoff สำคัญตอนเลือก model แต่ไม่ใช่ประเด็นตัดสินเมื่อโจทย์มีข้อจำกัดด้านพื้นที่ประมวลผลข้อมูล.',
+      '❌ C — Latency/context size เป็น model/runtime tradeoff ไม่ใช่ข้อจำกัดด้าน residency ที่โจทย์ถาม.',
+      '❌ D — Prompt versioning/caching ไม่ได้กำหนดว่า inference traffic สามารถไปประมวลผลใน Region ใดได้.',
       '🧠 จำสั้น ๆ — กระจาย Region ได้กว้างขึ้น ต้องเช็ก Data residency/compliance ก่อน.'
     ]
   });
@@ -173,10 +173,10 @@
       D:'Zero-retention mode is required before inference prompts are excluded from shared base-model training'
     },
     exp:[
-      '✅ A — Amazon Bedrock does not use customer inference inputs/outputs to train shared base models for other customers.',
-      '❌ B — Guardrails are safety controls; enabling them is not what determines whether prompts are used to train shared base models.',
-      '❌ C — Bedrock protects ordinary inference content as well; model providers do not get customer prompts/completions simply because the call is normal inference.',
-      '❌ D — Retention controls govern whether request/response data may be retained; shared base-model training is a separate data-use question.',
+      '✅ A — Amazon Bedrock ไม่ได้นำ customer inference inputs/outputs ไปฝึก shared base models สำหรับลูกค้ารายอื่น.',
+      '❌ B — Guardrails เป็น safety controls ไม่ใช่เงื่อนไขที่ทำให้ prompts ถูกหรือไม่ถูกนำไปฝึก shared base models.',
+      '❌ C — Bedrock ปกป้อง ordinary inference content ด้วย ไม่ได้มีเฉพาะ fine-tuning data ที่ถูกแยกออก.',
+      '❌ D — Retention controls เป็นเรื่องการเก็บ request/response data ส่วนการนำข้อมูลไปฝึก shared base model เป็นคนละประเด็น.',
       '🧠 จำสั้น ๆ — Bedrock inference content ไม่ได้กลายเป็น shared base-model training data.'
     ]
   });
@@ -191,12 +191,12 @@
       F:'BERTScore or semantic similarity'
     },
     exp:[
-      '✅ A — Conversion rate measures whether the assistant helps turn interactions into purchases/actions.',
-      '✅ B — ROI connects benefits from the assistant to the cost of operating it.',
-      '✅ C — CLV/revenue impact measures downstream commercial value created by customers or sales.',
-      '❌ D — ROUGE/BLEU are model-output evaluation metrics, not direct measures of business value.',
-      '❌ E — Faithfulness/groundedness measures answer quality relative to evidence, not revenue or customer value directly.',
-      '❌ F — Semantic similarity measures language/output similarity rather than a business outcome.',
+      '✅ A — Conversion rate วัดว่า assistant ช่วยเปลี่ยน interaction ให้กลายเป็นการซื้อหรือ action ที่ต้องการได้มากแค่ไหน.',
+      '✅ B — ROI เชื่อมประโยชน์ที่ได้จาก assistant เข้ากับต้นทุนที่ใช้ดำเนินระบบ.',
+      '✅ C — CLV/revenue impact วัดมูลค่าเชิงธุรกิจที่เกิดจากลูกค้าหรือยอดขายในระยะต่อมา.',
+      '❌ D — ROUGE/BLEU เป็น metrics สำหรับประเมิน model output ไม่ใช่ตัววัด business value โดยตรง.',
+      '❌ E — Faithfulness/groundedness วัดคุณภาพคำตอบเทียบกับ evidence ไม่ได้วัดรายได้หรือมูลค่าลูกค้าโดยตรง.',
+      '❌ F — Semantic similarity วัดความคล้ายกันของภาษา/ความหมาย ไม่ใช่ business outcome.',
       '🧠 จำสั้น ๆ — Business value = conversion / money / customer value; model-quality metrics วัดคนละชั้น.'
     ]
   });
@@ -209,10 +209,10 @@
       D:'Increase the maximum output tokens'
     },
     exp:[
-      '✅ A — Lower temperature reduces sampling variability and makes repeated outputs more consistent.',
-      '❌ B — Higher temperature increases variation/creativity, the opposite of the requirement.',
-      '❌ C — Fewer output tokens limits response length; it does not directly control sampling randomness.',
-      '❌ D — More output tokens allows longer responses but does not make wording more predictable.',
+      '✅ A — Lower temperature ลดความแปรผันจากการ sampling ทำให้เมื่อ input เหมือนเดิม output มีความสม่ำเสมอมากขึ้น.',
+      '❌ B — Higher temperature เพิ่ม variation/creativity ซึ่งตรงข้ามกับ requirement ที่ต้องการ predictable output.',
+      '❌ C — ลด maximum output tokens ทำให้คำตอบสั้นลง แต่ไม่ได้ควบคุม randomness โดยตรง.',
+      '❌ D — เพิ่ม maximum output tokens ทำให้ตอบได้ยาวขึ้น แต่ไม่ได้ทำให้ wording คงที่ขึ้น.',
       '🧠 จำสั้น ๆ — Consistency ↑ = Temperature ↓.'
     ]
   });
@@ -227,12 +227,12 @@
       F:'Data poisoning'
     },
     exp:[
-      '✅ A — Prompt injection attempts to insert instructions that override or redirect intended behavior.',
-      '✅ B — Jailbreaking attempts to bypass safeguards or policy restrictions.',
-      '✅ C — Prompt leakage/exposure attempts to reveal hidden/system prompt content.',
-      '❌ D — Model inversion tries to reconstruct information about training examples from model behavior/output.',
-      '❌ E — Model extraction tries to reproduce or steal model behavior/parameters via queries.',
-      '❌ F — Data poisoning manipulates training data before or during model training.',
+      '✅ A — Prompt injection คือการแทรก instructions เพื่อ override หรือเบี่ยงพฤติกรรมที่ application ตั้งใจไว้.',
+      '✅ B — Jailbreaking คือการพยายามหลบ safeguards หรือ policy restrictions.',
+      '✅ C — Prompt leakage/exposure คือการพยายามเปิดเผย system prompt หรือ hidden prompt content.',
+      '❌ D — Model inversion พยายาม reconstruct ข้อมูลเกี่ยวกับ training examples จาก model behavior/output.',
+      '❌ E — Model extraction พยายามเลียนแบบหรือขโมย model behavior ผ่านการ query ซ้ำ ๆ.',
+      '❌ F — Data poisoning คือการปนเปื้อน training data เพื่อบิดพฤติกรรมของ model.',
       '🧠 จำสั้น ๆ — Injection = แทรกคำสั่ง; Jailbreak = แหกข้อจำกัด; Leakage = ล้วง prompt ที่ซ่อน.'
     ]
   });
@@ -245,10 +245,10 @@
       D:'Query rewriting or decomposition'
     },
     exp:[
-      '✅ A — Tenant ID is a metadata constraint, so filtering should restrict the candidate set before relevance ordering.',
-      '❌ B — Reranking reorders already retrieved candidates by relevance; it does not enforce tenant isolation by itself.',
-      '❌ C — Hybrid retrieval combines lexical and semantic matching but does not guarantee a tenant boundary without metadata filtering.',
-      '❌ D — Query rewriting can improve retrieval quality but does not enforce which tenant documents are eligible.',
+      '✅ A — Tenant ID เป็น metadata constraint จึงควร filter candidate documents ตาม tenant ก่อน แล้วค่อยจัดอันดับ relevance ภายหลัง.',
+      '❌ B — Reranking ใช้จัดลำดับ candidates ที่ retrieve มาแล้วตาม relevance แต่ไม่ได้ enforce tenant isolation ด้วยตัวเอง.',
+      '❌ C — Hybrid retrieval ผสม lexical กับ semantic search แต่ไม่ได้รับประกัน tenant boundary ถ้าไม่มี metadata filtering.',
+      '❌ D — Query rewriting ช่วยปรับ query ให้ retrieve ได้ดีขึ้น แต่ไม่ได้กำหนดว่า document ของ tenant ไหนมีสิทธิ์เข้า candidate set.',
       '🧠 จำสั้น ๆ — ใครมีสิทธิ์เข้า candidate set = Filter; ใครควรขึ้นก่อน = Rerank.'
     ]
   });
@@ -261,11 +261,11 @@
       D:'Context recall'
     },
     exp:[
-      '✅ A — The evidence was retrieved correctly, but the generated answer contradicts or invents beyond it; that is a faithfulness/groundedness problem.',
-      '❌ B — Retrieval relevance asks whether retrieved passages match the question; the stem says the right policy sections were fetched.',
-      '❌ C — Answer relevance asks whether the response addresses the user question; a response can be relevant yet still unfaithful to evidence.',
-      '❌ D — Context recall concerns whether needed evidence was retrieved; the required policy sections are already present.',
-      '🧠 จำสั้น ๆ — Retrieved right, generated wrong = Faithfulness.'
+      '✅ A — โจทย์บอกว่า retrieve policy sections ถูกแล้ว แต่ generated answer กลับขัดแย้งหรือแต่งเกิน evidence จึงเป็นปัญหา Faithfulness/Groundedness.',
+      '❌ B — Retrieval relevance ถามว่า passages ที่ retrieve มาตรงกับคำถามหรือไม่ ซึ่งโจทย์บอกแล้วว่าดึงส่วนที่ถูกมาได้.',
+      '❌ C — Answer relevance วัดว่าคำตอบตอบตรงคำถามหรือไม่ คำตอบอาจ relevant แต่ยังไม่ faithful ต่อ evidence ก็ได้.',
+      '❌ D — Context recall วัดว่าหลักฐานที่จำเป็นถูก retrieve มาครบหรือไม่ แต่โจทย์ระบุว่าหลักฐานที่ต้องการอยู่ใน context แล้ว.',
+      '🧠 จำสั้น ๆ — Retrieve ถูก แต่ Generate มั่ว = Faithfulness.'
     ]
   });
 
@@ -279,12 +279,12 @@
       F:'Model customization / fine-tuning support'
     },
     exp:[
-      '✅ A — Multimodal input directly requires support for the needed modalities.',
-      '✅ B — Global multilingual use directly requires language coverage.',
-      '✅ C — A low-latency requirement directly makes inference latency a selection criterion.',
-      '✅ D — Controlled operating cost directly makes pricing/cost a criterion.',
-      '❌ E — Context-window size can matter in other scenarios, but no long-context requirement is stated here.',
-      '❌ F — Customization support can matter when weight updates are required, but this scenario does not state that need.',
+      '✅ A — Requirement ที่รับ multimodal input ทำให้ supported modalities เป็นเกณฑ์เลือก model โดยตรง.',
+      '✅ B — การใช้งานหลายภาษาทำให้ multilingual capability เป็นเกณฑ์โดยตรง.',
+      '✅ C — Requirement ด้าน low latency ทำให้ inference latency เป็นเกณฑ์เลือก model.',
+      '✅ D — Requirement ด้านการควบคุมค่าใช้จ่ายทำให้ cost/pricing เป็นเกณฑ์โดยตรง.',
+      '❌ E — Maximum context window อาจสำคัญในบางงาน แต่โจทย์ไม่ได้บอกว่าต้องรองรับ long context.',
+      '❌ F — Customization/fine-tuning support อาจสำคัญเมื่อจำเป็นต้อง update weights แต่ scenario นี้ไม่ได้ระบุ requirement ดังกล่าว.',
       '🧠 จำสั้น ๆ — เลือก criteria จาก requirement ที่โจทย์พูดจริง ไม่ใช่ทุก feature ที่ model มี.'
     ]
   });
@@ -299,10 +299,10 @@
       D:'Rule-based exact-match evaluation'
     },
     exp:[
-      '✅ A — LLM-as-a-Judge uses a model to apply a rubric at scale, while human-reviewed examples can be used to validate/calibrate the evaluator.',
-      '❌ B — Human evaluation is valuable but does not satisfy the stated need for a scalable automated rubric-based evaluator across many samples.',
-      '❌ C — Overlap metrics are exactly what the scenario says are insufficient for open-ended quality.',
-      '❌ D — Exact-match rules work for deterministic outputs, not nuanced open-ended responses with acceptable wording variation.',
+      '✅ A — LLM-as-a-Judge ใช้ LLM อีกตัวประเมินคำตอบตาม rubric ได้ในปริมาณมาก และใช้ human-reviewed subset ช่วย validate/calibrate evaluator.',
+      '❌ B — Human evaluation มีคุณค่า แต่ถ้าตรวจทุก sample จะไม่ตอบ requirement ที่ต้องการ evaluator แบบ scalable.',
+      '❌ C — Reference-based overlap metrics คือสิ่งที่โจทย์บอกว่าไม่เพียงพอสำหรับคำตอบปลายเปิด.',
+      '❌ D — Exact-match rules เหมาะกับ output ที่มีคำตอบตายตัว ไม่เหมาะกับคำตอบปลายเปิดที่ wording ต่างกันแต่ยังถูกได้.',
       '🧠 จำสั้น ๆ — Open-ended + rubric + scale = LLM-as-a-Judge; ต้อง validate กับ human subset.'
     ]
   });
@@ -315,10 +315,10 @@
       D:'SageMaker Ground Truth'
     },
     exp:[
-      '✅ A — Bedrock Model Evaluation is designed to compare/evaluate foundation-model outputs with automatic metrics and optional human evaluation.',
-      '❌ B — Clarify focuses on bias and explainability such as feature attribution/SHAP for ML workflows.',
-      '❌ C — A2I routes individual ML predictions/content to human review workflows; it is not the managed FM comparison/evaluation capability asked for.',
-      '❌ D — Ground Truth creates/manages labeled training datasets rather than comparing FM outputs before model selection.',
+      '✅ A — Bedrock Model Evaluation ถูกออกแบบมาเพื่อ compare/evaluate FM outputs ด้วย automatic metrics และสามารถใช้ human evaluation ได้.',
+      '❌ B — SageMaker Clarify เน้น bias และ explainability เช่น feature attribution/SHAP ใน ML workflows.',
+      '❌ C — A2I ใช้ส่ง prediction/content บางรายการไปให้มนุษย์ review หลัง inference ไม่ใช่ capability สำหรับ compare/evaluate foundation models โดยตรง.',
+      '❌ D — Ground Truth ใช้สร้างและจัดการ labeled training datasets ไม่ใช่เปรียบเทียบ FM outputs ก่อนเลือก model.',
       '🧠 จำสั้น ๆ — FM output evaluation = Bedrock Model Evaluation; Bias/SHAP = Clarify; Human prediction review = A2I; Labeling = Ground Truth.'
     ]
   });
@@ -331,10 +331,10 @@
       D:'Intelligent Prompt Routing'
     },
     exp:[
-      '✅ A — Prompt Management supports reusable prompts and saved versions that an application can pin to for controlled releases.',
-      '❌ B — Prompt Optimization rewrites/improves prompts; it is not the primary version-history and release-pinning mechanism.',
-      '❌ C — Prompt Caching reduces repeated input processing latency/cost; it does not provide prompt version governance.',
-      '❌ D — Intelligent Prompt Routing chooses among models based on routing criteria; it does not version prompts.',
+      '✅ A — Prompt Management รองรับ reusable prompts และ saved versions ทำให้ application pin ไปยัง version ที่อนุมัติสำหรับ production release ได้.',
+      '❌ B — Prompt Optimization ใช้ปรับ/เขียน prompt ให้ดีขึ้น ไม่ใช่กลไกหลักสำหรับ version history และ release pinning.',
+      '❌ C — Prompt Caching ลดการประมวลผล input ซ้ำเพื่อลด latency/cost แต่ไม่ได้จัดการ prompt versions.',
+      '❌ D — Intelligent Prompt Routing ใช้เลือก model ตาม routing criteria ไม่ได้ทำ prompt versioning.',
       '🧠 จำสั้น ๆ — Save/version prompt = Prompt Management; Rewrite = Optimization; Reuse tokens = Caching; Choose model = Routing.'
     ]
   });
@@ -347,11 +347,11 @@
       D:'Use prompt engineering only for both requirements and remove retrieval'
     },
     exp:[
-      '✅ A — Fine-tuning can make behavior/style persistent, while RAG supplies frequently changing private facts and evidence/citations at runtime.',
-      '❌ B — The responsibilities are reversed: frequently changing documents are better retrieved than repeatedly baked into weights.',
-      '❌ C — Fine-tuning facts that change often creates staleness and removes the direct retrieval path needed for citations.',
-      '❌ D — Prompting alone does not provide access to changing private documentation or grounded citations.',
-      '🧠 จำสั้น ๆ — Behavior/style in weights; current private facts via RAG.'
+      '✅ A — Fine-tuning ช่วยให้ behavior/style ติดอยู่กับ model ส่วน RAG ใช้ดึง private facts ที่เปลี่ยนบ่อยและนำ evidence/citations มาใช้ตอน runtime.',
+      '❌ B — สลับหน้าที่กัน: เอกสารที่เปลี่ยนบ่อยเหมาะกับ retrieval มากกว่าการ fine-tune ใหม่ทุกครั้ง.',
+      '❌ C — Fine-tune facts ที่เปลี่ยนบ่อยทำให้ข้อมูลใน weights ล้าสมัย และยังเสีย retrieval path ที่ต้องใช้สำหรับ citations.',
+      '❌ D — Prompt engineering อย่างเดียวไม่ได้ทำให้ model เข้าถึง private documentation ที่เปลี่ยนตามเวลาและไม่ได้ให้ grounded citations.',
+      '🧠 จำสั้น ๆ — Behavior/style อยู่ใน weights; current private facts ใช้ RAG.'
     ]
   });
 
@@ -365,12 +365,12 @@
       F:'Training loss'
     },
     exp:[
-      '✅ A — Task completion measures whether users actually finish the intended workflow.',
-      '✅ B — User satisfaction measures whether the application experience is useful/acceptable in practice.',
-      '✅ C — Cost per interaction is an application operating metric that matters for production viability.',
-      '❌ D — Text-similarity metrics evaluate output quality on a benchmark, not end-to-end application success by themselves.',
-      '❌ E — Groundedness is valuable model/application quality evidence, but alone it does not establish task success, satisfaction, or operational economics.',
-      '❌ F — Training loss is a model-development metric and is not an application-level production outcome.',
+      '✅ A — Task completion rate วัดว่าผู้ใช้ทำ workflow ที่ตั้งใจไว้สำเร็จจริงหรือไม่.',
+      '✅ B — User satisfaction วัดว่าประสบการณ์ใช้งาน application มีประโยชน์และยอมรับได้หรือไม่.',
+      '✅ C — Cost per interaction เป็น application operating metric ที่มีผลต่อความคุ้มค่าในการใช้งานจริง.',
+      '❌ D — ROUGE/BERTScore วัด output quality บน benchmark ไม่ได้บอก end-to-end application success ด้วยตัวมันเอง.',
+      '❌ E — Groundedness มีประโยชน์ต่อการวัดคุณภาพคำตอบ แต่เพียงตัวเดียวไม่บอก task success, satisfaction หรือ operating economics.',
+      '❌ F — Training loss เป็น model-development metric ไม่ใช่ application-level production outcome.',
       '🧠 จำสั้น ๆ — App evaluation = งานสำเร็จไหม + ผู้ใช้โอเคไหม + ใช้เงินจริงเท่าไร.'
     ]
   });
@@ -383,10 +383,10 @@
       D:'Recourse'
     },
     exp:[
-      '✅ A — Clear disclosure of intended use, limitations, and what users should expect is primarily transparency.',
-      '❌ B — Explainability focuses on understandable reasons for a specific prediction or decision.',
-      '❌ C — Human oversight means a person can review/approve/intervene in important actions.',
-      '❌ D — Recourse gives affected users a way to challenge or appeal an outcome.',
+      '✅ A — การเปิดเผย intended use, limitations และสิ่งที่ผู้ใช้ควรคาดหวังอย่างชัดเจน เป็นเรื่องของ Transparency เป็นหลัก.',
+      '❌ B — Explainability เน้นอธิบายเหตุผลของ prediction หรือ decision เฉพาะรายการ.',
+      '❌ C — Human oversight คือการให้คน review/approve/intervene ก่อน action สำคัญ.',
+      '❌ D — Recourse คือการให้ผู้ได้รับผลกระทบมีช่องทาง challenge หรือ appeal ผลลัพธ์.',
       '🧠 จำสั้น ๆ — System บอกว่าทำอะไร/จำกัดอะไร = Transparency; ทำไม prediction นี้ออกแบบนี้ = Explainability.'
     ]
   });
@@ -399,10 +399,10 @@
       D:'Safety / harmful-use risk'
     },
     exp:[
-      '✅ A — Generating content that may copy or infringe protected third-party work is an intellectual-property legal risk.',
-      '❌ B — Privacy/data-protection risk concerns personal or sensitive information, which is not the issue described.',
-      '❌ C — Bias/discrimination risk concerns unequal treatment or outcomes across groups, not protected creative work.',
-      '❌ D — Safety/harmful-use risk concerns dangerous or harmful behavior/content rather than ownership/licensing rights.',
+      '✅ A — การสร้าง content ที่อาจคัดลอกหรือละเมิดผลงานที่ได้รับความคุ้มครองของบุคคลอื่น เป็นความเสี่ยงด้าน intellectual property.',
+      '❌ B — Privacy/data-protection risk เกี่ยวกับข้อมูลส่วนบุคคลหรือข้อมูลอ่อนไหว ซึ่งไม่ใช่ประเด็นในโจทย์.',
+      '❌ C — Bias/discrimination risk เกี่ยวกับการปฏิบัติหรือผลลัพธ์ที่ไม่เท่าเทียมระหว่างกลุ่ม ไม่ใช่สิทธิ์ในผลงาน.',
+      '❌ D — Safety/harmful-use risk เกี่ยวกับพฤติกรรมหรือ content ที่อันตราย ไม่ใช่ ownership/licensing rights.',
       '🧠 จำสั้น ๆ — Copyright/ownership/licensing = IP risk.'
     ]
   });
@@ -415,10 +415,10 @@
       D:'Retrain a large model from scratch so the team controls the full model lifecycle'
     },
     exp:[
-      '✅ A — Right-sizing to the smaller model that already meets quality requirements avoids unnecessary compute and energy use.',
-      '❌ B — Extra capacity without a measured requirement adds resource use without demonstrated value.',
-      '❌ C — Batching can improve utilization in some workloads, but it does not remove the unnecessary model-size choice described in the stem.',
-      '❌ D — Training a large model from scratch would consume substantially more resources and is unnecessary for the stated requirement.',
+      '✅ A — ถ้าโมเดลเล็กทำ quality requirement ได้แล้ว การเลือกขนาดให้พอดีช่วยลด compute และพลังงานที่ไม่จำเป็น.',
+      '❌ B — การใช้โมเดลใหญ่ขึ้นโดยไม่มี measured benefit เพิ่ม resource use โดยไม่มีคุณค่าที่พิสูจน์ได้.',
+      '❌ C — Batching อาจช่วย utilization ในบาง workload แต่ไม่ได้แก้ต้นเหตุว่ากำลังเลือก model ใหญ่เกิน requirement.',
+      '❌ D — การ train โมเดลใหญ่จาก scratch ใช้ทรัพยากรมากกว่ามากและไม่จำเป็นสำหรับ requirement นี้.',
       '🧠 จำสั้น ๆ — Sustainability = ใช้ model/compute เท่าที่ requirement ต้องการ ไม่ใช่ใหญ่สุด.'
     ]
   });
@@ -431,10 +431,10 @@
       D:'Role trust policy'
     },
     exp:[
-      '✅ A — A permissions boundary sets the maximum effective permissions for that IAM identity without granting permissions by itself.',
-      '❌ B — An identity-based policy grants/denies permissions to the identity; it is not the identity-level maximum ceiling requested.',
-      '❌ C — An SCP constrains permissions at organization/account scope rather than acting as the per-identity boundary described.',
-      '❌ D — A role trust policy controls who can assume the role, not what actions the role may perform after assumption.',
+      '✅ A — Permissions boundary กำหนด maximum effective permissions ของ IAM identity โดยไม่ได้ grant permissions ให้เอง.',
+      '❌ B — Identity-based policy ใช้ grant/deny permissions ให้ identity แต่ไม่ใช่ identity-level ceiling ที่โจทย์ต้องการ.',
+      '❌ C — SCP จำกัด permissions ในระดับ organization/account ไม่ใช่ per-identity boundary.',
+      '❌ D — Role trust policy กำหนดว่าใครสามารถ assume role ได้ ไม่ได้กำหนดว่า role ทำ actions อะไรได้หลัง assume แล้ว.',
       '🧠 จำสั้น ๆ — Identity policy = Grant; Boundary = identity ceiling; SCP = org/account ceiling; Trust = who can assume.'
     ]
   });
@@ -447,10 +447,10 @@
       D:'Word filters in Bedrock Guardrails'
     },
     exp:[
-      '✅ A — Sensitive information filters are designed to detect, block, or mask sensitive entities such as PII in prompts and responses.',
-      '❌ B — Content filters classify harmful content categories; they are not the PII/entity-specific masking control.',
-      '❌ C — Denied topics block contextual topics/themes configured by the application, not general PII entity detection.',
-      '❌ D — Word filters block exact/custom words or phrases; they do not replace sensitive-entity detection and masking.',
+      '✅ A — Sensitive information filters ใช้ detect, block หรือ mask sensitive entities เช่น PII ใน prompts และ responses.',
+      '❌ B — Content filters ใช้จัดการ harmful content categories ไม่ใช่ control เฉพาะสำหรับ PII/entity masking.',
+      '❌ C — Denied topics ใช้ block หัวข้อหรือ theme ที่ application กำหนด ไม่ใช่การ detect PII entities ทั่วไป.',
+      '❌ D — Word filters ใช้ block คำหรือวลีแบบ exact/custom ไม่ได้แทน sensitive-entity detection และ masking.',
       '🧠 จำสั้น ๆ — PII/entity = Sensitive information; harmful category = Content; theme = Denied topic; exact word = Word filter.'
     ]
   });
@@ -463,10 +463,10 @@
       D:'Prompt Management'
     },
     exp:[
-      '✅ A — Model invocation logging captures model-invocation details and can deliver logs for governance/investigation according to configuration.',
-      '❌ B — CloudTrail records API activity such as who called which API, but it is not the Bedrock feature for capturing invocation content/details such as prompts/responses.',
-      '❌ C — Service metrics summarize operational behavior such as counts/latency/errors; they do not capture the interaction details requested.',
-      '❌ D — Prompt Management stores/versions reusable prompts; it is not an invocation audit-log feature.',
+      '✅ A — Model invocation logging ใช้ capture รายละเอียดการ invoke model เพื่อส่งต่อไปเก็บสำหรับ governance/investigation ตาม configuration.',
+      '❌ B — CloudTrail เก็บ API activity เช่นใครเรียก API อะไร เมื่อไร แต่ไม่ใช่ Bedrock feature สำหรับเก็บ interaction content/details เช่น prompts/responses.',
+      '❌ C — CloudWatch service metrics สรุป operational metrics เช่นจำนวน call, latency หรือ errors ไม่ได้เก็บรายละเอียด interaction ที่โจทย์ต้องการ.',
+      '❌ D — Prompt Management ใช้เก็บและ version reusable prompts ไม่ใช่ invocation audit-log feature.',
       '🧠 จำสั้น ๆ — API activity = CloudTrail; model interaction detail = Model invocation logging.'
     ]
   });
@@ -479,10 +479,10 @@
       D:'Explainability and fairness'
     },
     exp:[
-      '✅ A — Privacy-enhancing techniques reduce unnecessary exposure of identifiable data, while hashes/versioning detect unauthorized modification and support integrity.',
-      '❌ B — Confidentiality is adjacent to privacy, but the second control is detecting data changes rather than improving service availability.',
-      '❌ C — Residency and retention govern where data is processed/stored and how long it is kept; hashes/versioning do not define those policies.',
-      '❌ D — Explainability and fairness concern model decisions/outcomes rather than protecting and validating source data.',
+      '✅ A — Privacy-enhancing techniques ลดการเปิดเผย identifiable data ที่ไม่จำเป็น ส่วน hashes/versioning ช่วยตรวจ unauthorized modification และสนับสนุน data integrity.',
+      '❌ B — Confidentiality ใกล้กับ privacy แต่ control ตัวที่สองในโจทย์เน้นตรวจการเปลี่ยนแปลงข้อมูล ไม่ใช่ service availability.',
+      '❌ C — Residency/retention กำหนดว่าข้อมูลอยู่ที่ไหนและเก็บนานแค่ไหน ส่วน hashes/versioning ไม่ได้กำหนด policies เหล่านี้.',
+      '❌ D — Explainability/fairness เกี่ยวกับการตัดสินใจและผลลัพธ์ของ model ไม่ใช่การปกป้องและตรวจความถูกต้องของ source data.',
       '🧠 จำสั้น ๆ — ลด exposure = Privacy; ตรวจว่าข้อมูลโดนแก้ไหม = Integrity.'
     ]
   });
@@ -497,10 +497,10 @@
       D:'ISO/IEC 42001'
     },
     exp:[
-      '✅ A — The Generative AI Security Scoping Matrix classifies GenAI use patterns/scopes so organizations can understand how security responsibilities and controls change across them.',
-      '❌ B — NIST AI RMF is a broad framework for governing and managing AI risk, not a matrix organized around GenAI consumption/build scopes.',
-      '❌ C — ISO/IEC 27001 is an information-security management system standard, not a GenAI use-case scoping model.',
-      '❌ D — ISO/IEC 42001 is an AI management-system standard, not the AWS GenAI security scope classification described.',
+      '✅ A — Generative AI Security Scoping Matrix ใช้จัดกลุ่มรูปแบบการใช้งาน/การสร้าง GenAI เพื่อช่วยระบุว่า security responsibilities และ controls เปลี่ยนไปอย่างไรตาม scope.',
+      '❌ B — NIST AI RMF เป็น framework กว้างสำหรับ govern/manage AI risk ไม่ใช่ matrix ที่แบ่งตาม GenAI consumption/build scope.',
+      '❌ C — ISO/IEC 27001 เป็นมาตรฐานระบบบริหารความมั่นคงปลอดภัยสารสนเทศ (ISMS) ไม่ใช่ GenAI use-case scoping model.',
+      '❌ D — ISO/IEC 42001 เป็นมาตรฐานระบบบริหาร AI ไม่ใช่ framework สำหรับแบ่ง GenAI security scope แบบที่โจทย์อธิบาย.',
       '🧠 จำสั้น ๆ — Consume/build pattern + security responsibility = GenAI Security Scoping Matrix.'
     ]
   });
