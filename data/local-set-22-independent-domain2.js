@@ -52,11 +52,11 @@
     exp:['✅ A — Higher temperature เพิ่ม sampling variation/creativity.','❌ B — Lower temperature ทำให้ output predictable มากขึ้น.','❌ C — Context window size ไม่ใช่ creativity control.','❌ D — Tokens กับ embeddings ไม่ใช่ setting ที่สลับเพื่อเพิ่ม creativity.','🧠 จำสั้น ๆ — Creativity ↑ → Temperature ↑; Consistency ↑ → Temperature ↓.']});
 
   add({task:'2.2',type:'single',target:'grounding-vs-finetune',
-    question:'An assistant must answer from policies that change every week and show evidence for each answer. The company does not want to update model weights whenever a policy changes. Which approach BEST addresses the knowledge requirement?',
-    questionTh:'assistant ต้องตอบจาก policy ที่เปลี่ยนทุกสัปดาห์และแสดง evidence ของคำตอบ บริษัทไม่ต้องการ update model weights ทุกครั้งที่ policy เปลี่ยน ควรใช้แนวทางใด?',
-    choices:{A:'Retrieval-augmented generation',B:'Continued pre-training every week',C:'Model distillation',D:'Increase temperature'},
+    question:'A writing assistant already has all required facts in the prompt, but the company wants a specialized response style and task behavior to persist across requests without repeatedly supplying many demonstrations. It is willing to update model weights. Which approach BEST fits?',
+    questionTh:'writing assistant มี facts ที่ต้องใช้ครบอยู่ใน prompt แล้ว แต่บริษัทต้องการ response style และ task behavior แบบเฉพาะให้คงอยู่ข้าม requests โดยไม่ต้องใส่ demonstrations จำนวนมากซ้ำ ๆ และยอม update model weights ควรใช้แนวทางใด?',
+    choices:{A:'Supervised fine-tuning / instruction tuning',B:'RAG over a changing document store',C:'Metadata filtering',D:'Prompt caching only'},
     answer:['A'],
-    exp:['✅ A — RAG ดึงข้อมูลปัจจุบันตอน runtime และแนบ evidence โดยไม่ต้อง retrain ทุกครั้ง.','❌ B — CPT ทุกสัปดาห์ช้า/แพงและไม่เหมาะกับ knowledge ที่เปลี่ยนถี่.','❌ C — Distillation เน้นถ่ายทอด behavior จาก teacher ไป student.','❌ D — Temperature ไม่เพิ่มความรู้ปัจจุบันให้ model.','🧠 จำสั้น ๆ — Facts เปลี่ยนบ่อย + citations = RAG.']});
+    exp:['✅ A — ต้องการ persistent behavior/style และยอม update weights จึงเหมาะกับ SFT/instruction tuning.','❌ B — RAG เหมาะกับ external/current facts มากกว่าการทำ behavior ให้ติดใน weights.','❌ C — Metadata filtering ใช้จำกัด retrieval candidates.','❌ D — Caching ลด repeated processing แต่ไม่ได้เปลี่ยน behavior ของ model.','🧠 จำสั้น ๆ — Behavior ถาวร + update weights = SFT; facts เปลี่ยนบ่อย = RAG.']});
 
   add({task:'2.3',type:'single',target:'bedrock-data-boundary-angle',
     question:'A security review asks which statement BEST reflects the isolation expected when an organization uses Amazon Bedrock for normal inference with its private prompts and outputs.',
@@ -66,11 +66,11 @@
     exp:['✅ B — Customer prompts/completions ใน Bedrock ไม่ถูกนำไป train shared base models สำหรับลูกค้ารายอื่น.','❌ A/C — ไม่ใช่ behavior ของ managed Bedrock data boundary.','❌ D — Data boundary ไม่ได้ขึ้นกับว่าต้องเปิด Guardrails ก่อน.','🧠 จำสั้น ๆ — Bedrock inference content ไม่กลายเป็น training data ของ shared base models.']});
 
   add({task:'2.3',type:'single',target:'quick-research-vs-automate',
-    question:'A strategy team wants an AI capability to gather information from approved enterprise sources, analyze a complex question, and produce a synthesized research brief. It does not need a long-running approval workflow. Which Amazon Quick capability is the closest fit?',
-    questionTh:'ทีม strategy ต้องการ AI ที่รวบรวมข้อมูลจาก enterprise sources ที่อนุมัติ วิเคราะห์คำถามซับซ้อน และสังเคราะห์เป็น research brief โดยไม่ได้ต้องการ workflow ที่รันยาวพร้อม approvals ควรใช้ Amazon Quick capability ใด?',
-    choices:{A:'Quick Research',B:'Quick Automate',C:'Quick Flows',D:'Quick Sight'},
+    question:'A strategy team wants an AI capability to investigate a complex question across approved enterprise sources and synthesize the findings into a research brief. It does not need approvals or a long-running business process. Which capability is the closest fit?',
+    questionTh:'ทีม strategy ต้องการ AI ที่สืบค้นคำถามซับซ้อนจาก enterprise sources ที่อนุมัติและสังเคราะห์ผลเป็น research brief โดยไม่ต้องมี approvals หรือ long-running business process ควรใช้ capability ใด?',
+    choices:{A:'Amazon Quick Research',B:'Amazon Quick Automate',C:'Amazon Quick Flows',D:'Amazon Q Business'},
     answer:['A'],
-    exp:['✅ A — Quick Research เหมาะกับงานค้นคว้า วิเคราะห์ และสังเคราะห์ข้อมูลเป็น research output.','❌ B — Quick Automate เน้น complex long-running enterprise processes.','❌ C — Quick Flows เน้น workflow/routine ที่เบากว่า.','❌ D — Quick Sight เน้น analytics/BI.','🧠 จำสั้น ๆ — Research brief = Research; enterprise process = Automate.']});
+    exp:['✅ A — Quick Research เน้น research, analysis และ synthesis จากแหล่งข้อมูล.','❌ B — Quick Automate เหมาะกับ complex enterprise process ที่มี branching/approvals/errors.','❌ C — Quick Flows เหมาะกับ workflow/routine ที่เบากว่า ไม่ใช่ deep research brief.','❌ D — Q Business เป็น enterprise assistant/search experience คนละ product family กับ Quick capability ที่โจทย์ถาม.','🧠 จำสั้น ๆ — Research brief = Research; process ยาว = Automate.']});
 
   add({task:'2.2',type:'single',target:'context-engineering-angle',
     question:'A support assistant has a context window limit. Before each call, the application selects only relevant chat history, compresses older turns, inserts retrieved evidence, and includes recent tool results. What discipline does this describe?',
