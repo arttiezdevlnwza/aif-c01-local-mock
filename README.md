@@ -26,7 +26,7 @@ Set 19–22 ครอบคลุมทุก official Task Statement 1.1–5.2 
 
 Set 21–22 เป็น **Targeted Weakness + Under-covered Topics** โดยเน้นหัวข้อที่ review พบว่าพลาดซ้ำ/ยังลังเล เช่น Data Governance, Traditional ML vs FM, Responsible AI, RAG order, RMSE vs MAE, SOC reports, AgentCore/Quick รวมทั้งหัวข้อที่เจอน้อยใน 20 ชุดแรก เช่น agent memory, MCP host/client/server, Converse API, AgentCore Browser/Code Interpreter/Evaluations, prompt optimization/caching/routing, fairness DPL/DPPL, model invocation logging และ Generative AI Security Scoping Matrix.
 
-Set 22 ผ่าน **independent retest + distractor quality pass ครบ 65 ข้อ** ก่อนใช้งาน: ไม่มีข้อใดใช้ choice set เดิมของ Set 21 แบบ 1:1 (เทียบแบบไม่สนลำดับเพราะหน้า Quiz มี shuffle), retest หลายหัวข้อเปลี่ยน decision angle/รายการที่จับคู่/ลำดับที่ทดสอบ และใช้ same-family/adjacent-family distractors มากขึ้น โดยใช้ override เฉพาะ Set 22 เพื่อไม่เปลี่ยน Set 21 ที่ทำและ review ไปแล้ว.
+Set 22 ถูกแยกเป็น **independent question bank** จาก Set 21 แล้ว: ไม่ใช้ target map แบบ Q1↔Q1, ไม่มี choice set ซ้ำกับ Set 21, และใช้ broad coverage + selected weak-topic retests โดยเปลี่ยน decision boundary/question type เมื่อ retest concept เดิม. Set 21 ยังคงอยู่ใน bank เดิมและไม่ถูกแก้ย้อนหลัง.
 
 ## Features
 
@@ -136,9 +136,10 @@ data/
   local-set-19-builder.js
   local-set-20-part-*.js
   local-set-20-quality.js
-  local-set-21-22-domain*.js
-  local-set-21-22-builder.js
-  local-set-22-quality-overrides.js    # Set 22 close-distractor quality pass
+  local-set-21-22-domain*.js          # Legacy shared source now used to build Set 21
+  local-set-21-22-builder.js           # Builds Set 21 only
+  local-set-22-independent-domain*.js # Independent Set 22 bank
+  local-set-22-independent-builder.js # Builds/validates Set 22
 
   exam-family-guide.js             # Info Library data
   review-insights.js
