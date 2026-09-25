@@ -65,7 +65,7 @@ Dashboard ใช้ progress ใน browser ร่วมกับ review metadat
 - Review History แบบกด **ดู Review** ราย Set เพื่ออ่าน Selected/Correct, raw flags, เหตุผลตอนทำ, final diagnosis และ memory cue
 - Topic status เช่น repeated / unstable / improving / recovered
 
-มี review metadata สำหรับผลที่บันทึกไว้ของ Set 12, 13, 17, 18, 19, 20 และ 21
+มี review metadata สำหรับผลที่บันทึกไว้ของ Set 12, 13, 17, 18, 19, 20, 21 และ 22
 
 ### AIF-C01 Info Library
 
@@ -148,6 +148,9 @@ data/
   set-17-review.js
   set-18-review.js
   set-19-review.js
+  set-20-review.js
+  set-21-review.js
+  set-22-review.js
 
 docs/
   RULES.md
