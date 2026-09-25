@@ -24,12 +24,12 @@
     exp:['✅ A — มี dataset ขนาดใหญ่ที่เตรียมไว้และประมวลผลแบบออฟไลน์ จึงเหมาะกับ batch inference.','❌ B — Real-time เหมาะ request ที่ต้องตอบทันที.','❌ C — Async เหมาะ request รายชิ้นที่ใช้เวลานานและรับผลภายหลัง ไม่ใช่ dataset offline ทั้งก้อน.','❌ D — Serverless inference เหมาะ interactive traffic ที่มาเป็นช่วง ๆ.','🧠 จำสั้น ๆ — Dataset ทั้งก้อน + ไม่รีบราย request = Batch.']});
 
   add({task:'1.2',type:'matching',target:'aws-managed-ai-service-map',
-    question:'Match each AWS managed AI service with its primary capability.',
-    questionTh:'จับคู่ AWS managed AI service แต่ละตัวกับความสามารถหลัก.',
+    question:'A contact-center project has four separate media and language requirements. Assign the AWS managed AI service that directly handles each requirement.',
+    questionTh:'contact-center project มี 4 requirements แยกกันด้านเสียงและภาษา ให้จับคู่ AWS managed AI service ที่จัดการ requirement แต่ละอย่างโดยตรง.',
     choices:{A:'Amazon Transcribe',B:'Amazon Translate',C:'Amazon Comprehend',D:'Amazon Polly'},
-    matches:{'1':'Convert speech audio to text','2':'Translate text between languages','3':'Analyze text for meaning such as entities or sentiment','4':'Convert text into lifelike speech'},
+    matches:{'1':'Turn recorded calls into text','2':'Convert written content between languages','3':'Detect meaning such as entities or sentiment in text','4':'Generate spoken audio from written text'},
     answer:['A:1','B:2','C:3','D:4'],
-    exp:['✅ Amazon Transcribe → แปลงเสียงพูดเป็นข้อความ.','✅ Amazon Translate → แปลข้อความระหว่างภาษา.','✅ Amazon Comprehend → วิเคราะห์ NLP เช่น entity หรือ sentiment.','✅ Amazon Polly → แปลงข้อความเป็นเสียงพูด.','🧠 จำสั้น ๆ — Speech→Text = Transcribe; Text→Language = Translate; Understand text = Comprehend; Text→Speech = Polly.']});
+    exp:['✅ Transcribe → เสียงพูดเป็นข้อความ.','✅ Translate → แปลข้อความระหว่างภาษา.','✅ Comprehend → วิเคราะห์ความหมาย/entity/sentiment ของข้อความ.','✅ Polly → ข้อความเป็นเสียงพูด.','🧠 จำสั้น ๆ — Audio→Text / Language→Language / Understand text / Text→Audio.']});
 
   add({task:'1.2',type:'single',target:'traditional-ml-vs-fm-open-generation',
     question:'A design studio wants one application that can interpret free-form briefs, understand reference images, and draft new campaign copy without a fixed output label set. Which approach BEST fits?',
@@ -74,12 +74,12 @@
     exp:['✅ ลำดับคือ Define objective → Prepare/Train → Evaluate → Deploy → Monitor.','❌ Deploy ต้องเกิดหลัง evaluation ไม่ใช่ก่อน.','❌ Monitoring เป็นกิจกรรมหลังนำ model ไปใช้จริง.','🧠 จำสั้น ๆ — Objective → Train → Check → Ship → Watch.']});
 
   add({task:'1.1',type:'matching',target:'data-types',
-    question:'Match each dataset example with the MOST appropriate data type description.',
-    questionTh:'จับคู่ตัวอย่าง dataset แต่ละแบบกับคำอธิบายชนิดข้อมูลที่เหมาะที่สุด.',
-    choices:{A:'Rows of customer age, income, and churn label',B:'A sequence of hourly electricity readings',C:'A folder of product photos',D:'Free-form support emails'},
-    matches:{'1':'Structured labeled tabular data','2':'Time-series data','3':'Image data','4':'Unstructured text data'},
+    question:'Four ML projects arrive with very different source data. Pair each project example with the data category that an ML practitioner would use to describe it.',
+    questionTh:'มี ML projects 4 งานที่ใช้ source data ต่างกันมาก ให้จับคู่ตัวอย่างแต่ละงานกับหมวดข้อมูลที่ ML practitioner ใช้อธิบายได้เหมาะที่สุด.',
+    choices:{A:'Customer rows with columns and a known churn outcome',B:'Sensor measurements recorded every five minutes',C:'Inspection photographs from a factory line',D:'Open-ended customer complaint messages'},
+    matches:{'1':'Labeled structured/tabular data','2':'Time-series data','3':'Image data','4':'Unstructured text data'},
     answer:['A:1','B:2','C:3','D:4'],
-    exp:['✅ ตารางคอลัมน์ชัด + target label → Structured labeled tabular data.','✅ ค่าตามลำดับเวลา → Time-series.','✅ รูปภาพ → Image data.','✅ อีเมลข้อความอิสระ → Unstructured text.','🧠 จำสั้น ๆ — Table / Time / Image / Free text.']});
+    exp:['✅ ตารางคอลัมน์ชัดและมี target outcome → labeled structured/tabular data.','✅ ค่าที่เรียงตามเวลา → time-series data.','✅ ภาพถ่าย → image data.','✅ ข้อความอิสระ → unstructured text data.','🧠 จำสั้น ๆ — Table / Time / Image / Free text.']});
 
   add({task:'1.3',type:'single',target:'sagemaker-jumpstart-source-model',
     question:'A data science team using SageMaker AI wants to start from a pre-trained model available through an AWS model hub instead of training a foundation model from scratch. Which option is the closest fit?',
@@ -88,10 +88,10 @@
     answer:['A'],
     exp:['✅ A — SageMaker JumpStart ให้เข้าถึง pre-trained models และ solution templates เพื่อเริ่มงานได้เร็วขึ้น.','❌ B — Transcribe แปลงเสียงเป็นข้อความ.','❌ C — Audit Manager ใช้ด้าน audit evidence/compliance.','❌ D — Macie ค้นหา sensitive data ใน S3.','🧠 จำสั้น ๆ — SageMaker + model hub/pre-trained models = JumpStart.']});
 
-  add({task:'1.3',type:'single',target:'f1-imbalanced',
-    question:'A rare-event classifier is evaluated on a highly imbalanced dataset. The team wants one score that balances precision and recall for the positive class. Which metric is MOST appropriate?',
-    questionTh:'classifier สำหรับเหตุการณ์ที่เกิดน้อยถูกประเมินบน dataset ที่ class imbalance สูง ทีมต้องการคะแนนเดียวที่ balance precision และ recall ของ positive class ควรใช้ metric ใด?',
-    choices:{A:'F1 score',B:'Accuracy',C:'MAE',D:'BLEU'},
+  add({task:'1.3',type:'single',target:'precision-false-positive-cost',
+    question:'A screening system flags many normal cases for manual investigation. The business complaint is specifically that too many predicted positives are actually negative. Which metric should the team improve first?',
+    questionTh:'screening system ส่ง normal cases ไปตรวจด้วยคนจำนวนมาก ปัญหาที่ธุรกิจร้องเรียนคือเคสที่ model ทายว่า positive จำนวนมากจริง ๆ แล้วเป็น negative ควรปรับ metric ใดเป็นอันดับแรก?',
+    choices:{A:'Precision',B:'Recall',C:'MAE',D:'R-squared'},
     answer:['A'],
-    exp:['✅ A — F1 เป็น harmonic mean ของ precision และ recall จึงเหมาะเมื่อสนใจ balance สองตัวนี้.','❌ B — Accuracy อาจดูสูงหลอกตาใน dataset ที่ class imbalance มาก.','❌ C — MAE เป็น regression metric.','❌ D — BLEU เป็น text-generation metric.','🧠 จำสั้น ๆ — Balance Precision + Recall = F1.']});
+    exp:['✅ A — Precision วัดว่าในสิ่งที่ model ทาย positive มี positive จริงกี่ส่วน; false positives เยอะทำให้ precision ต่ำ.','❌ B — Recall เน้นว่า positive จริงถูกจับได้กี่ส่วน จึงเกี่ยวกับ false negatives มากกว่า.','❌ C — MAE เป็น regression metric.','❌ D — R-squared เป็น regression metric.','🧠 จำสั้น ๆ — “สิ่งที่ flag มา เชื่อได้แค่ไหน?” = Precision.']});
 })();
