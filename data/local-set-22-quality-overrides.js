@@ -741,6 +741,276 @@
     ]
   });
 
+
+  override(18, {
+    question:'An AI desktop application acts as an MCP host and opens a dedicated protocol connection to an external MCP server. What role inside the host manages that server connection?',
+    questionTh:'AI desktop application ทำหน้าที่เป็น MCP host และเปิด protocol connection แยกไปยัง external MCP server ตัวหนึ่ง role ใดภายใน host เป็นตัวจัดการ connection นั้น?',
+    choices:{
+      A:'MCP Host',
+      B:'MCP Client',
+      C:'MCP Server',
+      D:'MCP Tool'
+    },
+    answer:['B'],
+    exp:[
+      '✅ B — MCP Client เป็น component ภายใน host ที่เชื่อมต่อและสื่อสารกับ MCP Server แต่ละตัว.',
+      '❌ A — Host คือ application หลักที่สร้างและจัดการ clients ไม่ใช่ connection component เอง.',
+      '❌ C — Server อยู่ฝั่งที่ expose capabilities เช่น tools/resources/prompts.',
+      '❌ D — Tool คือ capability ที่ server expose ให้เรียกใช้ ไม่ใช่ตัว connection.',
+      '🧠 จำสั้น ๆ — Host มี Clients; Client ต่อ Server; Server expose Tools/Resources/Prompts.'
+    ]
+  });
+
+  override(21, {
+    question:'Which statement BEST distinguishes Amazon Quick Automate from Quick Flows for workflow design?',
+    questionTh:'ข้อใดอธิบายความต่างระหว่าง Amazon Quick Automate กับ Quick Flows ในการออกแบบ workflow ได้ดีที่สุด?',
+    choices:{
+      A:'Quick Flows is intended for long-running enterprise processes with approvals and error handling',
+      B:'Quick Automate is intended for more complex enterprise processes with branching, approvals, and exceptions',
+      C:'Quick Research is the required workflow engine whenever multiple business applications are involved',
+      D:'Quick Sight is the component that orchestrates approval and exception paths'
+    },
+    answer:['B'],
+    exp:[
+      '✅ B — Quick Automate เหมาะกับ enterprise process ที่ซับซ้อนและยาวขึ้น เช่น branching, approvals, exceptions/error handling.',
+      '❌ A — Quick Flows เหมาะกับ routine/personal-team workflows ที่เบากว่า ไม่ใช่ตัวหลักสำหรับ long-running enterprise process แบบนี้.',
+      '❌ C — Quick Research เน้นงาน research/synthesis ไม่ใช่ workflow engine สำหรับ approval process.',
+      '❌ D — Quick Sight เน้น analytics/BI ไม่ใช่ orchestration engine สำหรับ approval path.',
+      '🧠 จำสั้น ๆ — Flows = เบา/routine; Automate = complex enterprise process.'
+    ]
+  });
+
+  override(22, {
+    choices:{
+      A:'Runtime — host and run agent sessions',
+      B:'Gateway — expose APIs/services as callable tools',
+      C:'Policy — enforce deterministic allow/deny decisions',
+      D:'Memory — expose APIs as tools and route tool schemas',
+      E:'Observability — decide whether a sensitive action is authorized',
+      F:'Identity — provide the managed runtime that executes agent sessions'
+    },
+    answer:['A','B','C'],
+    exp:[
+      '✅ A — Runtime ให้ managed environment สำหรับรัน agent sessions.',
+      '✅ B — Gateway ช่วยเชื่อม APIs/services ให้ agent เรียกเป็น tools.',
+      '✅ C — Policy ใช้บังคับ authorization แบบ deterministic ก่อน sensitive action.',
+      '❌ D — Memory ใช้เก็บ/เรียก context หรือข้อมูลที่ต้องจำ ไม่ได้ expose APIs เป็น tools.',
+      '❌ E — Observability ใช้ติดตาม traces/metrics/logs ไม่ได้เป็น authorization decision point.',
+      '❌ F — Identity จัดการ identity/credentials/access context ไม่ใช่ตัว runtime สำหรับรัน session.',
+      '🧠 จำสั้น ๆ — Run = Runtime; Tools = Gateway; Allow/Deny = Policy.'
+    ]
+  });
+
+  override(23, {
+    choices:{
+      A:'AgentCore Browser',
+      B:'AgentCore Code Interpreter',
+      C:'AgentCore Evaluations',
+      D:'AgentCore Runtime',
+      E:'AgentCore Observability',
+      F:'AgentCore Gateway'
+    },
+    answer:['A','B','C'],
+    exp:[
+      '✅ A — Browser ใช้ให้ agent interact กับ web pages.',
+      '✅ B — Code Interpreter ใช้รัน calculations/code ใน managed execution environment.',
+      '✅ C — Evaluations ใช้ประเมินผลลัพธ์/พฤติกรรมของ agent เช่น response quality และ tool use.',
+      '❌ D — Runtime ใช้ host/run agent sessions แต่ไม่ใช่ capability เฉพาะสำหรับ web navigation/code/evaluation.',
+      '❌ E — Observability ใช้ monitor/traces/metrics ไม่ใช่ตัวให้ agent browse หรือ execute code.',
+      '❌ F — Gateway ใช้ expose APIs/services เป็น tools ไม่ใช่ browser/code sandbox/evaluator.',
+      '🧠 จำสั้น ๆ — Web = Browser; Code = Code Interpreter; Score = Evaluations.'
+    ]
+  });
+
+  override(24, {
+    choices:{
+      A:'Knowledge Bases for Amazon Bedrock',
+      B:'Agents for Amazon Bedrock',
+      C:'Amazon Bedrock Prompt Management',
+      D:'Amazon Bedrock Guardrails'
+    },
+    answer:['A'],
+    exp:[
+      '✅ A — Knowledge Bases ใช้ managed retrieval/RAG เพื่อดึงข้อมูลจากแหล่งความรู้ปัจจุบันและนำไป grounding คำตอบพร้อม citations.',
+      '❌ B — Agents ใช้ orchestration/tool use หลายขั้นตอน ไม่ใช่ managed document retrieval โดยตรง.',
+      '❌ C — Prompt Management ใช้เก็บ/version prompt templates ไม่ได้ทำ retrieval จากเอกสาร.',
+      '❌ D — Guardrails ใช้ safety/control input-output ไม่ได้เป็น retrieval layer.',
+      '🧠 จำสั้น ๆ — Current docs + retrieval + citations = Knowledge Bases.'
+    ]
+  });
+
+  override(26, {
+    choices:{
+      A:'Prompt caching',
+      B:'Intelligent prompt routing',
+      C:'Cross-Region Inference',
+      D:'Provisioned Throughput for every request regardless of traffic shape',
+      E:'Batch inference for interactive requests that need immediate answers',
+      F:'Prompt Optimization to rewrite every repeated prefix'
+    },
+    answer:['A','B','C'],
+    exp:[
+      '✅ A — Prompt caching ลดการประมวลผล context/prefix ที่ซ้ำ จึงช่วยลด latency/cost.',
+      '✅ B — Intelligent prompt routing ช่วยส่งงานไป model ที่เหมาะกับความซับซ้อนแทนการใช้ตัวแพงกับทุก request.',
+      '✅ C — Cross-Region Inference ช่วยเพิ่ม access to capacity ข้าม Regions ตาม profile/ข้อจำกัดที่ใช้.',
+      '❌ D — Provisioned Throughput อาจเหมาะบาง workload แต่โจทย์ไม่ได้ต้องการจอง capacity คงที่ให้ทุก request.',
+      '❌ E — Batch inference เหมาะงาน offline ไม่ใช่ interactive workload ที่ต้องตอบทันที.',
+      '❌ F — Prompt Optimization ใช้ปรับ prompt ไม่ได้มีเป้าหมายหลักเพื่อ reuse token processing ของ prefix เดิม.',
+      '🧠 จำสั้น ๆ — Prefix ซ้ำ = Cache; งานง่าย/ยาก = Route; capacity ข้าม Region = Cross-Region.'
+    ]
+  });
+
+  override(31, {
+    choices:{
+      A:'Prompt Management',
+      B:'Prompt Optimization',
+      C:'Prompt Caching',
+      D:'Intelligent Prompt Routing'
+    },
+    answer:['A'],
+    exp:[
+      '✅ A — Prompt Management ใช้เก็บ reusable templates, variables และ versions เพื่อให้ production pin ไปยัง version ที่ต้องการได้.',
+      '❌ B — Prompt Optimization ใช้ช่วยปรับ prompt ให้ดีขึ้น ไม่ใช่ repository/version-control ของ prompt.',
+      '❌ C — Prompt Caching ลดการประมวลผล input ซ้ำเพื่อลด latency/cost.',
+      '❌ D — Intelligent Prompt Routing เลือก model ตามลักษณะ request ไม่ได้จัดการ prompt versions.',
+      '🧠 จำสั้น ๆ — Store/version = Management; Rewrite = Optimization; Reuse = Caching; Choose model = Routing.'
+    ]
+  });
+
+  override(32, {
+    choices:{
+      A:'Few-shot prompting',
+      B:'One-shot prompting',
+      C:'Zero-shot prompting',
+      D:'Chain-of-thought prompting'
+    },
+    answer:['A'],
+    exp:[
+      '✅ A — มีหลาย examples ก่อนคำถามใหม่โดยไม่ update weights คือ Few-shot prompting.',
+      '❌ B — One-shot ใช้ตัวอย่างเพียงหนึ่งตัวอย่าง.',
+      '❌ C — Zero-shot ไม่มีตัวอย่างให้ดู.',
+      '❌ D — Chain-of-thought เน้นการชี้นำให้เกิด reasoning steps ไม่ได้ถูกนิยามจากจำนวน examples หลายตัว.',
+      '🧠 จำสั้น ๆ — 0 example = Zero-shot; 1 = One-shot; หลายตัว = Few-shot.'
+    ]
+  });
+
+  override(34, {
+    question:'Assume the document chunks and vector index are already prepared. Order the main RAG runtime steps from receiving a user question through attaching the final evidence to the model request.',
+    questionTh:'สมมติว่า document chunks และ vector index ถูกเตรียมไว้แล้ว จงเรียง RAG runtime ตั้งแต่รับคำถามผู้ใช้จนถึงแนบ evidence ที่เลือกแล้วเข้า model request.',
+    choices:{
+      A:'Attach the selected passages to the model context',
+      B:'Retrieve candidate chunks from the vector store',
+      C:'Receive the user query',
+      D:'Apply metadata filtering and/or reranking to the candidates',
+      E:'Create the query representation needed for vector search'
+    },
+    answer:['C','E','B','D','A'],
+    exp:[
+      '✅ ลำดับ runtime คือ Query → Query representation → Retrieve → Filter/Rerank → Attach context.',
+      '❌ Attach ต้องเกิดหลัง retrieve และคัด candidates แล้ว ไม่ใช่ก่อน.',
+      '❌ Filter/Rerank ทำกับ retrieved candidates จึงต้องตามหลัง Retrieve.',
+      '🧠 จำสั้น ๆ — Query → Embed/Search → Retrieve → Refine → Context.'
+    ]
+  });
+
+  override(36, {
+    choices:{
+      A:'Amazon OpenSearch Service / OpenSearch Serverless for search-oriented vector retrieval',
+      B:'Amazon Aurora or RDS for PostgreSQL with pgvector for relational data plus vector similarity',
+      C:'Amazon DynamoDB Streams as the primary vector index',
+      D:'Amazon SQS as the semantic retrieval engine',
+      E:'Amazon Kinesis Data Streams as the PostgreSQL vector extension'
+    },
+    answer:['A','B'],
+    exp:[
+      '✅ A — OpenSearch เหมาะกับ search-oriented workloads และรองรับ vector/semantic retrieval.',
+      '✅ B — PostgreSQL + pgvector เหมาะเมื่อข้อมูล relational อยู่ใน PostgreSQL อยู่แล้วและต้องเพิ่ม vector similarity.',
+      '❌ C — DynamoDB Streams เป็น change-data stream ไม่ใช่ primary vector index/search engine.',
+      '❌ D — SQS เป็น message queue ไม่ใช่ semantic/vector retrieval engine.',
+      '❌ E — Kinesis เป็น streaming service ไม่ใช่ PostgreSQL vector extension.',
+      '🧠 จำสั้น ๆ — Search engine = OpenSearch; relational PostgreSQL + vectors = pgvector.'
+    ]
+  });
+
+  override(39, {
+    question:'Match each foundation-model adaptation technique with the pattern that BEST defines it.',
+    questionTh:'จับคู่ foundation-model adaptation technique แต่ละแบบกับ pattern ที่นิยามมันได้ตรงที่สุด.',
+    choices:{
+      A:'Transfer learning',
+      B:'Knowledge distillation',
+      C:'Continued pre-training',
+      D:'Instruction tuning / supervised fine-tuning'
+    },
+    matches:{
+      '1':'Reuse knowledge from a pretrained model for a related target task',
+      '2':'Train a smaller student to imitate behavior from a larger teacher',
+      '3':'Continue learning from a large domain corpus, often without instruction-response labels',
+      '4':'Use labeled instruction-response examples to change task behavior'
+    },
+    answer:['A:1','B:2','C:3','D:4'],
+    exp:[
+      '✅ Transfer learning → นำความรู้จาก pretrained model ไปต่อยอด related task.',
+      '✅ Distillation → teacher ใหญ่ถ่ายทอด behavior ไป student เล็ก.',
+      '✅ Continued pre-training → เรียนต่อจาก domain corpus ขนาดใหญ่ มักไม่ใช่ instruction-response labels.',
+      '✅ Instruction tuning/SFT → ใช้ labeled instruction-response examples เพื่อปรับ task behavior.',
+      '🧠 จำสั้น ๆ — Transfer = ต่อความรู้; Distill = Teacher→Student; CPT = Corpus; SFT = Labeled instructions.'
+    ]
+  });
+
+  override(40, {
+    choices:{
+      A:'Remove duplicates, low-quality examples, and obvious contradictions',
+      B:'Check subgroup representation and label consistency before tuning',
+      C:'Verify rights, privacy, and governance for the training examples',
+      D:'Move held-out test examples into the tuning set to improve the measured score',
+      E:'Keep contradictory labels because more label variety always improves tuning',
+      F:'Use private or copyrighted data without permission if the model will stay internal'
+    },
+    answer:['A','B','C'],
+    exp:[
+      '✅ A — การ curate/clean data ลด noise และตัวอย่างที่ขัดแย้งกันโดยไม่จำเป็น.',
+      '✅ B — Representation และ label consistency มีผลโดยตรงต่อ quality/fairness ของ tuning dataset.',
+      '✅ C — ต้องตรวจ rights/privacy/governance ก่อนนำข้อมูลไป train.',
+      '❌ D — เอา held-out test data ไป train ทำให้ final evaluation ปนเปื้อน.',
+      '❌ E — Contradictory labels ที่ไม่ตั้งใจทำให้ signal สำหรับ tuning แย่ลง.',
+      '❌ F — การใช้ข้อมูลโดยไม่มี permission สร้าง legal/governance risk แม้ model จะเป็น internal.',
+      '🧠 จำสั้น ๆ — Clean + Representative/consistent + Permission.'
+    ]
+  });
+
+  override(41, {
+    choices:{
+      A:'Evaluate the customized model against the acceptance criteria',
+      B:'Version and approve the curated training examples',
+      C:'Promote the approved customized artifact to production',
+      D:'Run the fine-tuning/customization job'
+    },
+    answer:['B','D','A','C'],
+    exp:[
+      '✅ ลำดับคือ Approve data → Customize → Evaluate → Promote.',
+      '❌ Evaluation ต้องเกิดหลัง customization เพราะต้องวัด artifact ที่ปรับแล้ว.',
+      '❌ Production promotion ต้องเป็นขั้นท้ายหลังผ่าน acceptance criteria.',
+      '🧠 จำสั้น ๆ — Data → Tune → Test → Release.'
+    ]
+  });
+
+  override(42, {
+    choices:{
+      A:'ROUGE-L',
+      B:'BLEU',
+      C:'BERTScore',
+      D:'Perplexity'
+    },
+    answer:['A'],
+    exp:[
+      '✅ A — ROUGE เป็น family ของ overlap metrics ที่ใช้กับ summarization บ่อย โดย ROUGE-L ดู longest common subsequence.',
+      '❌ B — BLEU มักเชื่อมโยงกับ machine translation และ n-gram precision มากกว่า summarization.',
+      '❌ C — BERTScore ใช้ contextual embeddings เพื่อวัด semantic similarity ไม่ใช่ traditional overlap metric.',
+      '❌ D — Perplexity วัดความน่าจะเป็น/ความมั่นใจเชิง language modeling ไม่ใช่ reference-summary overlap.',
+      '🧠 จำสั้น ๆ — Summary overlap = ROUGE; Translation overlap = BLEU; Semantic similarity = BERTScore.'
+    ]
+  });
+
   window.LOCAL_SET_22_QUALITY_AUDIT = {
     focus:'Close distractors and reduced elimination-by-unrelated-choice risk',
     revisedQuestions:[1,6,7,8,13,19,20,25,27,28,29,30,33,35,37,38,43,44,45,46,47,48,54,55,60,61,62,63,64]
