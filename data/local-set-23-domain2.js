@@ -24,11 +24,11 @@
     exp:['✅ A — การสร้าง sequence โดยทำนาย next token จาก context ก่อนหน้า คือ autoregressive generation.','❌ B — Diffusion ค่อย ๆ denoise จาก noise.','❌ C — K-means ใช้ clustering.','❌ D — PCA ใช้ลดมิติข้อมูล ไม่ใช่ sequence generation.','🧠 จำสั้น ๆ — Next token ทีละตัว = Autoregressive.']});
 
   add({task:'2.1',type:'single',target:'context-engineering-selection',
-    question:'Before each FM call, an application removes irrelevant chat history, summarizes older turns, inserts the most useful retrieved passages, and includes only needed tool results. What discipline does this describe?',
-    questionTh:'ก่อนเรียก FM แต่ละครั้ง แอปจะตัด chat history ที่ไม่เกี่ยวข้อง สรุป turns เก่า ใส่ retrieved passages ที่มีประโยชน์ที่สุด และส่งเฉพาะ tool results ที่จำเป็น การทำแบบนี้เรียกว่าอะไร?',
-    choices:{A:'Context engineering',B:'Model distillation',C:'Fine-tuning',D:'Batch inference'},
+    question:'A chat application keeps appending every old message and every tool result until requests become expensive and important evidence is crowded out. The team wants a deliberate process for selecting, summarizing, and structuring only the information that should enter each model call. What is this practice called?',
+    questionTh:'chat application ใส่ทุกข้อความเก่าและทุก tool result ต่อกันไปเรื่อย ๆ จน request แพงและ evidence สำคัญถูกเบียดออก ทีมต้องการกระบวนการที่ตั้งใจเลือก สรุป และจัดโครงเฉพาะข้อมูลที่ควรเข้า model call แต่ละครั้ง การทำแบบนี้เรียกว่าอะไร?',
+    choices:{A:'Context engineering',B:'Knowledge distillation',C:'Batch transform',D:'Label encoding'},
     answer:['A'],
-    exp:['✅ A — Context engineering คือการคัด จัด และบีบข้อมูลที่เข้า context window ให้เหมาะกับแต่ละ call.','❌ B — Distillation ถ่ายทอด behavior จาก teacher ไป student.','❌ C — Fine-tuning เปลี่ยน model weights.','❌ D — Batch inference เป็น execution pattern.','🧠 จำสั้น ๆ — จัดของที่เข้า context = Context engineering.']});
+    exp:['✅ A — Context engineering จัดการว่า information ใดควรเข้า context window และควรจัดรูป/สรุปอย่างไร.','❌ B — Distillation ถ่ายทอด behavior จาก teacher ไป student model.','❌ C — Batch transform เป็นรูปแบบ inference แบบออฟไลน์.','❌ D — Label encoding เป็น data preprocessing สำหรับ labels/categories.','🧠 จำสั้น ๆ — เลือกและจัดของที่จะเข้า model call = Context engineering.']});
 
   add({task:'2.1',type:'ordering',target:'fm-lifecycle-current-guide',
     question:'Order these foundation-model lifecycle activities from initial model choice through improvement after production use.',
@@ -38,12 +38,12 @@
     exp:['✅ ลำดับคือ Select → Adapt/Fine-tune → Evaluate → Deploy → Feedback.','❌ Deploy ต้องหลัง evaluation.','❌ Feedback จาก production เกิดหลัง deploy และนำไปใช้ปรับรอบถัดไป.','🧠 จำสั้น ๆ — Choose → Adapt → Check → Ship → Learn.']});
 
   add({task:'2.1',type:'matching',target:'agentic-foundations',
-    question:'Match each agentic-AI concept with the description that BEST fits it.',
-    questionTh:'จับคู่ agentic-AI concept แต่ละตัวกับคำอธิบายที่ตรงที่สุด.',
-    choices:{A:'Tool',B:'Memory',C:'Workflow orchestration',D:'Multi-agent system'},
-    matches:{'1':'An operation the agent can invoke on an external system','2':'Information retained to support current or future interactions','3':'The coordination of steps, dependencies, and execution flow','4':'Multiple specialized agents that coordinate on a larger task'},
+    question:'An agentic application is being decomposed into four building blocks. Pair each example with the concept it represents.',
+    questionTh:'agentic application ถูกแยกเป็น building blocks 4 แบบ ให้จับคู่ตัวอย่างแต่ละแบบกับ concept ที่มันแทน.',
+    choices:{A:'Call a ticketing API to create an incident',B:'Remember a user preference for later sessions',C:'Coordinate a fixed sequence of dependent steps',D:'Have specialist agents collaborate on research and validation'},
+    matches:{'1':'Tool usage','2':'Memory management','3':'Workflow orchestration','4':'Multi-agent system'},
     answer:['A:1','B:2','C:3','D:4'],
-    exp:['✅ Tool → operation ที่ agent เรียกใช้ภายนอก.','✅ Memory → ข้อมูลที่เก็บไว้ช่วย interaction ปัจจุบันหรืออนาคต.','✅ Workflow orchestration → จัดลำดับและ dependency ของงาน.','✅ Multi-agent → หลาย agent แบ่งบทบาทและประสานกัน.','🧠 จำสั้น ๆ — Do / Remember / Coordinate steps / Coordinate agents.']});
+    exp:['✅ เรียก API เพื่อทำ action → Tool usage.','✅ จำ preference ข้าม session → Memory management.','✅ จัดลำดับ steps/dependencies → Workflow orchestration.','✅ หลาย specialist agents ร่วมงาน → Multi-agent system.','🧠 จำสั้น ๆ — Act / Remember / Coordinate steps / Coordinate agents.']});
 
   add({task:'2.2',type:'multiple',target:'genai-advantages',
     question:'Which THREE capabilities are typical advantages of generative AI for business applications? (Select THREE.)',
