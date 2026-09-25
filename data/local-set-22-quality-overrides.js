@@ -5,6 +5,8 @@
     const item = q(id);
     if (!item) throw new Error(`Missing Set 22 bank item Q${id}`);
     if (config.choices) item.choices22 = config.choices;
+    if (config.answer) item.answer22 = config.answer;
+    if (config.matches) item.matches22 = config.matches;
     if (config.exp) item.exp22 = config.exp;
     if (config.question || config.questionTh) {
       const current = item.v?.[22];
