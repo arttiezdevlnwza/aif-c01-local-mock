@@ -18,23 +18,23 @@
   // Set 22 quality pass:
   // Keep Set 21 untouched, but replace easy/unrelated distractors with closer alternatives.
   override(1, {
-    question:'A claims team receives free-form customer emails, scanned documents, and photos. It wants one system that can understand the mixed inputs, summarize the case, and draft a natural-language response without defining a fixed label set in advance. Which approach BEST fits?',
-    questionTh:'ทีมเคลมได้รับอีเมลข้อความอิสระ เอกสารสแกน และรูปภาพจากลูกค้า ต้องการระบบเดียวที่เข้าใจข้อมูลหลายรูปแบบ สรุปเคส และร่างคำตอบภาษาธรรมชาติได้ โดยไม่ได้กำหนดชุด label ตายตัวไว้ล่วงหน้า ควรใช้แนวทางใด?',
+    question:'A document-processing team already has a large collection of labeled forms and wants to predict one of several predefined document categories from extracted fields. The task is stable, the output labels are fixed, and the team values simple retraining and efficient inference. Which approach is the BEST fit?',
+    questionTh:'ทีมประมวลผลเอกสารมีชุดข้อมูลแบบมี label จำนวนมากอยู่แล้ว และต้องการทำนายประเภทเอกสารจากข้อมูลที่ extract มา โดยประเภทผลลัพธ์ถูกกำหนดไว้ตายตัว งานมีรูปแบบคงที่ และทีมต้องการ retrain ได้ง่ายกับ inference ที่มีประสิทธิภาพ ควรใช้แนวทางใด?',
     choices:{
-      A:'A traditional supervised classifier trained on a fixed label set',
-      B:'A multimodal foundation model',
-      C:'A regression model over engineered tabular features',
-      D:'A deterministic rules engine with fixed templates'
+      A:'A traditional supervised classification model',
+      B:'A multimodal foundation model prompted to decide the category',
+      C:'A retrieval-augmented generation workflow',
+      D:'A conversational agent with tool orchestration'
     },
-    answer:['B'],
+    answer:['A'],
     exp:[
-      '✅ B — โจทย์ต้องเข้าใจหลาย modality ทั้งข้อความ เอกสาร และภาพ พร้อมสรุปและสร้างคำตอบแบบ open-ended จึงเหมาะกับ multimodal foundation model.',
-      '❌ A — Traditional supervised classifier เหมาะเมื่อมี target labels ชัดเจนและต้องทำนายหมวดหมู่ที่กำหนดไว้ ไม่ใช่งานสรุปและร่างคำตอบอิสระหลายรูปแบบ.',
-      '❌ C — Regression ใช้ทำนายค่าตัวเลขต่อเนื่องจาก features ไม่ตรงกับ requirement ที่ต้องเข้าใจและสร้างภาษาจาก mixed inputs.',
-      '❌ D — Rules engine เหมาะกับ logic ที่กำหนดล่วงหน้าและ output แบบตายตัว แต่ไม่ยืดหยุ่นพอสำหรับ free-form multimodal understanding และ generation.',
-      '🧠 จำสั้น ๆ — Fixed labels + structured prediction = Traditional ML; mixed unstructured inputs + open-ended generation = Foundation Model.'
+      '✅ A — มี labeled data, fixed categories และเป็น prediction task ที่เสถียร จึงเหมาะกับ traditional supervised classification ที่ retrain และ run inference ได้มีประสิทธิภาพ.',
+      '❌ B — Multimodal FM ทำ classification ได้ แต่เพิ่ม complexity/cost โดยไม่มี requirement ด้าน open-ended understanding หรือ generation.',
+      '❌ C — RAG เหมาะกับการ retrieve knowledge เพื่อ grounding คำตอบ ไม่ใช่ตัวหลักสำหรับ fixed-label classification จากข้อมูลที่เตรียมไว้แล้ว.',
+      '❌ D — Conversational agent เหมาะกับงานที่ต้อง reason/orchestrate tools หลายขั้น ไม่ตรงกับ fixed-label prediction task.',
+      '🧠 จำสั้น ๆ — Labeled data + fixed classes + stable prediction = Traditional supervised ML.'
     ]
-  });;
+  });;;
 
   override(6, {
     choices:{
