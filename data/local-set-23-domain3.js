@@ -52,11 +52,11 @@
     exp:['✅ A — Negative prompt/instruction ระบุสิ่งที่ model ไม่ควรทำหรือไม่ควรรวมใน output.','❌ B — Few-shot ต้องมีหลาย examples.','❌ C — Distillation เป็น training technique.','❌ D — Reranking เป็น retrieval technique.','🧠 จำสั้น ๆ — “อย่าทำ/อย่าใส่...” = Negative prompt.']});
 
   add({task:'3.2',type:'single',target:'one-vs-few-shot',
-    question:'A prompt contains three labeled examples demonstrating the desired output format before a new unseen input. Which technique is this?',
-    questionTh:'prompt มี labeled examples 3 ตัวเพื่อแสดงรูปแบบ output ที่ต้องการก่อน input ใหม่ที่ไม่เคยเห็น เทคนิคนี้เรียกว่าอะไร?',
-    choices:{A:'Few-shot prompting',B:'One-shot prompting',C:'Zero-shot prompting',D:'Continued pre-training'},
+    question:'A prompt shows several representative input-output demonstrations so the model can infer the desired pattern before handling a new case. Which prompting technique is being used?',
+    questionTh:'prompt แสดง input-output demonstrations หลายตัวที่เป็นตัวแทนของงาน เพื่อให้ model จับ pattern ที่ต้องการก่อนทำเคสใหม่ เทคนิค prompting นี้คืออะไร?',
+    choices:{A:'Few-shot prompting',B:'Chain-of-thought prompting',C:'Prompt templating',D:'Zero-shot prompting'},
     answer:['A'],
-    exp:['✅ A — มีหลายตัวอย่างก่อน task ใหม่ = Few-shot prompting.','❌ B — One-shot มีตัวอย่างเดียว.','❌ C — Zero-shot ไม่มีตัวอย่าง.','❌ D — Continued pre-training เปลี่ยน model weights ด้วย corpus เพิ่มเติม.','🧠 จำสั้น ๆ — 0 = Zero; 1 = One; หลาย = Few.']});
+    exp:['✅ A — หลาย demonstrations ก่อน task ใหม่คือ few-shot prompting.','❌ B — Chain-of-thought เน้น reasoning process ไม่ได้ถูกนิยามจากจำนวน examples.','❌ C — Prompt template คือโครง reusable ที่มี placeholders.','❌ D — Zero-shot ไม่มี demonstrations.','🧠 จำสั้น ๆ — หลาย examples = Few-shot.']});
 
   add({task:'3.2',type:'multiple',target:'prompt-best-practices',
     question:'A team wants more reliable prompt results during development. Which THREE practices align with prompt-engineering best practices? (Select THREE.)',
@@ -80,12 +80,12 @@
     exp:['✅ A — Prompt Management ใช้จัดเก็บ reusable prompts, variables และ versions.','❌ B — Knowledge Bases ใช้ RAG/retrieval.','❌ C — Model Evaluation ใช้ประเมิน FM outputs.','❌ D — Guardrails ใช้ safety filtering.','🧠 จำสั้น ๆ — Template + Version = Prompt Management.']});
 
   add({task:'3.3',type:'matching',target:'fm-customization-techniques',
-    question:'Match each FM adaptation technique with the description that BEST fits it.',
-    questionTh:'จับคู่ FM adaptation technique แต่ละตัวกับคำอธิบายที่ตรงที่สุด.',
-    choices:{A:'Instruction tuning / SFT',B:'Continued pre-training',C:'Knowledge distillation',D:'Transfer learning'},
-    matches:{'1':'Use labeled instruction-response examples to change task behavior','2':'Continue learning from a large domain corpus','3':'Train a smaller student to imitate a larger teacher','4':'Reuse learned knowledge for a related target task'},
+    question:'A model team is choosing among four adaptation strategies. Connect each project requirement to the technique that BEST matches it.',
+    questionTh:'ทีม model กำลังเลือก adaptation strategies 4 แบบ ให้จับคู่ project requirement แต่ละข้อกับ technique ที่เหมาะที่สุด.',
+    choices:{A:'Make task behavior persistent using labeled instruction-response examples',B:'Absorb terminology from a large unlabeled domain corpus',C:'Create a smaller model that imitates a stronger teacher',D:'Reuse knowledge from a pretrained model for a related target problem'},
+    matches:{'1':'Instruction tuning / supervised fine-tuning','2':'Continued pre-training','3':'Knowledge distillation','4':'Transfer learning'},
     answer:['A:1','B:2','C:3','D:4'],
-    exp:['✅ SFT → instruction-response examples.','✅ Continued pre-training → เรียนต่อจาก domain corpus.','✅ Distillation → teacher ใหญ่ถ่ายทอดไป student เล็ก.','✅ Transfer learning → นำความรู้เดิมไปต่อยอด related task.','🧠 จำสั้น ๆ — Instructions / Corpus / Teacher→Student / Reuse knowledge.']});
+    exp:['✅ Labeled instruction-response behavior → SFT/instruction tuning.','✅ Large domain corpus → Continued pre-training.','✅ Smaller student imitates teacher → Distillation.','✅ Reuse learned knowledge for related task → Transfer learning.','🧠 จำสั้น ๆ — Labels / Corpus / Teacher→Student / Reuse.']});
 
   add({task:'3.3',type:'multiple',target:'finetune-data-preparation',
     question:'Before fine-tuning an FM, which THREE data-preparation practices are most appropriate? (Select THREE.)',
@@ -122,10 +122,10 @@
     answer:['A','B','C'],
     exp:['✅ A — Human rubric ช่วยประเมิน nuance/factual usefulness.','✅ B — Benchmark + relevant metrics ให้หลักฐานเชิงมาตรฐาน.','✅ C — LLM-as-a-judge ช่วย scale evaluation และควร validate/calibrate กับ human samples.','❌ D/E/F — ไม่สะท้อน end-task quality อย่างเพียงพอ.','🧠 จำสั้น ๆ — Human + Benchmark + Scalable judge.']});
 
-  add({task:'3.4',type:'single',target:'rag-retrieval-relevance',
-    question:'A RAG answer faithfully follows the retrieved passages, but those passages discuss the wrong product and do not answer the user question. Which evaluation dimension is failing first?',
-    questionTh:'RAG answer ยึดตาม retrieved passages ได้ดี แต่ passages เหล่านั้นพูดถึงสินค้าผิดตัวและไม่ตอบคำถามผู้ใช้ evaluation dimension ใดมีปัญหาก่อน?',
-    choices:{A:'Retrieval relevance',B:'Generation faithfulness',C:'Model size',D:'Training loss'},
+  add({task:'3.4',type:'single',target:'fm-business-objective-alignment',
+    question:'An AI service answers correctly on offline benchmarks, but users frequently abandon the workflow before completing their task. Which metric would provide the MOST direct evidence of this application-level problem?',
+    questionTh:'AI service ทำคะแนน offline benchmarks ได้ดี แต่ผู้ใช้มักออกจาก workflow ก่อนทำงานสำเร็จ metric ใดให้หลักฐานตรงที่สุดต่อปัญหาระดับ application นี้?',
+    choices:{A:'Task completion rate',B:'BLEU score',C:'Embedding dimension',D:'Training loss'},
     answer:['A'],
-    exp:['✅ A — ปัญหาเริ่มจาก retrieved context ไม่เกี่ยวกับ query จึงเป็น retrieval relevance.','❌ B — Faithfulness ยังดีเพราะ answer ทำตาม context ที่ได้รับ.','❌ C/D — ไม่ใช่ RAG runtime quality dimension ของอาการนี้.','🧠 จำสั้น ๆ — Context ผิด = Retrieval relevance; Context ถูกแต่ตอบเกิน = Faithfulness.']});
+    exp:['✅ A — Task completion rate วัดว่าผู้ใช้ทำเป้าหมายของ workflow สำเร็จจริงหรือไม่.','❌ B — BLEU เป็น text-generation/reference metric ไม่ได้วัด end-to-end workflow success.','❌ C — Embedding dimension เป็น model/vector property.','❌ D — Training loss เป็น development metric ไม่ใช่ production business outcome.','🧠 จำสั้น ๆ — App สำเร็จไหม = Task completion rate.']});
 })();
