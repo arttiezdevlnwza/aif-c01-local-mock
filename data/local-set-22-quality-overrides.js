@@ -18,20 +18,23 @@
   // Set 22 quality pass:
   // Keep Set 21 untouched, but replace easy/unrelated distractors with closer alternatives.
   override(1, {
+    question:'A claims team receives free-form customer emails, scanned documents, and photos. It wants one system that can understand the mixed inputs, summarize the case, and draft a natural-language response without defining a fixed label set in advance. Which approach BEST fits?',
+    questionTh:'ทีมเคลมได้รับอีเมลข้อความอิสระ เอกสารสแกน และรูปภาพจากลูกค้า ต้องการระบบเดียวที่เข้าใจข้อมูลหลายรูปแบบ สรุปเคส และร่างคำตอบภาษาธรรมชาติได้ โดยไม่ได้กำหนดชุด label ตายตัวไว้ล่วงหน้า ควรใช้แนวทางใด?',
     choices:{
-      A:'A traditional supervised ML model',
-      B:'A fine-tuned foundation model for classification',
-      C:'A retrieval-augmented foundation-model application',
-      D:'A general-purpose foundation model with few-shot examples'
+      A:'A traditional supervised classifier trained on a fixed label set',
+      B:'A multimodal foundation model',
+      C:'A regression model over engineered tabular features',
+      D:'A deterministic rules engine with fixed templates'
     },
+    answer:['B'],
     exp:[
-      '✅ A — ข้อมูลเป็น structured/tabular, งานเป็น classification ที่มี label ชัดเจน, ต้องอธิบายเหตุผลได้ และต้องรันจำนวนมากด้วยต้นทุนต่ำ จึงเหมาะกับ traditional supervised ML.',
-      '❌ B — Fine-tuned FM สามารถทำ classification ได้ แต่เพิ่มความซับซ้อนและต้นทุน ทั้งที่โจทย์ไม่ได้ต้องการพฤติกรรม generative แบบกว้าง.',
-      '❌ C — RAG ใช้ดึงความรู้มา grounding คำตอบ แต่ไม่ได้แทน supervised classifier สำหรับการทำนายจากข้อมูลตารางแบบงานแคบนี้.',
-      '❌ D — Few-shot prompting ช่วยชี้นำ FM ได้ แต่โจทย์ไม่ต้องการ open-ended generation และให้ความสำคัญกับ cost/explainability มากกว่า.',
-      '🧠 จำสั้น ๆ — งานแคบ + structured + labeled + explainable + cheap at scale = Traditional ML.'
+      '✅ B — โจทย์ต้องเข้าใจหลาย modality ทั้งข้อความ เอกสาร และภาพ พร้อมสรุปและสร้างคำตอบแบบ open-ended จึงเหมาะกับ multimodal foundation model.',
+      '❌ A — Traditional supervised classifier เหมาะเมื่อมี target labels ชัดเจนและต้องทำนายหมวดหมู่ที่กำหนดไว้ ไม่ใช่งานสรุปและร่างคำตอบอิสระหลายรูปแบบ.',
+      '❌ C — Regression ใช้ทำนายค่าตัวเลขต่อเนื่องจาก features ไม่ตรงกับ requirement ที่ต้องเข้าใจและสร้างภาษาจาก mixed inputs.',
+      '❌ D — Rules engine เหมาะกับ logic ที่กำหนดล่วงหน้าและ output แบบตายตัว แต่ไม่ยืดหยุ่นพอสำหรับ free-form multimodal understanding และ generation.',
+      '🧠 จำสั้น ๆ — Fixed labels + structured prediction = Traditional ML; mixed unstructured inputs + open-ended generation = Foundation Model.'
     ]
-  });
+  });;
 
   override(6, {
     choices:{
