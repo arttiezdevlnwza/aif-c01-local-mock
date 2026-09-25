@@ -144,18 +144,14 @@
   }
 
   const set21 = buildSet(21);
-  const set22 = buildSet(22);
   const p21 = validate(set21);
-  const p22 = validate(set22);
-  if (p21.length || p22.length) {
-    console.error('Set 21/22 validation failed', {set21:p21,set22:p22});
+  if (p21.length) {
+    console.error('Set 21 validation failed', {set21:p21});
     return;
   }
 
   const quizSets = window.QUIZ_SETS = window.QUIZ_SETS || [];
-  [set21,set22].forEach(set => {
-    const i = quizSets.findIndex(existing => existing.id === set.id);
-    if (i >= 0) quizSets[i] = set;
-    else quizSets.push(set);
-  });
+  const i = quizSets.findIndex(existing => existing.id === set21.id);
+  if (i >= 0) quizSets[i] = set21;
+  else quizSets.push(set21);
 })();
