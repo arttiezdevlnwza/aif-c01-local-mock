@@ -3,11 +3,11 @@
   const add = x => bank.push({ domain:4, ...x });
 
   add({task:'4.1',type:'single',target:'transparency-vs-explainability-angle',
-    question:'A bank tells applicants that AI is used, explains the intended use and known limitations of the system, and publishes when human review is available. Which responsible-AI principle is being emphasized most directly?',
-    questionTh:'ธนาคารแจ้งผู้สมัครว่าใช้ AI อธิบาย intended use และ known limitations ของระบบ และบอกว่ามี human review เมื่อใด หลัก Responsible AI ใดถูกเน้นโดยตรงที่สุด?',
-    choices:{A:'Transparency',B:'Explainability',C:'Robustness',D:'Sustainability'},
+    question:'A loan applicant asks why one specific application was declined. The bank wants to provide understandable factors that contributed to that individual prediction rather than only describing the system in general. Which principle is MOST directly involved?',
+    questionTh:'ผู้สมัครสินเชื่อถามว่าทำไม application ของตัวเองจึงถูกปฏิเสธ ธนาคารต้องการอธิบาย factors ที่มีผลต่อ prediction เฉพาะเคสนี้ ไม่ใช่แค่บอกข้อมูลทั่วไปของระบบ หลักใดเกี่ยวข้องโดยตรงที่สุด?',
+    choices:{A:'Explainability',B:'Transparency',C:'Sustainability',D:'Data residency'},
     answer:['A'],
-    exp:['✅ A — การเปิดเผยว่าใช้ AI, intended use, limitations และ process เป็น Transparency.','❌ B — Explainability เน้นเหตุผลของ prediction/decision เฉพาะกรณี.','❌ C — Robustness คือความทนต่อ noise/perturbation.','❌ D — Sustainability เน้น resource/energy use.','🧠 จำสั้น ๆ — บอกว่าระบบคืออะไร/ใช้อย่างไร = Transparency; ทำไมเคสนี้ได้ผลนี้ = Explainability.']});
+    exp:['✅ A — เหตุผลของ prediction/decision เฉพาะเคสคือ Explainability.','❌ B — Transparency เน้นการเปิดเผยระบบ, intended use และ limitations ในภาพรวม.','❌ C — Sustainability เน้น resource/energy use.','❌ D — Residency เป็นเรื่องตำแหน่งจัดเก็บ/ประมวลผลข้อมูล.','🧠 จำสั้น ๆ — Why this prediction? = Explainability; What is this system? = Transparency.']});
 
   add({task:'4.1',type:'single',target:'automation-bias',
     question:'A clinician sees strong evidence that conflicts with an AI recommendation but follows the recommendation anyway mainly because “the system is usually right.” Which bias is MOST directly illustrated?',
@@ -31,12 +31,12 @@
     exp:['✅ ลำดับคือ Define → Data → Evaluate → Document → Monitor after deployment.','❌ Evaluate ต้องมาก่อน documentation ของผล/limitations และก่อน release.','🧠 จำสั้น ๆ — รู้ความเสี่ยง → เตรียมข้อมูล → ตรวจ → จด → เฝ้าดู.']});
 
   add({task:'4.2',type:'matching',target:'human-centered-ai-protections',
-    question:'Match each scenario with the responsible-AI concept that BEST fits it.',
-    questionTh:'จับคู่ scenario กับ Responsible AI concept ที่ตรงที่สุด.',
-    choices:{A:'A person can stop an automated action before it affects a customer',B:'An affected customer can appeal a decision',C:'The system provides understandable reasons for one prediction',D:'Users are told the system uses AI and what its limits are'},
-    matches:{'1':'Human oversight','2':'Recourse','3':'Explainability','4':'Transparency'},
+    question:'Match each responsible-AI quality with the scenario that BEST demonstrates it.',
+    questionTh:'จับคู่ Responsible AI quality แต่ละข้อกับ scenario ที่แสดงคุณสมบัตินั้นได้ตรงที่สุด.',
+    choices:{A:'A model produces similar quality across demographic groups',B:'A service remains reliable when inputs contain noise or small perturbations',C:'Personal data is minimized and protected from unnecessary exposure',D:'A smaller model is selected because it meets the requirement with much less compute'},
+    matches:{'1':'Fairness','2':'Robustness','3':'Privacy','4':'Sustainability'},
     answer:['A:1','B:2','C:3','D:4'],
-    exp:['✅ หยุด/approve ก่อน action = Human oversight.','✅ ขอ review/appeal หลังได้รับผล = Recourse.','✅ เหตุผลของ prediction เฉพาะเคส = Explainability.','✅ แจ้ง AI/intended use/limits = Transparency.','🧠 จำสั้น ๆ — คนคุม / อุทธรณ์ / บอกเหตุผล / บอกระบบ.']});
+    exp:['✅ Similar subgroup quality → Fairness.','✅ Reliable under noise/perturbation → Robustness.','✅ Minimize/protect personal data → Privacy.','✅ Meet requirement with less compute → Sustainability.','🧠 จำสั้น ๆ — Groups / Noise / Data exposure / Resource use.']});
 
   add({task:'4.1',type:'single',target:'adversarial-robustness',
     question:'A vision model performs well on normal images but fails when tiny, carefully crafted perturbations are added that are hard for humans to notice. Which responsible-AI concern is MOST directly involved?',
@@ -46,11 +46,11 @@
     exp:['✅ A — ความสามารถในการคง reliability เมื่อเจอ adversarial/noisy inputs คือ robustness.','❌ B — Transparency เป็นการเปิดเผยระบบ/ข้อจำกัด.','❌ C — Residency เป็นเรื่อง location ของข้อมูล.','❌ D — Sustainability เป็นเรื่อง resource/energy.','🧠 จำสั้น ๆ — เจอ perturbation แล้วยังต้องไว้ใจได้ = Robustness.']});
 
   add({task:'4.1',type:'single',target:'sustainability-right-sizing',
-    question:'Two models meet the accepted quality threshold. One is much larger and consumes substantially more compute without measurable business benefit. Which choice better aligns with environmental sustainability?',
-    questionTh:'มี 2 models ที่ผ่าน quality threshold เท่ากัน ตัวหนึ่งใหญ่กว่ามากและใช้ compute มากกว่าโดยไม่มี business benefit ที่วัดได้ ทางเลือกใดสอดคล้องกับ environmental sustainability มากกว่า?',
-    choices:{A:'Use the smaller model that meets the requirement',B:'Always use the largest model available',C:'Generate longer outputs to use the larger model fully',D:'Retrain the larger model from scratch for every release'},
+    question:'A model is retrained every night even though the underlying data changes only monthly and weekly evaluation shows no meaningful quality gain from daily retraining. Which change BEST supports environmental sustainability without sacrificing the stated requirement?',
+    questionTh:'โมเดลถูก retrain ทุกคืนทั้งที่ข้อมูลพื้นฐานเปลี่ยนเพียงรายเดือน และ weekly evaluation พบว่า daily retraining ไม่ได้เพิ่มคุณภาพอย่างมีนัยสำคัญ การเปลี่ยนแปลงใดสนับสนุน environmental sustainability โดยไม่เสีย requirement มากที่สุด?',
+    choices:{A:'Reduce unnecessary retraining frequency based on evidence',B:'Increase model size before every retraining job',C:'Generate longer outputs during evaluation',D:'Duplicate the training dataset to use more compute'},
     answer:['A'],
-    exp:['✅ A — Right-sizing compute/model ให้พอดีกับ requirement ลด resource/energy use ที่ไม่จำเป็น.','❌ B/C/D — เพิ่ม resource use โดยไม่มี requirement รองรับ.','🧠 จำสั้น ๆ — ผ่าน requirement แล้ว เล็กกว่าที่พอก็ sustainable กว่า.']});
+    exp:['✅ A — ลด retraining ที่ไม่สร้าง measured benefit ช่วยลด compute/energy โดยยังรักษา requirement.','❌ B/C/D — เพิ่ม resource use โดยไม่มี evidence ว่าช่วยคุณภาพ.','🧠 จำสั้น ๆ — Sustainability = ตัด compute ที่ไม่จำเป็นและไม่เพิ่ม value.']});
 
   add({task:'4.1',type:'single',target:'ip-risk',
     question:'A generative model produces an advertisement that closely reproduces protected artwork owned by another company. Which risk category is MOST directly implicated?',
