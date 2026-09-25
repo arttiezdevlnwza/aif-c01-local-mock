@@ -23,12 +23,12 @@
     answer:['A'],
     exp:['✅ A — Right-sizing model ให้พอดีกับ requirement ช่วยลด resource/energy use โดยไม่เสีย outcome.','❌ B/C/D — เพิ่ม resource use โดยไม่มี requirement รองรับ.','🧠 จำสั้น ๆ — ผ่านเกณฑ์เท่ากัน → ใช้ compute เท่าที่จำเป็น.']});
 
-  add({task:'4.1',type:'single',target:'genai-legal-ip-risk',
-    question:'A marketing model generates artwork that closely reproduces a copyrighted illustration owned by another company. Which legal risk is MOST directly involved?',
-    questionTh:'marketing model สร้าง artwork ที่ใกล้เคียงกับภาพลิขสิทธิ์ของบริษัทอื่นมาก legal risk ใดเกี่ยวข้องโดยตรงที่สุด?',
-    choices:{A:'Intellectual property infringement',B:'Data drift',C:'Latency degradation',D:'Class imbalance'},
+  add({task:'4.1',type:'single',target:'biased-output-legal-trust-risk',
+    question:'A hiring assistant consistently recommends fewer qualified candidates from one demographic group, creating unequal outcomes and complaints from applicants. Which responsible-AI risk is MOST directly illustrated?',
+    questionTh:'hiring assistant แนะนำ qualified candidates จาก demographic group หนึ่งน้อยกว่ากลุ่มอื่นอย่างสม่ำเสมอ ทำให้เกิดผลลัพธ์ไม่เท่าเทียมและมีผู้สมัครร้องเรียน risk ด้าน Responsible AI ใดตรงที่สุด?',
+    choices:{A:'Bias and discrimination risk',B:'Intellectual-property infringement',C:'Data residency violation',D:'Inference latency'},
     answer:['A'],
-    exp:['✅ A — Copyright/ownership/licensing concerns เป็น intellectual-property risk.','❌ B — Data drift เป็น ML production issue.','❌ C — Latency เป็น operational performance issue.','❌ D — Class imbalance เป็น dataset issue.','🧠 จำสั้น ๆ — Copyright / ownership / licensing = IP risk.']});
+    exp:['✅ A — ผลลัพธ์ไม่เท่าเทียมระหว่าง demographic groups เป็น bias/discrimination risk โดยตรง.','❌ B — IP infringement เกี่ยวกับ copyright/ownership/licensing.','❌ C — Residency เกี่ยวกับตำแหน่งจัดเก็บ/ประมวลผลข้อมูล.','❌ D — Latency เป็น performance issue.','🧠 จำสั้น ๆ — Unequal outcomes across groups = Bias/Fairness risk.']});
 
   add({task:'4.2',type:'single',target:'model-cards-transparency',
     question:'A team wants a standard artifact that documents intended use, evaluation results, limitations, and risk considerations for a SageMaker model so stakeholders can understand how it should be used. Which feature is the closest fit?',
@@ -59,10 +59,10 @@
     exp:['✅ ลำดับคือ Define use → Prepare data → Evaluate → Document → Monitor after release.','❌ ต้องประเมินก่อนบันทึก final limitations/mitigations และก่อนเฝ้าระวัง production.','🧠 จำสั้น ๆ — Define → Data → Check → Document → Monitor.']});
 
   add({task:'4.1',type:'matching',target:'responsible-ai-features',
-    question:'Match each responsible-AI feature with the scenario that BEST represents it.',
-    questionTh:'จับคู่ responsible-AI feature แต่ละตัวกับ scenario ที่แสดงลักษณะนั้นได้ตรงที่สุด.',
-    choices:{A:'Fairness',B:'Robustness',C:'Veracity',D:'Inclusivity'},
-    matches:{'1':'Comparable groups receive appropriately consistent treatment and outcomes','2':'The system remains reliable under noisy or perturbed inputs','3':'Outputs are checked for truthfulness and factual accuracy','4':'Design and data account for a diverse range of users and needs'},
+    question:'A responsible-AI review records four observations about a system. Assign the principle that each observation is testing.',
+    questionTh:'responsible-AI review บันทึก observations 4 แบบเกี่ยวกับระบบ ให้จับคู่แต่ละ observation กับหลักการที่กำลังทดสอบ.',
+    choices:{A:'The model avoids producing dangerous instructions in a safety-sensitive workflow',B:'Claims are checked for factual truthfulness before being shown',C:'Product design accounts for users with different backgrounds and needs',D:'Comparable demographic groups are checked for unjustified outcome disparities'},
+    matches:{'1':'Safety','2':'Veracity','3':'Inclusivity','4':'Fairness'},
     answer:['A:1','B:2','C:3','D:4'],
-    exp:['✅ Fairness → ผลลัพธ์/การปฏิบัติที่เหมาะสมระหว่างกลุ่ม.','✅ Robustness → ยัง reliable เมื่อ input มี noise/perturbation.','✅ Veracity → ความจริงและ factual accuracy.','✅ Inclusivity → ครอบคลุมผู้ใช้และความต้องการที่หลากหลาย.','🧠 จำสั้น ๆ — Groups / Noise / Truth / Diverse users.']});
+    exp:['✅ ป้องกัน harmful outcome → Safety.','✅ ตรวจ factual truthfulness → Veracity.','✅ รองรับผู้ใช้หลากหลาย → Inclusivity.','✅ ตรวจ outcome disparity ระหว่างกลุ่ม → Fairness.','🧠 จำสั้น ๆ — Harm / Truth / Diverse users / Groups.']});
 })();
