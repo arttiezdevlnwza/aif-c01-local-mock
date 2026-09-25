@@ -10,11 +10,11 @@
     exp:['✅ A — Knowledge Bases ทำ managed retrieval/RAG เพื่อ grounding คำตอบจากแหล่งข้อมูลปัจจุบันพร้อม citations.','❌ B — Guardrails เป็น safety/control layer.','❌ C — Prompt Management เก็บ/version prompt templates.','❌ D — Model Evaluation ใช้ประเมิน outputs/models.','🧠 จำสั้น ๆ — Current private knowledge + citations = Knowledge Bases.']});
 
   add({task:'3.1',type:'single',target:'metadata-filtering-access-boundary',
-    question:'A knowledge base contains documents for many departments. Retrieval for a Finance user must consider only documents tagged department=finance before relevance scoring. Which technique should enforce this first?',
-    questionTh:'knowledge base มีเอกสารหลายแผนก การ retrieval สำหรับผู้ใช้ Finance ต้องพิจารณาเฉพาะเอกสารที่ tag department=finance ก่อนจัด relevance ควรใช้ technique ใดก่อน?',
-    choices:{A:'Metadata filtering',B:'Reranking',C:'Prompt caching',D:'Fine-tuning'},
+    question:'A retrieval system must exclude documents from other tenants before any semantic relevance ranking occurs. Which control should be applied to the candidate set first?',
+    questionTh:'retrieval system ต้องตัดเอกสารของ tenant อื่นออกก่อนที่จะทำ semantic relevance ranking ใด ๆ ควรใช้ control ใดกับ candidate set ก่อน?',
+    choices:{A:'Metadata filtering',B:'Semantic reranking',C:'Query decomposition',D:'Prompt caching'},
     answer:['A'],
-    exp:['✅ A — Metadata filtering จำกัด candidate set ตาม metadata constraint ก่อน relevance ordering.','❌ B — Reranking จัดลำดับ candidates ที่ผ่านการ retrieve/filter มาแล้ว.','❌ C — Prompt caching ลดการประมวลผล context ซ้ำ.','❌ D — Fine-tuning เปลี่ยน model weights ไม่ได้ enforce document eligibility.','🧠 จำสั้น ๆ — ใครเข้า candidate set ได้ = Filter.']});
+    exp:['✅ A — Metadata filtering ใช้ enforce eligibility/boundary ของ documents ก่อนจัด relevance.','❌ B — Reranking จัดลำดับ candidates ที่มีสิทธิ์แล้ว.','❌ C — Query decomposition แยกคำถามเพื่อช่วย retrieval ไม่ได้ enforce tenant boundary.','❌ D — Prompt caching ลด repeated processing.','🧠 จำสั้น ๆ — ใครมีสิทธิ์เข้า candidate set = Filter; ใครควรขึ้นก่อน = Rerank.']});
 
   add({task:'3.1',type:'single',target:'reranking-angle',
     question:'A retriever already returns 30 semantically relevant passages, but the best evidence is often buried near the bottom. The team wants a second step to reorder those candidates by relevance before generation. What should it add?',
@@ -81,11 +81,11 @@
     exp:['✅ ลำดับคือ Prepare data → Fine-tune → Evaluate → Promote.','❌ Promote ต้องหลัง evaluation.','🧠 จำสั้น ๆ — Data → Tune → Check → Release.']});
 
   add({task:'3.3',type:'single',target:'rouge-vs-bleu-vs-bertscore',
-    question:'A translation team wants a traditional reference-overlap metric based largely on matching n-grams between candidate and reference translations. Which metric is MOST associated with this use case?',
-    questionTh:'ทีม machine translation ต้องการ traditional reference-overlap metric ที่อาศัยการเทียบ n-grams ระหว่าง candidate กับ reference translations metric ใดสัมพันธ์กับ use case นี้มากที่สุด?',
-    choices:{A:'BLEU',B:'ROUGE',C:'BERTScore',D:'RMSE'},
+    question:'Two generated answers use very different wording but preserve nearly the same meaning as their references. The team wants a metric based on contextual embeddings rather than exact n-gram overlap. Which metric BEST fits?',
+    questionTh:'generated answers สองชุดใช้ wording ต่างจาก references มากแต่ยังรักษาความหมายใกล้เคียงกัน ทีมต้องการ metric ที่ใช้ contextual embeddings แทน exact n-gram overlap ควรใช้ metric ใด?',
+    choices:{A:'BERTScore',B:'BLEU',C:'ROUGE-L',D:'Perplexity'},
     answer:['A'],
-    exp:['✅ A — BLEU เชื่อมโยงกับ machine translation และ n-gram precision/overlap.','❌ B — ROUGE ใช้กับ summarization บ่อย.','❌ C — BERTScore ใช้ contextual embeddings เพื่อ semantic similarity.','❌ D — RMSE เป็น regression metric.','🧠 จำสั้น ๆ — Translation = BLEU; Summary = ROUGE; Meaning similarity = BERTScore.']});
+    exp:['✅ A — BERTScore ใช้ contextual embeddings เพื่อวัด semantic similarity แม้ wording ต่างกัน.','❌ B — BLEU เน้น n-gram overlap และใช้กับ translation บ่อย.','❌ C — ROUGE-L เป็น overlap metric ที่ดู longest common subsequence.','❌ D — Perplexity วัด language-model likelihood ไม่ใช่ similarity กับ reference.','🧠 จำสั้น ๆ — Meaning ใกล้แม้คำต่าง = BERTScore.']});
 
   add({task:'3.3',type:'single',target:'llm-as-judge-calibration',
     question:'A team uses another LLM to score open-ended answers against a rubric at scale. What additional practice most directly improves confidence that this evaluator is behaving acceptably?',
@@ -95,18 +95,18 @@
     exp:['✅ A — Human-reviewed subset ช่วยตรวจ/calibrate LLM judge และจับ bias/inconsistency.','❌ B — Temperature ของ evaluated model ไม่ validate judge.','❌ C — ไม่มี rubric จะยิ่งลด consistency.','❌ D — Exact match ไม่เหมาะกับ nuanced open-ended answers.','🧠 จำสั้น ๆ — LLM judge ต้องมี human anchor ตรวจความน่าเชื่อถือ.']});
 
   add({task:'3.3',type:'single',target:'bedrock-eval-vs-clarify',
-    question:'A team wants a managed AWS capability to compare foundation-model responses using model-quality criteria and optional human evaluation. It is not asking for SHAP feature attribution. Which capability fits?',
-    questionTh:'ทีมต้องการ managed AWS capability เพื่อเปรียบเทียบ foundation-model responses ด้วย model-quality criteria และ optional human evaluation โดยไม่ได้ต้องการ SHAP feature attribution ควรใช้ capability ใด?',
-    choices:{A:'Amazon Bedrock Model Evaluation',B:'SageMaker Clarify',C:'SageMaker Model Monitor',D:'Amazon Textract'},
+    question:'A tabular credit model is being developed in SageMaker. The team needs pre-training bias metrics and SHAP-based feature attribution for individual predictions. Which AWS capability is the direct match?',
+    questionTh:'ทีมกำลังพัฒนา tabular credit model ใน SageMaker และต้องการ pre-training bias metrics กับ SHAP-based feature attribution สำหรับ predictions ควรใช้ AWS capability ใด?',
+    choices:{A:'SageMaker Clarify',B:'Amazon Bedrock Model Evaluation',C:'Amazon Augmented AI (A2I)',D:'SageMaker Model Monitor'},
     answer:['A'],
-    exp:['✅ A — Bedrock Model Evaluation ใช้ประเมิน/เปรียบเทียบ FM outputs ด้วย automatic/human evaluation.','❌ B — Clarify เน้น bias/explainability เช่น SHAP.','❌ C — Model Monitor เน้น post-deployment monitoring/drift.','❌ D — Textract ดึงข้อมูลจากเอกสาร.','🧠 จำสั้น ๆ — FM output evaluation = Bedrock Evaluation; Bias/SHAP = Clarify.']});
+    exp:['✅ A — SageMaker Clarify ใช้ bias analysis และ explainability/feature attribution เช่น SHAP.','❌ B — Bedrock Model Evaluation เน้นประเมิน FM outputs/models.','❌ C — A2I ใช้ human review workflows.','❌ D — Model Monitor เน้น monitoring หลัง deploy เช่น data/model quality และ drift.','🧠 จำสั้น ๆ — Bias/SHAP = Clarify; FM output eval = Bedrock Evaluation.']});
 
   add({task:'3.1',type:'multiple',target:'fm-selection-requirements',
-    question:'A travel assistant must accept text and images, support Thai and English, respond interactively, and stay within a cost target. Which FOUR model-selection criteria map directly to these requirements? (Select FOUR.)',
-    questionTh:'travel assistant ต้องรับ text และ images รองรับไทย/อังกฤษ ตอบแบบ interactive และอยู่ใน cost target เกณฑ์เลือก model ใด 4 ข้อตรงกับ requirements เหล่านี้?',
-    choices:{A:'Supported modalities',B:'Multilingual capability',C:'Inference latency',D:'Cost',E:'Number of social-media mentions',F:'Logo style'},
+    question:'A legal-document assistant must handle very long documents, run in an approved AWS Region, support tool/function calling, and meet a strict cost ceiling. Which FOUR model-selection criteria map directly to these requirements? (Select FOUR.)',
+    questionTh:'legal-document assistant ต้องรองรับเอกสารยาวมาก ใช้งานใน AWS Region ที่อนุมัติ รองรับ tool/function calling และอยู่ภายใต้ cost ceiling เกณฑ์เลือก model ใด 4 ข้อตรงกับ requirements เหล่านี้?',
+    choices:{A:'Maximum context window',B:'Regional availability',C:'Tool/function-calling support',D:'Inference cost',E:'Popularity on social media',F:'Number of marketing case studies'},
     answer:['A','B','C','D'],
-    exp:['✅ A — ต้องรับหลาย modality.','✅ B — ต้องรองรับหลายภาษา.','✅ C — Interactive response ต้องพิจารณา latency.','✅ D — มี cost target ชัดเจน.','❌ E/F — ไม่ใช่ technical selection criteria ของ requirement นี้.','🧠 จำสั้น ๆ — Requirement ไหนพูดมา ให้ map เป็น selection criterion ตรงนั้น.']});
+    exp:['✅ A — Long documents ต้องดู context window.','✅ B — Approved Region ต้องดู regional availability.','✅ C — Requirement เรื่อง tools ต้องดู tool/function-calling support.','✅ D — Cost ceiling ต้องพิจารณา inference pricing/cost.','❌ E/F — ไม่ใช่ direct technical requirements.','🧠 จำสั้น ๆ — เลือก model จาก constraints ที่ระบบต้องใช้จริง.']});
 
   add({task:'3.4',type:'multiple',target:'genai-cost-optimization',
     question:'A high-volume GenAI service repeatedly sends the same long policy prefix, receives a mix of simple and hard requests, and sometimes hits regional capacity pressure. Which THREE approaches can directly address these three cost/capacity patterns? (Select THREE.)',
@@ -123,9 +123,9 @@
     exp:['✅ A — วัดว่างานจริงสำเร็จไหม.','✅ B — วัดประสบการณ์/คุณค่าที่ผู้ใช้รับรู้.','✅ C — วัด economics ของการใช้งานจริง.','❌ D/E/F — เป็น model metadata/architecture ไม่ใช่ application outcome.','🧠 จำสั้น ๆ — App success = งานสำเร็จ + ผู้ใช้โอเค + cost คุ้ม.']});
 
   add({task:'3.3',type:'single',target:'rag-evaluation-faithfulness',
-    question:'A RAG system retrieves passages that clearly contain the correct policy, but the generated answer adds an unsupported exception that is not present in those passages. Which quality dimension is failing most directly?',
-    questionTh:'RAG system retrieve passages ที่มี policy ถูกต้องชัดเจน แต่ generated answer เพิ่มข้อยกเว้นที่ไม่มีอยู่ใน passages เหล่านั้น quality dimension ใดมีปัญหาโดยตรงที่สุด?',
-    choices:{A:'Generation faithfulness / groundedness',B:'Retrieval relevance',C:'Vector-index availability',D:'Training accuracy'},
+    question:'A RAG answer accurately reflects the passages it received, but those passages are about the wrong policy section and do not address the user’s question. Which quality dimension should be investigated first?',
+    questionTh:'RAG answer สะท้อน passages ที่ได้รับมาได้ถูกต้อง แต่ passages เหล่านั้นเป็น policy section ผิดเรื่องและไม่ตอบคำถามผู้ใช้ ควรตรวจ quality dimension ใดก่อน?',
+    choices:{A:'Retrieval relevance',B:'Generation faithfulness',C:'Output token limit',D:'Training loss'},
     answer:['A'],
-    exp:['✅ A — Evidence ถูกแล้ว แต่ answer ไม่ยึด evidence จึงเป็น faithfulness/groundedness issue.','❌ B — Retrieval relevance ดีอยู่แล้วเพราะ passages ถูกต้อง.','❌ C — Index ใช้งานได้เพราะ retrieve สำเร็จ.','❌ D — Training accuracy ไม่ใช่ metric หลักของ RAG runtime issue นี้.','🧠 จำสั้น ๆ — Retrieve ถูก แต่ตอบเกิน evidence = Faithfulness.']});
+    exp:['✅ A — ปัญหาเกิดตั้งแต่ retrieved passages ไม่เกี่ยวกับ query จึงเป็น Retrieval relevance.','❌ B — Generation faithfulness ดีอยู่แล้วเพราะ answer ยึดตาม passages ที่ได้รับ.','❌ C — Token limit ไม่ใช่สาเหตุที่ retrieve ผิดเรื่อง.','❌ D — Training loss ไม่ใช่ runtime RAG quality dimension นี้.','🧠 จำสั้น ๆ — Context ผิด = Retrieval relevance; Context ถูกแต่ตอบมั่ว = Faithfulness.']});
 })();
