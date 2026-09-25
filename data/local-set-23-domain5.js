@@ -16,12 +16,12 @@
     answer:['A'],
     exp:['✅ A — Identity จัดการ identity/credential access สำหรับ agent และ downstream resources.','❌ B — Policy เน้น deterministic authorization decisions/allow-deny.','❌ C — Memory ใช้เก็บ context/knowledge ที่ต้องจำ.','❌ D — Evaluations ใช้ประเมิน agent behavior/quality.','🧠 จำสั้น ๆ — Credentials = Identity; Allow/Deny rules = Policy.']});
 
-  add({task:'5.1',type:'single',target:'bedrock-invocation-logging-retest',
-    question:'A governance team needs configured records of Bedrock model interactions for later investigation, including request and response details where permitted. Which capability is the direct match?',
-    questionTh:'ทีม governance ต้องการเก็บ records ของ Bedrock model interactions ตาม configuration เพื่อใช้สืบสวนภายหลัง รวม request/response details ในขอบเขตที่อนุญาต ควรใช้ capability ใด?',
-    choices:{A:'Model invocation logging',B:'AWS CloudTrail only',C:'Prompt Management',D:'AWS Config'},
+  add({task:'5.1',type:'single',target:'cloudtrail-vs-invocation-logging-reverse',
+    question:'An auditor only needs to know which identity called a Bedrock API, which operation was invoked, and when the call occurred. The auditor does not need the full prompt or model response content. Which service is the BEST fit?',
+    questionTh:'auditor ต้องการรู้เพียงว่า identity ใดเรียก Bedrock API, เรียก operation อะไร และเมื่อไร โดยไม่ต้องการ prompt หรือ model response แบบเต็ม ควรใช้ service ใด?',
+    choices:{A:'AWS CloudTrail',B:'Bedrock model invocation logging',C:'Prompt Management',D:'Amazon Macie'},
     answer:['A'],
-    exp:['✅ A — Model invocation logging ใช้ capture model-interaction details ตาม configuration.','❌ B — CloudTrail เน้น API activity เช่นใครเรียก API อะไร เมื่อไร ไม่ใช่ interaction content โดยตรง.','❌ C — Prompt Management เก็บ/version prompts.','❌ D — Config ติดตาม resource configuration/compliance.','🧠 จำสั้น ๆ — ใครเรียก API = CloudTrail; คุยอะไรกับ model = Invocation logging.']});
+    exp:['✅ A — CloudTrail บันทึก API activity เช่น caller, operation และเวลา.','❌ B — Model invocation logging เหมาะเมื่อจำเป็นต้องเก็บ invocation input/output details ตาม configuration.','❌ C — Prompt Management ใช้เก็บ/version prompts.','❌ D — Macie ใช้ค้นหา sensitive data ใน S3.','🧠 จำสั้น ๆ — ใครเรียกอะไรเมื่อไร = CloudTrail; คุยอะไรกับ model = Invocation logging.']});
 
   add({task:'5.1',type:'single',target:'model-inversion-retest',
     question:'An attacker studies a model\'s outputs to infer whether particular sensitive records or attributes were present in the model\'s training data. Which threat BEST matches?',
@@ -58,10 +58,10 @@
     answer:['A','B','C'],
     exp:['✅ A — Least privilege จำกัดผู้ที่อ่าน/แก้ข้อมูลได้.','✅ B — Integrity checks ช่วยตรวจ unauthorized modifications.','✅ C — Data minimization/privacy protection ลด exposure ของ sensitive data.','❌ D — Temperature เป็น generation parameter.','❌ E — Duplicates ไม่ใช่ security control.','❌ F — การลบ audit trail ทำให้ governance/security แย่ลง.','🧠 จำสั้น ๆ — Access + Integrity + Privacy.']});
 
-  add({task:'5.2',type:'ordering',target:'nist-ai-rmf-retest',
-    question:'Order the four NIST AI Risk Management Framework functions in their standard recall sequence.',
-    questionTh:'เรียง 4 functions ของ NIST AI Risk Management Framework ตามลำดับมาตรฐานที่ใช้จำ.',
-    choices:{A:'Measure',B:'Manage',C:'Map',D:'Govern'},
-    answer:['D','C','A','B'],
-    exp:['✅ ลำดับสำหรับ recall คือ Govern → Map → Measure → Manage.','❌ Govern เป็น cross-cutting ในการใช้งานจริง แต่ลำดับจำมาตรฐานยังเป็น GMMM.','🧠 จำสั้น ๆ — GMMM = Govern → Map → Measure → Manage.']});
+  add({task:'5.2',type:'ordering',target:'governed-data-lifecycle',
+    question:'An organization defines this required lifecycle for a governed training dataset. Order the stages from intake to end-of-retention disposal.',
+    questionTh:'องค์กรกำหนด lifecycle ที่ต้องใช้สำหรับ governed training dataset ไว้ดังนี้ จงเรียงขั้นตอนตั้งแต่รับข้อมูลจนถึงการกำจัดเมื่อครบ retention period.',
+    choices:{A:'Delete or archive according to the retention policy',B:'Approve the data source and intended use',C:'Apply access controls and quality/integrity checks',D:'Use the governed dataset for the approved AI workflow',E:'Monitor use and retain required audit records'},
+    answer:['B','C','D','E','A'],
+    exp:['✅ ลำดับตาม process ที่โจทย์กำหนดคือ Approve source/use → Protect/check → Use → Monitor/retain records → Dispose at end of retention.','❌ การลบ/archive ต้องเป็นขั้นท้ายเมื่อครบ retention requirement.','🧠 จำสั้น ๆ — Approve → Protect → Use → Observe → Dispose.']});
 })();
