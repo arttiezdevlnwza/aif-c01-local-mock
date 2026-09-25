@@ -73,14 +73,15 @@
         question,
         questionTh,
         choices:clone(effectiveChoices),
-        answer:clone(item.answer),
+        answer:clone(setNumber === 22 && item.answer22 ? item.answer22 : item.answer),
         explanation:(effectiveExplanation || []).join('\n'),
         type:item.type,
         vocab:buildVocab(question, effectiveChoices),
         task:item.task,
         _target:item.target
       };
-      if (item.matches) q.matches = clone(item.matches);
+      const effectiveMatches = setNumber === 22 && item.matches22 ? item.matches22 : item.matches;
+      if (effectiveMatches) q.matches = clone(effectiveMatches);
       return q;
     });
 
