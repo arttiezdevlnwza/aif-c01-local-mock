@@ -1,18 +1,18 @@
 # AIF-C01 Local Mock
 
-Static web app สำหรับฝึก **AWS Certified AI Practitioner (AIF-C01)** แบบ local/browser-only พร้อมข้อสอบ 22 ชุด, Study Dashboard, Review Queue และ AIF-C01 Info Library
+Static web app สำหรับฝึก **AWS Certified AI Practitioner (AIF-C01)** แบบ local/browser-only พร้อมข้อสอบ 23 ชุด, Study Dashboard, Review Queue และ AIF-C01 Info Library
 
 ## Current status
 
-- **22 Sets / 1,430 questions**
+- **23 Sets / 1,495 questions**
 - **65 questions per set**
-- Set 8–22 เน้น **English scenario + close distractors**
+- Set 8–23 เน้น **English scenario + close distractors**
 - รองรับ **Single Choice / Multiple Response / Ordering / Matching**
 - ทุกข้อใน Local Mock คิดคะแนน: `correct / 65 × 100`
 - Progress เก็บใน **browser localStorage** ไม่มี account/database/backend
 - AIF-C01 Info Library ปัจจุบันมี **17 topic families / 133 quick-reference items**
 
-## Blueprint สำหรับ Set 19–22
+## Blueprint สำหรับ Set 19–23
 
 | Domain | Questions |
 |---|---:|
@@ -22,7 +22,9 @@ Static web app สำหรับฝึก **AWS Certified AI Practitioner (AIF-
 | D4 — Responsible AI | 9 |
 | D5 — Security, Compliance, and Governance | 9 |
 
-Set 19–22 ครอบคลุมทุก official Task Statement 1.1–5.2 และใช้ scenario / boundary / distractor แบบใกล้ข้อสอบมากขึ้น
+Set 19–23 ครอบคลุมทุก official Task Statement 1.1–5.2 และใช้ scenario / boundary / distractor แบบใกล้ข้อสอบมากขึ้น
+
+Set 23 ใช้ **AIF-C01 Exam Guide v1.1 task mapping ปัจจุบัน** โดยเฉพาะ Domain 3: 3.1 Design considerations / 3.2 Prompt engineering / 3.3 Training & fine-tuning / 3.4 Evaluation และเป็น independent mixed set ที่ใช้ Set 22 reviewed gaps เป็น spaced-repetition input บางส่วน ไม่ใช่ retest แบบ 1:1.
 
 Set 21–22 เป็น **Targeted Weakness + Under-covered Topics** โดยเน้นหัวข้อที่ review พบว่าพลาดซ้ำ/ยังลังเล เช่น Data Governance, Traditional ML vs FM, Responsible AI, RAG order, RMSE vs MAE, SOC reports, AgentCore/Quick รวมทั้งหัวข้อที่เจอน้อยใน 20 ชุดแรก เช่น agent memory, MCP host/client/server, Converse API, AgentCore Browser/Code Interpreter/Evaluations, prompt optimization/caching/routing, fairness DPL/DPPL, model invocation logging และ Generative AI Security Scoping Matrix.
 
@@ -140,6 +142,8 @@ data/
   local-set-21-22-builder.js           # Builds Set 21 only
   local-set-22-independent-domain*.js # Independent Set 22 bank
   local-set-22-independent-builder.js # Builds/validates Set 22
+  local-set-23-domain*.js            # Independent Set 23 bank
+  local-set-23-builder.js            # Builds/validates Set 23
 
   exam-family-guide.js             # Info Library data
   review-insights.js
