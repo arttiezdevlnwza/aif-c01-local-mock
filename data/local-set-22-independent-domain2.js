@@ -23,13 +23,6 @@
     answer:['A'],
     exp:['✅ A — Input ทุกส่วนใช้ tokens และรวมกันต้องอยู่ภายใน context window ของ model.','❌ B — Normal inference ไม่ได้ retrain weights ทุกครั้ง.','❌ C — Embeddings ยังเป็น vectors ไม่ได้เปลี่ยนชนิดตามจำนวน turns.','❌ D — Temperature ไม่ได้ลดเป็นศูนย์อัตโนมัติเมื่อ prompt ยาว.','🧠 จำสั้น ๆ — Context window = งบพื้นที่ token ของ request.']});
 
-  add({task:'2.1',type:'multiple',target:'genai-core-capabilities',
-    question:'A communications team is considering GenAI for daily work. Which THREE activities are core generative-AI capabilities rather than governance controls or evaluation methods? (Select THREE.)',
-    questionTh:'ทีม communications กำลังพิจารณา GenAI สำหรับงานประจำวัน กิจกรรมใด 3 อย่างเป็น core GenAI capabilities มากกว่าจะเป็น governance control หรือ evaluation method?',
-    choices:{A:'Draft new marketing copy from instructions',B:'Summarize a long report',C:'Answer questions conversationally',D:'Enforce an IAM permissions boundary',E:'Collect audit evidence against a framework',F:'Measure RMSE on a regression model'},
-    answer:['A','B','C'],
-    exp:['✅ A — การสร้างข้อความใหม่จาก instructions เป็น generative capability.','✅ B — Summarization เป็น GenAI capability.','✅ C — Conversational Q&A เป็น capability.','❌ D — IAM boundary เป็น security control.','❌ E — Audit evidence collection เป็น governance/compliance activity.','❌ F — RMSE เป็น regression evaluation metric.','🧠 จำสั้น ๆ — Generate / Summarize / Converse = GenAI capabilities.']});
-
   add({task:'2.1',type:'multiple',target:'genai-risks',
     question:'A legal team is reviewing a customer-facing generative assistant. Which THREE issues are inherent GenAI risks or limitations that should be mitigated? (Select THREE.)',
     questionTh:'ทีมกฎหมายกำลัง review generative assistant ที่ลูกค้าใช้งานโดยตรง ปัญหาใด 3 อย่างเป็น GenAI risks/limitations ที่ควรมีมาตรการลดความเสี่ยง?',
