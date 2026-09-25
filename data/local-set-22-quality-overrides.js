@@ -1011,8 +1011,208 @@
     ]
   });
 
+
+  override(49, {
+    choices:{
+      A:'Release the system with defined human oversight and production monitoring',
+      B:'Record evaluation results, known limitations, intended use, and residual risks',
+      C:'Define intended use, affected users, decision impact, and key risk scenarios',
+      D:'Prepare data that is appropriate and representative for the intended population',
+      E:'Evaluate performance, subgroup behavior, safety, and other relevant risks'
+    },
+    answer:['C','D','E','B','A'],
+    exp:[
+      '✅ ลำดับคือ Define use/risks → Prepare representative data → Evaluate → Document → Deploy/Monitor.',
+      '❌ Documentation ต้องตามหลัง evaluation เพราะต้องบันทึกผลและ limitations ที่ค้นพบจากการประเมิน.',
+      '❌ Deployment เป็นขั้นท้ายหลังผ่าน evaluation และมีเอกสาร/controls พร้อมแล้ว.',
+      '🧠 จำสั้น ๆ — รู้ความเสี่ยง → เตรียมข้อมูล → ตรวจ → จด → ค่อยปล่อย.'
+    ]
+  });
+
+  override(50, {
+    choices:{
+      A:'Measurement bias',
+      B:'Sampling bias',
+      C:'Selection bias',
+      D:'Automation bias'
+    },
+    answer:['A'],
+    exp:[
+      '✅ A — วิธีวัด/annotation ให้ความแม่นยำไม่เท่ากันระหว่างกลุ่ม ทำให้ค่าที่บันทึกเพี้ยนอย่างเป็นระบบ จึงเป็น Measurement bias.',
+      '❌ B — Sampling bias เกิดจากตัวอย่างที่เก็บมาไม่เป็นตัวแทนของประชากรเป้าหมาย.',
+      '❌ C — Selection bias เกี่ยวกับกระบวนการเลือกตัวอย่าง/กลุ่มที่ทำให้ข้อมูลเอนเอียง ไม่ใช่เครื่องมือวัดให้ค่าผิด.',
+      '❌ D — Automation bias คือคนเชื่อผลจากระบบอัตโนมัติมากเกินไป.',
+      '🧠 จำสั้น ๆ — ตัววัด/labeling process ทำข้อมูลเพี้ยน = Measurement bias.'
+    ]
+  });
+
+  override(51, {
+    choices:{
+      A:'Collect/curate enough examples for under-represented subgroups',
+      B:'Audit and harmonize inconsistent labels across annotators and groups',
+      C:'Tune the decision threshold without fixing the underlying dataset',
+      D:'Report only overall accuracy so subgroup differences do not affect the launch',
+      E:'Remove demographic slices from evaluation to avoid seeing disparity'
+    },
+    answer:['A','B'],
+    exp:[
+      '✅ A — การเพิ่ม/curate ตัวอย่างของกลุ่มที่ under-represented ช่วยให้ dataset เป็นตัวแทนประชากรดีขึ้น.',
+      '✅ B — การตรวจและทำ label ให้สม่ำเสมอลด fairness risk จาก inconsistent annotation.',
+      '❌ C — Threshold tuning อาจเปลี่ยน output หลัง model มีแล้ว แต่ไม่แก้ representation/label quality ของ dataset ต้นทาง.',
+      '❌ D — Aggregate accuracy อาจซ่อนปัญหาของ subgroup.',
+      '❌ E — การเลิกวิเคราะห์ subgroup ทำให้ตรวจ fairness issue ยากขึ้น ไม่ได้ลด risk.',
+      '🧠 จำสั้น ๆ — คนบางกลุ่มน้อย = Representation; label ไม่ตรงกัน = Label quality.'
+    ]
+  });
+
+  override(52, {
+    question:'Which service-to-purpose pairing is CORRECT for a team that needs bias analysis before training and SHAP-based explainability during model development?',
+    questionTh:'คู่ service-to-purpose ใดถูกต้องสำหรับทีมที่ต้องการวิเคราะห์ bias ก่อน training และ SHAP-based explainability ระหว่างพัฒนา model?',
+    choices:{
+      A:'SageMaker Clarify — bias analysis and feature-attribution explainability',
+      B:'SageMaker Model Monitor — pre-training label bias and SHAP generation',
+      C:'SageMaker Ground Truth — production drift detection and feature attribution',
+      D:'Amazon Augmented AI (A2I) — automatic SHAP analysis before training'
+    },
+    answer:['A'],
+    exp:[
+      '✅ A — SageMaker Clarify ใช้ตรวจ bias และ explainability/feature attribution เช่น SHAP.',
+      '❌ B — Model Monitor เน้น monitoring หลัง deploy เช่น data/model quality และ drift.',
+      '❌ C — Ground Truth เน้น data labeling ไม่ใช่ production drift + SHAP.',
+      '❌ D — A2I ใช้ human review workflows หลัง inference ไม่ใช่ automatic pre-training SHAP analysis.',
+      '🧠 จำสั้น ๆ — Bias/SHAP = Clarify; Drift = Monitor; Label = Ground Truth; Human review = A2I.'
+    ]
+  });
+
+  override(53, {
+    choices:{
+      A:'DPL — compare positive proportions in the dataset labels before training',
+      B:'DPPL — compare positive proportions in predicted labels after inference',
+      C:'DPL — compare production predictions after deployment',
+      D:'DPPL — compare historical training labels before a model exists'
+    },
+    answer:['A'],
+    exp:[
+      '✅ A — DPL ใช้กับ positive proportions ใน labels ของ dataset ก่อน train.',
+      '❌ B — คำอธิบายนี้เป็น DPPL จริง แต่โจทย์ถาม metric ฝั่ง pre-training labels.',
+      '❌ C — DPL ไม่ได้ใช้กับ production predictions หลัง deploy.',
+      '❌ D — DPPL ใช้ predicted labels หลังมี model prediction ไม่ใช่ historical labels ก่อน train.',
+      '🧠 จำสั้น ๆ — DPL: L = Labels ก่อน train; DPPL: Predicted Labels หลัง model.'
+    ]
+  });
+
+  override(56, {
+    question:'Match each human-centered AI concept with the user protection it MOST directly provides.',
+    questionTh:'จับคู่ human-centered AI concept แต่ละตัวกับการคุ้มครองผู้ใช้ที่มันให้โดยตรงที่สุด.',
+    choices:{
+      A:'Recourse',
+      B:'Human oversight',
+      C:'Transparency',
+      D:'Explainability'
+    },
+    matches:{
+      '1':'Give an affected person a path to challenge or appeal an outcome',
+      '2':'Allow a person to review, approve, or intervene before a consequential action',
+      '3':'Disclose that AI is used and communicate intended use or limitations',
+      '4':'Provide understandable reasons for a particular prediction or decision'
+    },
+    answer:['A:1','B:2','C:3','D:4'],
+    exp:[
+      '✅ Recourse → ผู้ได้รับผลกระทบมีช่องทาง challenge/appeal.',
+      '✅ Human oversight → คน review/approve/intervene ก่อน action สำคัญ.',
+      '✅ Transparency → เปิดเผยการใช้ AI, intended use และ limitations.',
+      '✅ Explainability → อธิบายเหตุผลของ prediction/decision เฉพาะกรณี.',
+      '🧠 จำสั้น ๆ — Appeal = Recourse; คนคุม = Oversight; บอกระบบ = Transparency; บอกเหตุผล = Explainability.'
+    ]
+  });
+
+  override(57, {
+    question:'A provider wants an assurance report based on the Trust Services Criteria that can be distributed broadly to prospective customers without giving them the detailed restricted-use SOC 2 report. Which report BEST fits?',
+    questionTh:'provider ต้องการ assurance report ตาม Trust Services Criteria ที่แจกให้ prospective customers ได้กว้าง โดยไม่ต้องให้ detailed restricted-use SOC 2 report ควรใช้รายงานใด?',
+    choices:{
+      A:'SOC 1',
+      B:'SOC 2',
+      C:'SOC 3',
+      D:'ISO/IEC 27001 certificate'
+    },
+    answer:['C'],
+    exp:[
+      '✅ C — SOC 3 เป็น general-use report ตาม Trust Services Criteria ที่เหมาะกับการแจกต่อสาธารณะ/ลูกค้าในวงกว้าง.',
+      '❌ A — SOC 1 เน้น controls ที่เกี่ยวข้องกับ financial reporting.',
+      '❌ B — SOC 2 ให้รายละเอียด controls มากกว่าและเป็น restricted-use report สำหรับผู้ใช้ที่ต้องการรายละเอียด.',
+      '❌ D — ISO/IEC 27001 เป็น certification ของ ISMS ไม่ใช่ SOC assurance report.',
+      '🧠 จำสั้น ๆ — SOC 1 = Financial; SOC 2 = Detailed; SOC 3 = Public/general use.'
+    ]
+  });
+
+  override(58, {
+    question:'A compliance team needs to map an audit framework to AWS controls and continuously collect evidence from AWS services so auditors can review readiness over time. Which service is the BEST fit?',
+    questionTh:'ทีม compliance ต้อง map audit framework กับ AWS controls และรวบรวม evidence จาก AWS services อย่างต่อเนื่องเพื่อให้ออดิเตอร์ตรวจ readiness ตามเวลา ควรใช้ service ใด?',
+    choices:{
+      A:'AWS Config',
+      B:'AWS Audit Manager',
+      C:'AWS Artifact',
+      D:'AWS CloudTrail'
+    },
+    answer:['B'],
+    exp:[
+      '✅ B — Audit Manager ช่วย map controls/frameworks และเก็บ evidence เพื่อรองรับ audit readiness.',
+      '❌ A — Config เน้น resource configuration state และ rule-based compliance.',
+      '❌ C — Artifact ใช้ดาวน์โหลด AWS compliance reports/agreements ไม่ได้รวบรวม evidence ของ workload ตาม framework.',
+      '❌ D — CloudTrail บันทึก API activity ว่าใครทำอะไรเมื่อไร แต่ไม่ใช่ audit-evidence framework manager.',
+      '🧠 จำสั้น ๆ — Config = resource state; Audit Manager = evidence; Artifact = AWS reports; CloudTrail = API activity.'
+    ]
+  });
+
+  override(59, {
+    question:'A data-governance program needs clear accountability plus lifecycle controls. Match each concept with the description that BEST fits it.',
+    questionTh:'โปรแกรม data governance ต้องการทั้ง accountability และ lifecycle controls ให้จับคู่ concept กับคำอธิบายที่ตรงที่สุด.',
+    choices:{
+      A:'Data owner',
+      B:'Data steward',
+      C:'Data lineage',
+      D:'Data retention',
+      E:'Data residency'
+    },
+    matches:{
+      '1':'Accountable for business use, access decisions, and overall responsibility for a data domain',
+      '2':'Handles day-to-day data quality, definitions, metadata, and governance practices',
+      '3':'Tracks data origins, movement, and transformations',
+      '4':'Defines how long records are kept before archival or deletion',
+      '5':'Defines approved geographic locations for storing or processing data'
+    },
+    answer:['A:1','B:2','C:3','D:4','E:5'],
+    exp:[
+      '✅ Data owner → รับผิดชอบเชิงธุรกิจและ accountability ของ data domain.',
+      '✅ Data steward → ดูแลคุณภาพ, definitions, metadata และ governance ในงานประจำ.',
+      '✅ Data lineage → ตามต้นทาง การเคลื่อนย้าย และ transformations.',
+      '✅ Data retention → กำหนดว่าเก็บข้อมูลนานแค่ไหน.',
+      '✅ Data residency → กำหนดว่าข้อมูลอยู่/ประมวลผลใน geographic location ใดได้.',
+      '🧠 จำสั้น ๆ — Owner = accountable; Steward = ดูแลประจำวัน; Lineage = มาจากไหน; Retention = เก็บนาน; Residency = อยู่ที่ไหน.'
+    ]
+  });
+
+  override(65, {
+    question:'An attacker sends many queries to a deployed proprietary model and uses the input-output pairs to train a substitute model that mimics the original service. Which threat BEST matches?',
+    questionTh:'ผู้โจมตีส่ง queries จำนวนมากไปยัง proprietary model แล้วใช้คู่ input-output ไป train substitute model ให้เลียนแบบบริการเดิม threat ใดตรงที่สุด?',
+    choices:{
+      A:'Model extraction',
+      B:'Model inversion',
+      C:'Data poisoning',
+      D:'Prompt injection'
+    },
+    answer:['A'],
+    exp:[
+      '✅ A — Model extraction พยายามคัดลอก/เลียนแบบ model behavior จาก queries และ outputs เพื่อสร้าง substitute model.',
+      '❌ B — Model inversion พยายามย้อนหรือ reconstruct ข้อมูลเกี่ยวกับ training examples.',
+      '❌ C — Data poisoning ปนเปื้อน training data เพื่อเปลี่ยน behavior ของ model.',
+      '❌ D — Prompt injection แทรก instructions เพื่อ override application/model behavior.',
+      '🧠 จำสั้น ๆ — ขโมย behavior ไปสร้างตัวเลียนแบบ = Extraction; ย้อนข้อมูล train = Inversion.'
+    ]
+  });
+
   window.LOCAL_SET_22_QUALITY_AUDIT = {
-    focus:'Close distractors and reduced elimination-by-unrelated-choice risk',
-    revisedQuestions:[1,6,7,8,13,19,20,25,27,28,29,30,33,35,37,38,43,44,45,46,47,48,54,55,60,61,62,63,64]
+    focus:'Independent Retest B: no Set 21-identical choice sets, different decision angles, and closer distractors',
+    revisedQuestions:Array.from({length:65}, (_, index) => index + 1)
   };
 })();
