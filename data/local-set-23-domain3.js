@@ -1,0 +1,131 @@
+(() => {
+  const bank = window.LOCAL_SET_23_BANK = window.LOCAL_SET_23_BANK || [];
+  const add = x => bank.push({ domain:3, ...x });
+
+  add({task:'3.1',type:'single',target:'fm-selection-context-window',
+    question:'A legal assistant must analyze contracts that are often much longer than the input limit of one candidate model. Which selection criterion is MOST directly relevant?',
+    questionTh:'legal assistant ต้องวิเคราะห์สัญญาที่มักยาวเกิน input limit ของ candidate model ตัวหนึ่ง เกณฑ์เลือก model ใดเกี่ยวข้องโดยตรงที่สุด?',
+    choices:{A:'Maximum input/context length',B:'Temperature',C:'Number of training epochs',D:'Label cardinality'},
+    answer:['A'],
+    exp:['✅ A — เอกสารยาวต้องพิจารณา input/context length ที่ model รองรับ.','❌ B — Temperature ควบคุม randomness ไม่ได้เพิ่ม context limit.','❌ C — Training epochs เป็น training parameter.','❌ D — Label cardinality เกี่ยวกับ classification labels.','🧠 จำสั้น ๆ — เอกสารยาว = ดู Context window.']});
+
+  add({task:'3.1',type:'single',target:'temperature-creativity-angle',
+    question:'A creative-writing application wants more varied wording and is willing to accept less predictable responses. Which inference-parameter change BEST aligns with that goal?',
+    questionTh:'แอป creative writing ต้องการ wording ที่หลากหลายขึ้นและยอมรับได้หากคำตอบ predictable น้อยลง ควรปรับ inference parameter ใด?',
+    choices:{A:'Increase temperature moderately',B:'Decrease temperature toward zero',C:'Reduce input length only',D:'Increase vector dimensions'},
+    answer:['A'],
+    exp:['✅ A — Temperature สูงขึ้นเพิ่ม sampling variation และ creativity.','❌ B — Temperature ต่ำลงทำให้ output คงที่ขึ้น.','❌ C — Input length ไม่ใช่ตัวควบคุม creativity โดยตรง.','❌ D — Vector dimensions ไม่ใช่ inference sampling parameter.','🧠 จำสั้น ๆ — Variety ↑ → Temperature ↑.']});
+
+  add({task:'3.1',type:'single',target:'rag-business-application',
+    question:'An employee assistant must answer from private policy documents that change frequently and cite the passages it used. Which design BEST fits?',
+    questionTh:'employee assistant ต้องตอบจาก private policy documents ที่เปลี่ยนบ่อยและแสดง passages ที่ใช้เป็นแหล่งอ้างอิง design ใดเหมาะที่สุด?',
+    choices:{A:'Retrieval-Augmented Generation (RAG)',B:'Train a new FM from scratch after every update',C:'Clustering',D:'Increase temperature'},
+    answer:['A'],
+    exp:['✅ A — RAG ดึง knowledge ปัจจุบันตอน runtime และใช้เป็น grounding/citation ได้โดยไม่ต้อง retrain ทุกครั้ง.','❌ B — Training ใหม่ทุก update แพงและไม่เหมาะกับข้อมูลเปลี่ยนบ่อย.','❌ C — Clustering ไม่ได้ตอบคำถามจาก knowledge source.','❌ D — Temperature ไม่เพิ่ม current knowledge.','🧠 จำสั้น ๆ — Facts เปลี่ยนบ่อย + citation = RAG.']});
+
+  add({task:'3.1',type:'multiple',target:'vector-database-options',
+    question:'Which TWO AWS options are directly suitable when an FM application needs vector similarity search while either using a search-oriented engine or keeping relational PostgreSQL data? (Select TWO.)',
+    questionTh:'AWS options ใด 2 ตัวเหมาะโดยตรงเมื่อ FM application ต้องการ vector similarity search โดยกรณีหนึ่งเน้น search engine และอีกกรณีต้องคง relational PostgreSQL data?',
+    choices:{A:'Amazon OpenSearch Service',B:'Amazon Aurora PostgreSQL-compatible with pgvector support',C:'Amazon SQS',D:'Amazon EventBridge',E:'AWS CloudTrail'},
+    answer:['A','B'],
+    exp:['✅ A — OpenSearch รองรับ search/vector retrieval workloads.','✅ B — Aurora PostgreSQL-compatible สามารถใช้ vector extension/capability สำหรับ similarity search พร้อม relational data.','❌ C — SQS เป็น message queue.','❌ D — EventBridge เป็น event routing service.','❌ E — CloudTrail เป็น API activity logging.','🧠 จำสั้น ๆ — Search engine = OpenSearch; relational PostgreSQL + vectors = Aurora/RDS PostgreSQL.']});
+
+  add({task:'3.1',type:'single',target:'customization-cost-rag-vs-finetune',
+    question:'A company needs answers grounded in a private knowledge base that changes daily. It wants the least operational effort and does not need persistent changes to model behavior. Which customization approach is generally the BEST fit?',
+    questionTh:'บริษัทต้องการคำตอบที่ grounded จาก private knowledge base ซึ่งเปลี่ยนทุกวัน ต้องการ operational effort ต่ำ และไม่จำเป็นต้องเปลี่ยน behavior ของ model แบบถาวร แนวทาง customization ใดเหมาะที่สุด?',
+    choices:{A:'RAG',B:'Fine-tune the model every day',C:'Pre-train a new model',D:'Model distillation'},
+    answer:['A'],
+    exp:['✅ A — RAG อัปเดต knowledge source ได้โดยไม่ต้อง update weights ทุกวัน.','❌ B — Fine-tune ทุกวันมี operational/cost overhead สูงเกิน requirement.','❌ C — Pre-training ใหม่แพงและเกินความจำเป็น.','❌ D — Distillation ใช้สร้าง student model เล็ก ไม่ได้แก้ knowledge freshness.','🧠 จำสั้น ๆ — Knowledge เปลี่ยนบ่อย = Retrieval; behavior เปลี่ยนถาวร = Fine-tune.']});
+
+  add({task:'3.1',type:'single',target:'agent-business-application',
+    question:'A travel assistant must decide which external service to call next based on the user goal, use tools, observe results, and continue until the task is complete. Which concept BEST describes this design?',
+    questionTh:'travel assistant ต้องตัดสินใจว่าจะเรียก external service ใดต่อจาก goal ของผู้ใช้ ใช้ tools ดูผลลัพธ์ แล้วทำต่อจนงานเสร็จ แนวคิดใดอธิบาย design นี้ได้ดีที่สุด?',
+    choices:{A:'AI agent',B:'Static prompt template',C:'Offline batch inference',D:'K-means clustering'},
+    answer:['A'],
+    exp:['✅ A — Agent สามารถ reason/plan เลือก tool ทำ action และใช้ observation ทำขั้นถัดไป.','❌ B — Prompt template อย่างเดียวไม่ได้ orchestrate tool loop.','❌ C — Batch inference ไม่ได้ตัดสินใจแบบ dynamic หลายขั้น.','❌ D — Clustering ใช้จัดกลุ่มข้อมูล.','🧠 จำสั้น ๆ — Goal → Choose tool → Act → Observe → Continue = Agent.']});
+
+  add({task:'3.2',type:'single',target:'negative-prompting',
+    question:'A prompt says, “Write a product description, but do not mention competitor names or make medical claims.” Which prompt-engineering construct is being used most directly?',
+    questionTh:'prompt ระบุว่า “เขียน product description แต่ห้ามพูดชื่อคู่แข่งหรือกล่าวอ้างทางการแพทย์” prompt-engineering construct ใดถูกใช้โดยตรงที่สุด?',
+    choices:{A:'Negative prompting',B:'Few-shot prompting',C:'Model distillation',D:'Reranking'},
+    answer:['A'],
+    exp:['✅ A — Negative prompt/instruction ระบุสิ่งที่ model ไม่ควรทำหรือไม่ควรรวมใน output.','❌ B — Few-shot ต้องมีหลาย examples.','❌ C — Distillation เป็น training technique.','❌ D — Reranking เป็น retrieval technique.','🧠 จำสั้น ๆ — “อย่าทำ/อย่าใส่...” = Negative prompt.']});
+
+  add({task:'3.2',type:'single',target:'one-vs-few-shot',
+    question:'A prompt contains three labeled examples demonstrating the desired output format before a new unseen input. Which technique is this?',
+    questionTh:'prompt มี labeled examples 3 ตัวเพื่อแสดงรูปแบบ output ที่ต้องการก่อน input ใหม่ที่ไม่เคยเห็น เทคนิคนี้เรียกว่าอะไร?',
+    choices:{A:'Few-shot prompting',B:'One-shot prompting',C:'Zero-shot prompting',D:'Continued pre-training'},
+    answer:['A'],
+    exp:['✅ A — มีหลายตัวอย่างก่อน task ใหม่ = Few-shot prompting.','❌ B — One-shot มีตัวอย่างเดียว.','❌ C — Zero-shot ไม่มีตัวอย่าง.','❌ D — Continued pre-training เปลี่ยน model weights ด้วย corpus เพิ่มเติม.','🧠 จำสั้น ๆ — 0 = Zero; 1 = One; หลาย = Few.']});
+
+  add({task:'3.2',type:'multiple',target:'prompt-best-practices',
+    question:'A team wants more reliable prompt results during development. Which THREE practices align with prompt-engineering best practices? (Select THREE.)',
+    questionTh:'ทีมต้องการให้ผลจาก prompt เชื่อถือได้มากขึ้นระหว่างพัฒนา แนวปฏิบัติใด 3 ข้อสอดคล้องกับ prompt-engineering best practices?',
+    choices:{A:'Use clear and specific instructions',B:'Experiment and compare prompt variants',C:'Keep prompts concise while preserving needed context',D:'Hide the task objective from the model',E:'Add irrelevant examples to increase length',F:'Assume the first prompt version is final'},
+    answer:['A','B','C'],
+    exp:['✅ A — Specific instructions ลด ambiguity.','✅ B — Experimentation ช่วยหาวิธี prompt ที่เหมาะกับ task/model.','✅ C — Concision ช่วยลด noise โดยยังคง context ที่จำเป็น.','❌ D — ซ่อน objective เพิ่ม ambiguity.','❌ E — Irrelevant examples เพิ่ม noise/cost.','❌ F — Prompt ควรถูกทดลองและปรับ ไม่ใช่ถือว่า version แรกดีที่สุด.','🧠 จำสั้น ๆ — Clear + Test + Concise.']});
+
+  add({task:'3.2',type:'multiple',target:'prompt-security-risks',
+    question:'Which THREE are recognized prompt-engineering security risks or attack patterns? (Select THREE.)',
+    questionTh:'ข้อใด 3 อย่างเป็น security risks หรือ attack patterns ที่เกี่ยวกับ prompt engineering?',
+    choices:{A:'Prompt injection/hijacking',B:'Jailbreaking',C:'Prompt exposure/leakage',D:'Regression',E:'Clustering',F:'Batch inference'},
+    answer:['A','B','C'],
+    exp:['✅ A — Injection/hijacking พยายามแทรกหรือ override instructions.','✅ B — Jailbreaking พยายามหลบ safeguards/restrictions.','✅ C — Exposure/leakage พยายามเปิดเผย hidden prompt/instructions.','❌ D/E/F — เป็น ML/inference concepts ไม่ใช่ prompt attacks.','🧠 จำสั้น ๆ — แทรก / แหก / ล้วง = Prompt security family.']});
+
+  add({task:'3.2',type:'single',target:'prompt-management',
+    question:'A production application needs reusable prompt templates, variables, saved versions, and a controlled way to reference an approved prompt version. Which Amazon Bedrock capability BEST fits?',
+    questionTh:'production application ต้องการ reusable prompt templates, variables, saved versions และวิธีอ้างอิง approved prompt version อย่างควบคุม ควรใช้ Amazon Bedrock capability ใด?',
+    choices:{A:'Prompt Management',B:'Knowledge Bases',C:'Model Evaluation',D:'Guardrails content filters'},
+    answer:['A'],
+    exp:['✅ A — Prompt Management ใช้จัดเก็บ reusable prompts, variables และ versions.','❌ B — Knowledge Bases ใช้ RAG/retrieval.','❌ C — Model Evaluation ใช้ประเมิน FM outputs.','❌ D — Guardrails ใช้ safety filtering.','🧠 จำสั้น ๆ — Template + Version = Prompt Management.']});
+
+  add({task:'3.3',type:'matching',target:'fm-customization-techniques',
+    question:'Match each FM adaptation technique with the description that BEST fits it.',
+    questionTh:'จับคู่ FM adaptation technique แต่ละตัวกับคำอธิบายที่ตรงที่สุด.',
+    choices:{A:'Instruction tuning / SFT',B:'Continued pre-training',C:'Knowledge distillation',D:'Transfer learning'},
+    matches:{'1':'Use labeled instruction-response examples to change task behavior','2':'Continue learning from a large domain corpus','3':'Train a smaller student to imitate a larger teacher','4':'Reuse learned knowledge for a related target task'},
+    answer:['A:1','B:2','C:3','D:4'],
+    exp:['✅ SFT → instruction-response examples.','✅ Continued pre-training → เรียนต่อจาก domain corpus.','✅ Distillation → teacher ใหญ่ถ่ายทอดไป student เล็ก.','✅ Transfer learning → นำความรู้เดิมไปต่อยอด related task.','🧠 จำสั้น ๆ — Instructions / Corpus / Teacher→Student / Reuse knowledge.']});
+
+  add({task:'3.3',type:'multiple',target:'finetune-data-preparation',
+    question:'Before fine-tuning an FM, which THREE data-preparation practices are most appropriate? (Select THREE.)',
+    questionTh:'ก่อน fine-tune FM แนวปฏิบัติด้าน data preparation ใด 3 ข้อเหมาะสมที่สุด?',
+    choices:{A:'Curate and remove low-quality or duplicate examples',B:'Check label consistency and representativeness',C:'Verify governance, privacy, and rights for training use',D:'Mix final evaluation examples into training',E:'Ignore demographic imbalance if overall volume is large',F:'Keep contradictory labels intentionally without review'},
+    answer:['A','B','C'],
+    exp:['✅ A — Curation ลด noise และ duplicates.','✅ B — Label quality/representativeness มีผลต่อ quality และ fairness.','✅ C — Governance/privacy/rights ต้องตรวจให้พร้อมก่อน train.','❌ D — ทำ evaluation contamination.','❌ E — Volume มากไม่ได้แปลว่า subgroup representation ดี.','❌ F — Contradictions ที่ไม่ตั้งใจทำ training signal แย่ลง.','🧠 จำสั้น ๆ — Clean + Representative + Governed.']});
+
+  add({task:'3.3',type:'single',target:'rlhf',
+    question:'A model is improved using rankings or preferences from human reviewers so the model learns to favor outputs people prefer. Which technique is MOST closely associated with this?',
+    questionTh:'โมเดลถูกปรับปรุงโดยใช้ rankings หรือ preferences จาก human reviewers เพื่อให้ model เรียนรู้ว่า output แบบใดที่คนต้องการ เทคนิคใดสัมพันธ์กับวิธีนี้มากที่สุด?',
+    choices:{A:'Reinforcement learning from human feedback (RLHF)',B:'K-means clustering',C:'Prompt caching',D:'Vector reranking'},
+    answer:['A'],
+    exp:['✅ A — RLHF ใช้ human feedback/preferences เพื่อช่วยปรับ behavior ของ model.','❌ B — K-means เป็น clustering.','❌ C — Prompt caching เป็น inference optimization.','❌ D — Vector reranking จัดลำดับ retrieval candidates.','🧠 จำสั้น ๆ — Human preference → model behavior = RLHF.']});
+
+  add({task:'3.3',type:'ordering',target:'sft-lifecycle-retest',
+    question:'A team has already selected a base model. Order the controlled fine-tuning steps from dataset preparation through release.',
+    questionTh:'ทีมเลือก base model แล้ว จงเรียง controlled fine-tuning steps ตั้งแต่เตรียม dataset จนถึง release.',
+    choices:{A:'Release the approved customized model',B:'Evaluate the customized model on held-out criteria',C:'Prepare and approve the fine-tuning dataset',D:'Run the fine-tuning job'},
+    answer:['C','D','B','A'],
+    exp:['✅ ลำดับคือ Prepare/approve data → Fine-tune → Evaluate → Release.','❌ Release ต้องเกิดหลัง evaluation ผ่านเกณฑ์.','🧠 จำสั้น ๆ — Data → Tune → Check → Release.']});
+
+  add({task:'3.4',type:'single',target:'bertscore-semantic',
+    question:'Generated answers often use different wording from references while preserving the same meaning. Which metric is designed to compare semantic similarity using contextual embeddings?',
+    questionTh:'generated answers มักใช้ wording ต่างจาก references แต่ยังคงความหมายเดียวกัน metric ใดออกแบบมาเพื่อเปรียบเทียบ semantic similarity ด้วย contextual embeddings?',
+    choices:{A:'BERTScore',B:'BLEU',C:'ROUGE-L',D:'RMSE'},
+    answer:['A'],
+    exp:['✅ A — BERTScore ใช้ contextual embeddings จึงจับ semantic similarity ได้แม้ wording ต่าง.','❌ B — BLEU เน้น n-gram overlap และใช้กับ translation บ่อย.','❌ C — ROUGE-L เป็น overlap metric ที่ดู sequence overlap.','❌ D — RMSE เป็น regression metric.','🧠 จำสั้น ๆ — Meaning similarity แม้คำต่าง = BERTScore.']});
+
+  add({task:'3.4',type:'multiple',target:'fm-evaluation-approaches',
+    question:'A team is evaluating open-ended FM answers where quality cannot be captured by one exact-match score. Which THREE approaches can provide useful evaluation evidence? (Select THREE.)',
+    questionTh:'ทีมกำลังประเมิน open-ended FM answers ที่คุณภาพไม่สามารถวัดด้วย exact-match score เดียวได้ แนวทางใด 3 อย่างให้ evaluation evidence ที่มีประโยชน์?',
+    choices:{A:'Human evaluation with a rubric',B:'Benchmark datasets and task-relevant metrics',C:'LLM-as-a-judge calibrated against human-reviewed samples',D:'Ignore task objectives and compare output length only',E:'Use training loss as the only production metric',F:'Judge quality solely by model parameter count'},
+    answer:['A','B','C'],
+    exp:['✅ A — Human rubric ช่วยประเมิน nuance/factual usefulness.','✅ B — Benchmark + relevant metrics ให้หลักฐานเชิงมาตรฐาน.','✅ C — LLM-as-a-judge ช่วย scale evaluation และควร validate/calibrate กับ human samples.','❌ D/E/F — ไม่สะท้อน end-task quality อย่างเพียงพอ.','🧠 จำสั้น ๆ — Human + Benchmark + Scalable judge.']});
+
+  add({task:'3.4',type:'single',target:'rag-retrieval-relevance',
+    question:'A RAG answer faithfully follows the retrieved passages, but those passages discuss the wrong product and do not answer the user question. Which evaluation dimension is failing first?',
+    questionTh:'RAG answer ยึดตาม retrieved passages ได้ดี แต่ passages เหล่านั้นพูดถึงสินค้าผิดตัวและไม่ตอบคำถามผู้ใช้ evaluation dimension ใดมีปัญหาก่อน?',
+    choices:{A:'Retrieval relevance',B:'Generation faithfulness',C:'Model size',D:'Training loss'},
+    answer:['A'],
+    exp:['✅ A — ปัญหาเริ่มจาก retrieved context ไม่เกี่ยวกับ query จึงเป็น retrieval relevance.','❌ B — Faithfulness ยังดีเพราะ answer ทำตาม context ที่ได้รับ.','❌ C/D — ไม่ใช่ RAG runtime quality dimension ของอาการนี้.','🧠 จำสั้น ๆ — Context ผิด = Retrieval relevance; Context ถูกแต่ตอบเกิน = Faithfulness.']});
+})();
