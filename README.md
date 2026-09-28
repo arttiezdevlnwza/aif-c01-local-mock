@@ -28,6 +28,8 @@ Set 23 ใช้ **AIF-C01 Exam Guide v1.1 task mapping ปัจจุบัน
 
 Set 24 เป็น **Final Comprehensive 150 ข้อ** สำหรับรอบสุดท้าย: ใช้โจทย์ scenario ยาว, ครอบคลุม task groups 1.1–5.2, เพิ่มน้ำหนักหัวข้อที่เคยออกน้อย/ไม่เคยออก, และพลิก concept เดิมใน decision angle ใหม่. Explanation ทุกข้อถูก builder บังคับให้มี **โจทย์แปลว่าอะไร → โจทย์ถามอะไรเรา → เฉลย → เหตุผลของคำตอบที่ถูกและทุก distractor/mapping → จำสั้น ๆ**.
 
+Set 24 กระจาย 150 ข้อเป็น **D1 30 / D2 34 / D3 40 / D4 22 / D5 24** และตั้งใจเพิ่ม coverage ของหัวข้อที่เคยบาง เช่น FM sources/serving methods, context engineering, MCP/multi-agent, Amazon Nova, AWS Transform, Kiro/Strands/AgentCore, vector-store choices, prompt poisoning, CPT/SFT/RLHF/distillation boundaries, application-level evaluation, Model Cards/open-source/data licensing transparency, Amazon Inspector, Trusted Advisor, confidence scoring, review cadence และ team training.
+
 Set 21–22 เป็น **Targeted Weakness + Under-covered Topics** โดยเน้นหัวข้อที่ review พบว่าพลาดซ้ำ/ยังลังเล เช่น Data Governance, Traditional ML vs FM, Responsible AI, RAG order, RMSE vs MAE, SOC reports, AgentCore/Quick รวมทั้งหัวข้อที่เจอน้อยใน 20 ชุดแรก เช่น agent memory, MCP host/client/server, Converse API, AgentCore Browser/Code Interpreter/Evaluations, prompt optimization/caching/routing, fairness DPL/DPPL, model invocation logging และ Generative AI Security Scoping Matrix.
 
 Set 22 ถูกแยกเป็น **independent question bank** จาก Set 21 แล้ว: ไม่ใช้ target map แบบ Q1↔Q1, ไม่มี choice set ซ้ำกับ Set 21, และใช้ broad coverage + selected weak-topic retests โดยเปลี่ยน decision boundary/question type เมื่อ retest concept เดิม. Set 21 ยังคงอยู่ใน bank เดิมและไม่ถูกแก้ย้อนหลัง.
