@@ -40,14 +40,13 @@
 
     if(item.type === 'single' || item.type === 'multiple'){
       const correct = new Set(item.answer || []);
+      parts.push(item.type === 'single'
+        ? `✅ เฉลย: ${(item.answer||[]).join(', ')}`
+        : `✅ เฉลยที่ต้องเลือก: ${(item.answer||[]).join(', ')}`);
       Object.entries(item.choices || {}).forEach(([key,text]) => {
         const reason = item.why?.[key] || 'ไม่มีคำอธิบาย';
         parts.push(choiceLine(correct.has(key) ? '✅' : '❌', key, text, reason));
       });
-      parts.push('');
-      parts.push(item.type === 'single'
-        ? `✅ เฉลย: ${(item.answer||[]).join(', ')}`
-        : `✅ เฉลยที่ต้องเลือก: ${(item.answer||[]).join(', ')}`);
     } else if(item.type === 'matching'){
       parts.push('✅ เฉลยการจับคู่:');
       (item.answer || []).forEach((pair,index) => {
@@ -55,7 +54,8 @@
         const l = item.choices?.[left] || left;
         const r = item.matches?.[right] || right;
         const reason = item.why?.[left] || item.explain?.[index] || '';
-        parts.push(`✅ ${left}. ${l} → ${right}. ${r}${reason ? ` — ${reason.replace(/^✅\s*[^—]*—?\s*/, '')}` : ''}`);
+        parts.push(`✅ ${left}. ${l} → ${right}. ${r}`);
+        if(reason) parts.push(`   เหตุผล: ${String(reason).replace(/^✅\s*/, '')}`);
       });
       parts.push('');
       parts.push('แต่ละคู่ต้องอาศัยความหมาย/หน้าที่ของ concept ไม่ใช่จำตำแหน่งตัวอักษร เพราะหน้า Quiz อาจสลับลำดับตัวเลือก');
