@@ -127,9 +127,9 @@
     q:'A property company has historical transactions with features such as neighborhood, floor area, age of the building, renovation status, and the actual selling price. The company wants a model that produces an estimated selling price as a continuous numeric value for each new property rather than assigning the property to a category. Which ML technique is the best fit?',
     th:'บริษัทอสังหาริมทรัพย์มีข้อมูลธุรกรรมในอดีตซึ่งประกอบด้วยย่าน พื้นที่ใช้สอย อายุอาคาร สถานะการปรับปรุง และราคาขายจริง บริษัทต้องการโมเดลที่ให้ราคาขายโดยประมาณเป็นค่าตัวเลขต่อเนื่องสำหรับอสังหาริมทรัพย์แต่ละรายการใหม่ แทนการจัดอสังหาริมทรัพย์ลงในหมวดหมู่ เทคนิค ML ใดเหมาะที่สุด?',
     ask:'เลือกเทคนิคสำหรับทำนายค่าตัวเลขต่อเนื่อง.',
-    choices:{A:'Regression',B:'Classification',C:'Clustering',D:'Reinforcement learning'},
+    choices:{A:'Regression',B:'Classification',C:'Time-series anomaly detection only',D:'Clustering'},
     answer:['A'],
-    why:{A:'ถูก เพราะ target คือราคาซึ่งเป็นค่าตัวเลขต่อเนื่อง.',B:'ผิด เพราะ classification ทำนาย label/หมวดหมู่.',C:'ผิด เพราะ clustering หาโครงสร้างกลุ่มเมื่อไม่มี target label.',D:'ผิด เพราะ RL เรียนจาก action/reward.'},
+    why:{A:'ถูก เพราะ target คือราคาซึ่งเป็นค่าตัวเลขต่อเนื่อง.',B:'ผิด เพราะ classification ทำนาย label/หมวดหมู่.',C:'ผิด เพราะ anomaly detection มุ่งหาค่าหรือเหตุการณ์ผิดปกติ ไม่ใช่ประมาณราคาต่อเนื่องของทุก property.',D:'ผิด เพราะ clustering หาโครงสร้างกลุ่มเมื่อไม่มี target label.'},
     cue:'ทำนาย “ตัวเลขต่อเนื่อง” = Regression.'});
 
   add({objective:'1.2.3',target:'classification-use-case',
