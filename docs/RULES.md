@@ -113,6 +113,23 @@ Never:
 - add deep implementation detail outside AIF-C01 merely to sound complete;
 - rationalize a bad answer key instead of fixing it.
 
+### Final Comprehensive Set standard
+
+For the final comprehensive set (Set 24):
+
+- Do **not** cap the set at 65 questions. Question count is driven by Exam Guide coverage.
+- Preserve the official domain weighting approximately across the complete bank, but coverage takes priority over a fixed exam-length simulation.
+- Every question must use a **realistic multi-sentence scenario**. Avoid one-line or two-line recall stems unless the concept genuinely cannot be tested in a scenario; even then, wrap the concept in a realistic work context.
+- Every explanation must include, in this order:
+  1. **📝 โจทย์แปลว่าอะไร** — a complete natural Thai translation of the entire stem. Do not leave ordinary English fragments untranslated.
+  2. **🎯 โจทย์ถามอะไรเรา** — state the actual decision/boundary being tested.
+  3. **💡 ทำไมข้อนี้ถึงตอบแบบนี้** — identify the correct answer(s), explain why each is correct, and explain every remaining choice separately.
+  4. **🧠 จำสั้น ๆ** — concise memory cue when useful.
+- Proper nouns, AWS service names, and important exam terms may remain in English or appear as Thai + English in parentheses; ordinary scenario wording should be translated naturally.
+- Cover every official Exam Guide objective that can reasonably become a question. Give extra weight to objectives and in-scope services that have never or rarely appeared in Sets 1–23.
+- Repeated concepts must be tested from **different decision boundaries, lifecycle positions, failure symptoms, or neighboring distractor families**. Do not recreate a previous question with new nouns.
+- Perform an overlap audit against the immediately previous set and a coverage audit against all prior sets before release.
+
 ### Pre-commit audit
 - 65 questions; intended domain mix.
 - Valid answer keys.
