@@ -159,8 +159,8 @@
     cue:'Tree/Rules = intrinsic; Black box + SHAP/etc. = post-hoc.'});
 
   add({objective:'4.2.2',target:'model-cards',
-    q:'A model owner needs a durable artifact that records the model’s intended use, owners, training/evaluation information, risk considerations, performance results, and known limitations so reviewers can understand the model before approving it for a new use case. The organization uses SageMaker AI and wants a feature designed for model documentation and transparency. What should it use?',
-    th:'model owner ต้องการ durable artifact ที่บันทึก intended use, owners, ข้อมูล training/evaluation, risk considerations, performance results และ known limitations เพื่อให้ reviewers เข้าใจ model ก่อนอนุมัติ use case ใหม่ องค์กรใช้ SageMaker AI และต้องการ feature ที่ออกแบบมาสำหรับ model documentation และ transparency ควรใช้อะไร?',
+    q:'A model-risk committee is reviewing whether an existing SageMaker model may be reused by a different business unit. Instead of asking the original developers to reconstruct years of design decisions, the committee wants one governed lifecycle record that identifies accountable owners, approved and out-of-scope uses, evaluation evidence, risk findings, and known limitations. Which SageMaker feature is intended to provide this structured model documentation?',
+    th:'คณะกรรมการ model risk กำลังพิจารณาว่า SageMaker model ที่มีอยู่สามารถนำไปใช้ซ้ำโดยอีก business unit ได้หรือไม่ แทนที่จะให้ทีมพัฒนาเดิมย้อนประกอบการตัดสินใจหลายปีจากเอกสารที่กระจัดกระจาย คณะกรรมการต้องการ lifecycle record แบบมี governance หนึ่งชุดที่ระบุผู้รับผิดชอบ ขอบเขตการใช้งานที่อนุมัติและไม่อนุมัติ หลักฐานการประเมิน ผลการตรวจความเสี่ยง และข้อจำกัดที่ทราบ SageMaker feature ใดถูกออกแบบมาเพื่อจัดทำเอกสาร model แบบมีโครงสร้างลักษณะนี้?',
     ask:'ระบุ SageMaker Model Cards สำหรับ model documentation/transparency.',
     choices:{A:'SageMaker Model Cards',B:'Amazon SQS',C:'AWS Data Exchange',D:'Prompt Caching'},
     answer:['A'],
