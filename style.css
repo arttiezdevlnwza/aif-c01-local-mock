@@ -28,9 +28,3 @@
 .topbar-actions{display:flex;gap:8px;align-items:center;flex-wrap:nowrap;white-space:nowrap;flex-shrink:0}
 @media(max-width:820px){.topbar-actions{flex-wrap:wrap;white-space:normal}}
 
-
-/* Set 25 — compact exam-style reading width */
-.app-shell.set25-exam-style{max-width:1760px}
-.app-shell.set25-exam-style .quiz-layout{grid-template-columns:1fr}
-.app-shell.set25-exam-style .question-nav-panel{display:none}
-.app-shell.set25-exam-style .question-card h2{max-width:none;font-size:22px;line-height:1.45}
