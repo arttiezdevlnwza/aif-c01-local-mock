@@ -86,20 +86,20 @@
 
   const set={
     id:'local-set-25',
-    title:'Local Mock Set 25 — Post-Exam Memory Edition',
-    subtitle:'65 Original Questions · Style-Inspired by the 30 Sep 2026 AIF-C01 Exam Recollection',
+    title:'Local Mock Set 25',
+    subtitle:'65 Questions · Short Exam-Style Stems + Close Distractors',
     questionCount:65,
     questions,
     _blueprint:{
-      purpose:'Keepsake set based on post-exam recollection of topic frequency, short stem style, indirect distractors, matching frequency, and one ordering item. These are original practice questions, not verbatim or reconstructed exam items.',
-      sourceNote:'ใกล้เคียงสไตล์ข้อสอบจริงจากความทรงจำหลังสอบวันที่ 30 ก.ย. 2026: โจทย์ส่วนใหญ่สั้น 1–2 บรรทัด, มีข้อ direct ปน close distractors, Matching 5 ข้อ, Ordering 1 ข้อ; เน้น applied concepts มากกว่า service trivia.',
+      purpose:'Short exam-style practice with concise stems, indirect distractors, matching questions, and one ordering item.',
+      sourceNote:'โจทย์ส่วนใหญ่สั้น 1–2 บรรทัด มีข้อ direct ปน close distractors, Matching 5 ข้อ, Ordering 1 ข้อ และเน้น applied concepts มากกว่า service trivia.',
       observedEmphasis:[
-        'Bedrock often appears as scenario context rather than direct feature trivia',
-        'Jailbreak / prompt injection appears several times',
+        'Bedrock is used mainly as scenario context rather than direct feature trivia',
+        'Jailbreak / prompt injection receive repeated coverage',
         'Few-shot and chain-of-thought are straightforward',
         'Model Cards, fairness, explainability, and Guardrails receive visible coverage',
         'Metrics are mostly recognition/matching rather than heavy calculation',
-        'One light SageMaker JumpStart item; no deliberate emphasis on AgentCore, SOC/NIST, Amazon Q, QuickSight, Strands, or Kiro'
+        'One light SageMaker JumpStart item; limited emphasis on AgentCore, SOC/NIST, Amazon Q, QuickSight, Strands, or Kiro'
       ],
       domains,types,tasks,qualityProblems:problems
     }
