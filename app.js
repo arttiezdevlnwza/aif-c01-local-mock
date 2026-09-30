@@ -390,7 +390,6 @@ function renderOverallProgress(){
     <div class="overall-bar-wrap"><div class="overall-bar" style="width:${completion}%"></div></div>`;
 }
 function renderHome(){
-  document.querySelector('.app-shell')?.classList.remove('set25-exam-style');
   $('homeView').classList.remove('hidden'); $('quizView').classList.add('hidden'); $('summaryView').classList.add('hidden');
   renderOverallProgress();
   renderProgressToolStatus();
@@ -423,7 +422,6 @@ function renderVocabulary(q){
   $('vocabPanel').innerHTML=`<div class="vocab-title">ศัพท์ช่วยอ่านโจทย์</div><div class="vocab-grid">${items.map(x=>`<div class="vocab-item"><strong>${escapeHtml(x.term)}</strong><span>${escapeHtml(x.th)}</span></div>`).join('')}</div><div class="vocab-note">ชื่อ AWS service/feature จะไม่แปล เพื่อฝึกจำชื่อจริง</div>`;
 }
 function renderQuiz(){
-  document.querySelector('.app-shell')?.classList.toggle('set25-exam-style', activeSet?.id==='local-set-25');
   const st=state(), q=activeSet.questions[currentIndex], s=summary(activeSet);
   $('setTitle').textContent=`${activeSet.title} — ${activeSet.subtitle}`;
   $('setMeta').textContent=`${activeSet.questionCount} ข้อ · Progress ${s.answered}/${activeSet.questionCount} · ตัวเลือกสุ่มต่อ Attempt`;
